@@ -140,5 +140,17 @@ public class DimData {
 		return true;
     }
 	
+	public static void delete(String name) {
+		ConfigManager manager = new ConfigManager(DimManager.getInstance(),"data","world");
+		Set<String> keys = manager.getKeys("", "dim");
+		keys.forEach(key -> {if(name.equals(manager.getString(key + ".name"))) {
+			manager.setData(key, null);
+		}});
+	}
 	
+
+	public static void setLogin(String name) {
+		ConfigManager manager = new ConfigManager(DimManager.getInstance(),"data","world");
+		manager.setData("start", name);
+	}
 }

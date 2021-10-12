@@ -28,7 +28,7 @@ public final class PlayerLogin implements Listener {
     public void getLogoutPlayer(PlayerQuitEvent event) {
     	Player player = event.getPlayer();
     	//座標保存
-    	
+    	new WorldManager().logout(player);
     	
     }
 }

@@ -2,12 +2,11 @@ package com.github.redshirt53072.baseapi.util;
 
 import java.util.ArrayList;
 
-import org.bukkit.entity.Player;
 
 
 public class TextManager {
 	
-	public static int toNumber(Player player,String text) {
+	public static int toNumber(String text) {
 		int length = text.length();
         if(length == 0) {
         	return 1000000001;
@@ -42,7 +41,7 @@ public class TextManager {
         }
         return result;
 	}
-	public static int toNaturalNumber(Player player,String text) {
+	public static int toNaturalNumber(String text) {
 		int length = text.length();
         if(length == 0) {
         	return 1000000001;

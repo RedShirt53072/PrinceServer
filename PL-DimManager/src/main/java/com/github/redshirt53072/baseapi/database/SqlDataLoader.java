@@ -37,10 +37,10 @@ public abstract class SqlDataLoader {
     }
     
     public void logSevere(Exception ex) {
-		LogManager.logError("[database]データベースを読み込めませんでした。", plugin, ex, Level.SEVERE);
+		LogManager.logError("[database]データベース接続にエラーが発生しました。。", plugin, ex, Level.SEVERE);
 	}
     
-	public void logEnd() {
-		LogManager.logInfo("[database]データベースを読み込みました。", plugin, Level.FINE);
+	public void logEnd(String table,String action) {
+		LogManager.logInfo("[database]" + table + "のデータベース" + action + "しました。", plugin, Level.FINE);
 	}
 }
