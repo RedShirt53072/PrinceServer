@@ -1,0 +1,21 @@
+{
+    "parent": "minecraft:item/generated",
+    "textures": {
+        "layer0": "minecraft:block/white_stained_glass"
+    },
+    "overrides":[
+        { "predicate": {"custom_model_data":3010}, "model": "item/number/0"},
+        { "predicate": {"custom_model_data":3011}, "model": "item/number/1"},
+        { "predicate": {"custom_model_data":3012}, "model": "item/number/2"},
+        { "predicate": {"custom_model_data":3013}, "model": "item/number/3"},
+        { "predicate": {"custom_model_data":3014}, "model": "item/number/4"},
+        { "predicate": {"custom_model_data":3015}, "model": "item/number/5"},
+        { "predicate": {"custom_model_data":3016}, "model": "item/number/6"},
+        { "predicate": {"custom_model_data":3017}, "model": "item/number/7"},
+        { "predicate": {"custom_model_data":3018}, "model": "item/number/8"},
+        { "predicate": {"custom_model_data":3019}, "model": "item/number/9"},
+        { "predicate": {"custom_model_data":3020}, "model": "item/stella/vil"}
+        
+        
+    ]
+}
