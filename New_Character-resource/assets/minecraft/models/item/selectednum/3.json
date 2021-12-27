@@ -2,7 +2,8 @@
 	"credit": "Made with Blockbench",
 	"parent": "minecraft:item/generated",
 	"textures": {
-		"layer0": "minecraft:item_model/selected/3"
+		"layer0": "minecraft:item_model/3",
+		"layer1": "minecraft:item_model/frame"
 	},
 	"display": {
 		"thirdperson_righthand": {
