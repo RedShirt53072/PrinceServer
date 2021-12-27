@@ -28,7 +28,7 @@ public class ConfirmCheck {
     	new PlayerNBT(player).setInvID(InvIDType.CONFIRMCHECK);
      	
     	int payPage = new PlayerNBT(player).getPayPage();
-    	Inventory inv = Bukkit.createInventory(null, 27, payPage + "ページまでのエンダーチェストの拡張をしますか？");
+    	Inventory inv = Bukkit.createInventory(null, 27, (payPage +1) + "ページまで拡張しますか？");
     	
 		int cost = EnderInv.calcCost(payPage, player);
 
@@ -36,7 +36,7 @@ public class ConfirmCheck {
 		inv.setItem(15, createItem(Material.RED_WOOL,ChatColor.WHITE + "キャンセルする",null,1,null,0));
 		
 		player.openInventory(inv);
-        new PlayerNBT(player).setInvID(InvIDType.ENDERCHEST);
+        new PlayerNBT(player).setInvID(InvIDType.CONFIRMCHECK);
         player.playSound(player.getLocation(), Sound.BLOCK_BEACON_ACTIVATE, 1,1);
     }
     
@@ -66,32 +66,43 @@ public class ConfirmCheck {
     	event.setCancelled(true);
     	
     	if(slot == 11) {
-    		player.playSound(player.getLocation(), Sound.BLOCK_BEACON_DEACTIVATE, 1,1);
-    		player.closeInventory();
-    		return;
-    	}
-    	if(slot == 15) {
     		int nowEme = (int) MoneyManager.get(player);
     		int payPage = new PlayerNBT(player).getPayPage();
     		int cost = EnderInv.calcCost(payPage, player);
     		if(nowEme > cost) {
     			player.playSound(player.getLocation(), Sound.BLOCK_BEACON_POWER_SELECT, 1,1);
-    			new PlayerNBT(player).setUnlockedPage(payPage);
+    			new PlayerNBT(player).setUnlockedPage(payPage + 1);
     			MoneyManager.remove(player, cost);
     			MessageManager.sendImportant(ChatColor.GOLD.toString() + cost + "Ɇ" + ChatColor.WHITE + "を使用してエンダーチェストが" + (payPage + 1) + "ページまで拡張されました。", player);
-    			player.closeInventory();
+    			End();
         		return;
     		}
     		player.playSound(player.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1,(float)0.5);
     		MessageManager.sendImportant("Ɇが足りないため、エンダーチェストの拡張ができません。 所持:" + ChatColor.GOLD + nowEme + "Ɇ" + ChatColor.WHITE + "/必要:" + ChatColor.GOLD +  cost + "Ɇ", player);
-    		player.closeInventory();
+    		End();
     		
         	return;
     	}
+    	if(slot == 15) {
+    		player.playSound(player.getLocation(), Sound.BLOCK_BEACON_DEACTIVATE, 1,1);
+    		End();
+    		return;
+    	}
     }
     
+    private void End() {
+		new PlayerNBT(player).setSafeClose(true);
+		player.closeInventory();
+        new EnderInv(player).open();
+    }
     
     public void close() {
-        new EnderInv(player).open();
+    	if(new PlayerNBT(player).getSafeClose()) {
+    		new PlayerNBT(player).setSafeClose(false);
+    		return;
+    	}
+        new PlayerNBT(player).setInvID(InvIDType.NULLINV);
+    	player.playSound(player.getLocation(), Sound.BLOCK_BEACON_DEACTIVATE, 1,1);
+		
     }
 }

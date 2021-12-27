@@ -74,5 +74,17 @@ public class PlayerNBT {
     public int getPayPage() {
     	return readInt("paypage");
     }
+    public void setSafeClose(boolean safe) {
+    	if(safe) {
+    		writeInt("safeclose",1);	
+    	}else {
+    		writeInt("safeclose",0);
+    	}
+    }
+    
+    public boolean getSafeClose() {
+    	return 1 == readInt("safeclose");
+    }
+    
     
 }

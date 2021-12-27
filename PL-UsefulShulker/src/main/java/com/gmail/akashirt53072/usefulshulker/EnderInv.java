@@ -30,10 +30,10 @@ public class EnderInv {
     	pageInit(enderChest);
     	Inventory inv = Bukkit.createInventory(null, 36, "エンダーチェスト");
     	load(inv,0);
-        player.openInventory(inv);
         new PlayerNBT(player).setInvID(InvIDType.ENDERCHEST);
     	new PlayerNBT(player).setPage(0);
         player.playSound(player.getLocation(), Sound.BLOCK_ENDER_CHEST_OPEN, 1,1);
+        player.openInventory(inv);
     }
     
     private void load(Inventory inv,int slot) {
@@ -115,7 +115,7 @@ public class EnderInv {
 	static public int calcCost(int slot,Player player) {
 		//あとで計算式は変える
 		int unlock = new PlayerNBT(player).getUnlockedPage();
-		return (unlock + slot)* (unlock - slot + 1) * 500;		
+		return (unlock + slot ) * (slot - unlock + 1) * 500;
 	}
 	
     
@@ -138,8 +138,9 @@ public class EnderInv {
     		
     		if(nowEme > calcCost(slot,player)) {
     			save(event.getClickedInventory());
-    			player.closeInventory();
+        		new PlayerNBT(player).setSafeClose(true);
     			new PlayerNBT(player).setPayPage(slot);
+    			player.closeInventory();
     			new ConfirmCheck(player).open();
     		}
             player.playSound(player.getLocation(), Sound.BLOCK_CHEST_LOCKED, 1,1);
@@ -155,6 +156,10 @@ public class EnderInv {
     }
     
     public void close(Inventory inv) {
+    	if(new PlayerNBT(player).getSafeClose()) {
+    		new PlayerNBT(player).setSafeClose(false);
+    		return;
+    	}
     	
     	save(inv);
         new PlayerNBT(player).setInvID(InvIDType.NULLINV);

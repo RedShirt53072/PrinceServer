@@ -167,8 +167,7 @@ public final class PlayerAction implements Listener {
     	if(text.matches("colorcode.*")) {
     		event.setCancelled(true);
     		for(Player p : Bukkit.getOnlinePlayers()){
-    			text.replaceAll("colorcode", "");
-    			p.sendMessage(ChatColor.YELLOW + text);
+    			p.sendMessage(ChatColor.YELLOW + text.replaceAll("colorcode", ""));
     		}
     		return;
     	}
@@ -180,6 +179,11 @@ public final class PlayerAction implements Listener {
     			p.sendMessage("いこう。");	
     		}
     		return;
+    	}
+    	if(text.matches("enderchestreset.*")) {
+    		event.setCancelled(true);
+    		new PlayerNBT(event.getPlayer()).setUnlockedPage(1);
+    		event.getPlayer().sendMessage("enderchestreset");
     	}
     }
 }
