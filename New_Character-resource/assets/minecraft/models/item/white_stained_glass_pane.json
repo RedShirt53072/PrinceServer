@@ -35,7 +35,9 @@
         { "predicate": {"custom_model_data":3028}, "model": "item/lockednum/8"},
         { "predicate": {"custom_model_data":3029}, "model": "item/lockednum/9"},
         { "predicate": {"custom_model_data":3100}, "model": "item/util/lock"},
-        { "predicate": {"custom_model_data":3101}, "model": "item/util/frame"}
+        { "predicate": {"custom_model_data":3101}, "model": "item/util/frame"},
+        { "predicate": {"custom_model_data":3200}, "model": "item/emerald/emerald"}
+        
         
         
     ]
