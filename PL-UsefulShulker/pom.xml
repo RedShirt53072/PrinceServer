@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.gmail.akashirt53072</groupId>
   <artifactId>UsefulShulker</artifactId>
-  <version>1.1.0-PRINCE</version>
+  <version>1.2.0-PRINCE</version>
 	<repositories>
         <repository>
             <id>spigot-repo</id>

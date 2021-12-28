@@ -115,7 +115,13 @@ public class EnderInv {
 	static public int calcCost(int slot,Player player) {
 		//あとで計算式は変える
 		int unlock = new PlayerNBT(player).getUnlockedPage();
-		return (unlock + slot ) * (slot - unlock + 1) * 500;
+		int totalCost = 0;
+		
+		for(int i = 1;unlock + i < slot + 2;i++) {
+			totalCost += ((int)Math.pow(2,unlock + i)) * 500;	
+		}
+		
+		return totalCost;
 	}
 	
     
