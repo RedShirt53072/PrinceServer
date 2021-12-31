@@ -31,7 +31,7 @@ public final class DimManager extends GrowthApi{
 	/**
 	 * A.B.Cの形式のバージョン名
 	 */
-	private String version = "0.1.0";
+	private String version = "1.1.0";
 	
 	/**
 	 * 読み込み時
@@ -41,7 +41,7 @@ public final class DimManager extends GrowthApi{
 		this.saveDefaultConfig();
 	
 		api = this;
-		if(!BaseApi.getInstance().checkVersion("0.1.0")) {
+		if(!BaseApi.getInstance().checkVersion("1.0.0")) {
 			LogManager.logError("前提プラグインのバージョンが正しくありません。", api, new Throwable(), Level.SEVERE);
 			ApiManager.stopServer("プラグインバージョンの不整合による", StopReason.ERROR);
 		}

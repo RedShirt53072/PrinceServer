@@ -144,7 +144,7 @@ public class DimData {
 		ConfigManager manager = new ConfigManager(DimManager.getInstance(),"data","world.yml");
 		Set<String> keys = manager.getKeys("", "dim");
 		keys.forEach(key -> {if(name.equals(manager.getString(key + ".name"))) {
-			manager.setData(key, null);
+			manager.deleteData(key);
 		}});
 	}
 	

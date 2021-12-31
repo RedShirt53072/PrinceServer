@@ -7,10 +7,15 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 
 import com.github.redshirt53072.baseapi.message.MessageManager;
 import com.github.redshirt53072.baseapi.util.Flag;
@@ -61,6 +66,24 @@ public class WorldCommand implements TabExecutor{
     	    	Bukkit.getScheduler().runTask(DimManager.getInstance(), new Runnable() {
     	    		@Override
     	    		public void run() {
+    	    			GameMode old = p.getGameMode();
+    	    			
+    	    			if(mode.equals(GameMode.CREATIVE) && !old.equals(GameMode.CREATIVE)) {
+    	    				PlayerInventory inv = p.getInventory();
+    	    				for(ItemStack item : inv.getContents()){
+    	    					drop(p,item);
+    	    				}
+    	    				inv.clear();
+    	    			}
+    	    			if(old.equals(GameMode.CREATIVE) && !mode.equals(GameMode.CREATIVE)) {
+    	    				PlayerInventory inv = p.getInventory();
+    	    				for(ItemStack item : inv.getContents()){
+    	    					drop(p,item);
+    	    				}
+    	    				inv.clear();
+    	    			}
+    	    			
+    	    			
     	    			p.teleport(loc);
     	    			p.setGameMode(mode);	
     	    		}
@@ -73,6 +96,23 @@ public class WorldCommand implements TabExecutor{
 		
 		return true;
     }
+	private void drop(Player p,ItemStack item) {
+		if(item == null) {
+			return;
+		}
+		if(item.getType().equals(Material.AIR)){
+			return;
+		}
+		Item i = (Item) p.getWorld().spawnEntity(p.getLocation(), EntityType.DROPPED_ITEM);
+		i.setItemStack(item);
+		i.setPickupDelay(0);
+		i.setOwner(p.getUniqueId());
+		i.setGlowing(true);
+		i.setInvulnerable(true);
+		i.setCustomName(p.getName() + "の落とし物");
+		i.setCustomNameVisible(true);
+	}
+	
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args){
 		List<String> tab = new ArrayList<String>();

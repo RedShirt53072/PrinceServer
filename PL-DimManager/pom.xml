@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.redshirt53072</groupId>
   <artifactId>DimManager</artifactId>
-  <version>0.1.0</version>
+  <version>1.1.0</version>
 	<repositories>
         <repository>
             <id>spigot-repo</id>
@@ -23,14 +23,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-    		<groupId>mysql</groupId>
-    		<artifactId>mysql-connector-java</artifactId>
-    		<version>8.0.25</version>
-		</dependency>
-        <dependency>
         	<groupId>com.github.redshirt53072</groupId>
         	<artifactId>GrowthAPI</artifactId>
-        	<version>0.1.0</version>
+        	<version>1.0.0</version>
         	<scope>provided</scope>
         </dependency>
     </dependencies>

@@ -7,10 +7,12 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.World.Environment;
 import org.bukkit.entity.Player;
 
 import com.github.redshirt53072.baseapi.database.SqlDataLoader;
+import com.github.redshirt53072.baseapi.util.DataFolder;
 import com.github.redshirt53072.dimmanager.data.DimData;
 import com.github.redshirt53072.dimmanager.data.WorldSqlSender;
 
@@ -25,6 +27,10 @@ public class WorldManager extends SqlDataLoader{
 	public void login(Player p) {
 		//sql
 		String plName = p.getName();
+		DataFolder<World> world = new DataFolder<World>();
+		Bukkit.getWorlds().forEach(w ->{if(w.getEnvironment().equals(Environment.NORMAL)) {
+			world.setData(w);
+		}});;
 		new Thread() {
             @Override
             public void run() {
@@ -32,7 +38,7 @@ public class WorldManager extends SqlDataLoader{
             	WorldSqlSender sender = new WorldSqlSender(connectData);
         		Location loc = sender.read(p.getUniqueId(), "normal");
         		if(loc == null) {
-        			sender.insert("normal", p.getUniqueId(), p.getWorld().getUID());
+        			sender.insert("normal", p.getUniqueId(), world.getData().getUID());
         		}
         		close();
             	logEnd("player_loc","に" + plName + "の初期処理を");
