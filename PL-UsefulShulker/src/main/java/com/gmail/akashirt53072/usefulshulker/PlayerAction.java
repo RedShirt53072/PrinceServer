@@ -4,7 +4,6 @@ import org.bukkit.event.Listener;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -16,7 +15,6 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -160,30 +158,5 @@ public final class PlayerAction implements Listener {
     		return;
     	}
     	event.setCancelled(true);
-    }
-    @EventHandler
-    public void onInventoryClick(final AsyncPlayerChatEvent event) {
-    	String text = event.getMessage();
-    	if(text.matches("colorcode.*")) {
-    		event.setCancelled(true);
-    		for(Player p : Bukkit.getOnlinePlayers()){
-    			p.sendMessage(ChatColor.YELLOW + text.replaceAll("colorcode", ""));
-    		}
-    		return;
-    	}
-    	if(text.matches("kyoto.*")) {
-    		event.setCancelled(true);
-    		for(Player p : Bukkit.getOnlinePlayers()){
-    			p.sendMessage("そうだ");
-    			p.sendMessage("京都、");
-    			p.sendMessage("いこう。");	
-    		}
-    		return;
-    	}
-    	if(text.matches("enderchestreset.*")) {
-    		event.setCancelled(true);
-    		new PlayerNBT(event.getPlayer()).setUnlockedPage(1);
-    		event.getPlayer().sendMessage("enderchestreset");
-    	}
     }
 }

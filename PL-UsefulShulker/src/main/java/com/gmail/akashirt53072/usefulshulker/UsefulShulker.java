@@ -13,6 +13,7 @@ import com.github.redshirt53072.baseapi.server.ApiManager.StopReason;
 import com.github.redshirt53072.baseapi.server.GrowthApi;
 import com.github.redshirt53072.economyapi.general.EconomyApi;
 import com.github.redshirt53072.economyapi.gui.GuiManager;
+import com.gmail.akashirt53072.usefulshulker.command.ECSubCommand;
 
 
 /**
@@ -32,7 +33,7 @@ public final class UsefulShulker extends GrowthApi{
 	/**
 	 * A.B.Cの形式のバージョン名
 	 */
-	private String version = "1.0.0";
+	private String version = "1.2.2";
 	
 	
 	/**
@@ -56,7 +57,7 @@ public final class UsefulShulker extends GrowthApi{
 		//config
 		
 		//command
-
+		ECSubCommand.register();
 		//listener
 		
 		//メモリ

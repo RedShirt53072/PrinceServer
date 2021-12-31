@@ -83,7 +83,13 @@ public class PlayerNBT {
     }
     
     public boolean getSafeClose() {
-    	return 1 == readInt("safeclose");
+    	Integer safe = readInt("safeclose");
+    	if(safe == null) {
+    		writeInt("safeclose",0);
+    		safe = 0;
+    	}
+    	
+    	return 1 == safe;
     }
     
     
