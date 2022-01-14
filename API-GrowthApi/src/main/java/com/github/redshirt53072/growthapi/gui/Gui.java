@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import com.github.redshirt53072.growthapi.BaseAPI;
 import com.github.redshirt53072.growthapi.message.LogManager;
 import com.github.redshirt53072.growthapi.server.GrowthPlugin;
 
@@ -24,7 +25,6 @@ public abstract class Gui {
 	
 	public Gui(GrowthPlugin plugin) {
 	    this.plugin = plugin;
-	    onCreate();
 	}
 	
 	public Player getPlayer() {
@@ -36,8 +36,9 @@ public abstract class Gui {
 			LogManager.logError("[Gui]既にプレイヤーが登録されたGUIにプレイヤーを登録しようとしています。", plugin,new Throwable(), Level.WARNING);
 			return;
 		}
-	    this.player = player;
-		player.openInventory(inv);
+		GuiManager.openGui(this, player);
+		this.player = player;
+	    onRegister();
 	}
 	
 	protected ItemStack createItem(Material material,String name,ArrayList<String> lore,int amount,Enchantment ench,int itemModel){
@@ -59,16 +60,24 @@ public abstract class Gui {
 		return item;
 	}
 	
-	
-	public abstract void onCreate();
-
-	
-	public abstract boolean onClick(InventoryClickEvent event);
 
 	public void close() {
-		onClose(player);
-		player.closeInventory();	
+		//BaseAPI.getInstance().getLogger().log(Level.INFO,"close1:" + plugin.getPluginName());
+		GuiManager.addNotClose(player);
+		GuiManager.remove(player);
+		player.closeInventory();
+
+		//BaseAPI.getInstance().getLogger().log(Level.INFO,"close2:" + plugin.getPluginName());
 	}
-	abstract public void onClose(Player p);
+	
+	public void onEmergency() {
+		player.closeInventory();
+	}
+	
+	abstract public void onRegister();
+
+	abstract public boolean onClick(InventoryClickEvent event);
+
+	abstract public void onClose();
 	
 }

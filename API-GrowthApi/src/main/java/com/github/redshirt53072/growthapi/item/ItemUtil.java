@@ -59,24 +59,22 @@ public class ItemUtil {
 			}else {
 				item.setAmount(count);
 			}
-			dropItem(p,item);
+			if(-1 == p.getInventory().firstEmpty()){
+				dropItem(p,item);
+			}
+			p.getInventory().addItem(item);
 			count -= stack;
 		}
 	}
-	private static void dropItem(Player p,ItemStack item) {
-		if(-1 == p.getInventory().firstEmpty()){
-			//足元ドロップ
-			Item i = (Item) p.getWorld().spawnEntity(p.getLocation(), EntityType.DROPPED_ITEM);
-			i.setItemStack(item);
-			i.setPickupDelay(0);
-			i.setOwner(p.getUniqueId());
-			i.setGlowing(true);
-			i.setInvulnerable(true);
-			i.setCustomName(p.getName() + "の落とし物");
-			i.setCustomNameVisible(true);
-			return;
-		}
-		p.getInventory().addItem(item);
-		return;
+	public static void dropItem(Player p,ItemStack item) {
+		//足元ドロップ
+		Item i = (Item) p.getWorld().spawnEntity(p.getLocation(), EntityType.DROPPED_ITEM);
+		i.setItemStack(item);
+		i.setPickupDelay(0);
+		i.setOwner(p.getUniqueId());
+		i.setGlowing(true);
+		i.setInvulnerable(true);
+		i.setCustomName(p.getName() + "の落とし物");
+		i.setCustomNameVisible(true);
 	}
 }

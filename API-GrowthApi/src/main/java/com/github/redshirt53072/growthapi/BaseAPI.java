@@ -5,7 +5,6 @@ import java.util.logging.Level;
 
 import org.bukkit.plugin.RegisteredServiceProvider;
 
-import com.github.redshirt53072.growthapi.command.EmeraldCommand;
 import com.github.redshirt53072.growthapi.command.ManagementCommand;
 import com.github.redshirt53072.growthapi.database.MySQLConfig;
 import com.github.redshirt53072.growthapi.database.SQLManager;
@@ -34,6 +33,9 @@ public final class BaseAPI extends GrowthPlugin{
 	 * vaultのインスタンス
 	 */
 	private static Economy econ = null;
+	
+	
+	private static boolean useMySQL = true;
 	/**
 	 * 読み込み時
 	 */
@@ -67,15 +69,15 @@ public final class BaseAPI extends GrowthPlugin{
 			SQLManager.init();
 		}else {
 			LogManager.logInfo("Mysqlデータベースの使用は無効化されました", this, Level.INFO);
+			useMySQL = false;
 		}
 		
 		//command
 		this.getCommand("stop").setExecutor(new StopCommand());
 		this.getCommand("manage").setExecutor(new ManagementCommand());
 
-		this.getCommand("emerald").setExecutor(new EmeraldCommand());
 		//massage
-		LogManager.logInfo(this.getPluginName() + "を読み込みました", this, Level.INFO);
+		LogManager.logInfo(getPluginName() + "を読み込みました", this, Level.INFO);
 	}
 	/**
 	 * vaultの初期処理
@@ -93,6 +95,22 @@ public final class BaseAPI extends GrowthPlugin{
         return econ != null;
     }
 	/**
+	 * 終了時
+	 */
+	@Override
+	public void onDisable() {
+		LogManager.logInfo(getPluginName() + "を終了しました", this, Level.INFO);	
+	}
+	
+	/**
+	 * vaultインスタンスの取得
+	 * @return vaultインスタンス
+	 */
+	public static boolean canUseMySQL() {
+		return useMySQL;
+	}
+	
+	/**
 	 * vaultインスタンスの取得
 	 * @return vaultインスタンス
 	 */
@@ -101,17 +119,10 @@ public final class BaseAPI extends GrowthPlugin{
 	}
 	
 	/**
-	 * 終了時
-	 */
-	@Override
-	public void onDisable() {
-		LogManager.logInfo(this.getPluginName() + "を終了しました", this, Level.INFO);	
-	}
-	/**
 	 * インスタンス取得
 	 * @return apiインスタンス
 	 */
-	public static GrowthPlugin getInstance() {
+	public static BaseAPI getInstance() {
 		return plugin;
 	}
 }

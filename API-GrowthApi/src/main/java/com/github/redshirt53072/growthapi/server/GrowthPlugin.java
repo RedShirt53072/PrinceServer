@@ -46,32 +46,34 @@ public abstract class GrowthPlugin extends JavaPlugin{
 	 * @return バージョンが正しいかどうか
 	 */
 	public boolean checkVersion(String require) {
-		String[] inVer = version.split(".");
+		String[] inVer = version.split("\\.");
 		if(inVer.length != 3){
 			return false;
 		}
-		String[] reqVer = require.split(".");
+		String[] reqVer = require.split("\\.");
 		if(reqVer.length != 3){
 			return false;
 		}
+		
 		ArrayList<Integer> inNums = new ArrayList<Integer>();
 		ArrayList<Integer> reqNums = new ArrayList<Integer>();
 		
 		for(String inStr : inVer) {
-			Integer inNum = TextManager.toNaturalNumber(inStr);
+			Integer inNum = TextManager.toNumber(inStr);
 			if(inNum == null) {
 				return false;
 			}
 			inNums.add(inNum);
 		}
-		
+
 		for(String reqStr : reqVer) {
-			Integer reqNum = TextManager.toNaturalNumber(reqStr);
+			Integer reqNum = TextManager.toNumber(reqStr);
 			if(reqNum == null) {
 				return false;
 			}
 			reqNums.add(reqNum);
 		}
+
 		if(inNums.get(0) != reqNums.get(0)) {
 			return false;
 		}
