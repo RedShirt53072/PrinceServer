@@ -9,11 +9,11 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.github.redshirt53072.baseapi.command.ManagementCommand;
-import com.github.redshirt53072.baseapi.command.SubCommand;
-import com.github.redshirt53072.baseapi.message.MessageManager;
-import com.github.redshirt53072.baseapi.util.Flag;
-import com.github.redshirt53072.baseapi.util.TextManager;
+import com.github.redshirt53072.growthapi.command.ManagementCommand;
+import com.github.redshirt53072.growthapi.command.SubCommand;
+import com.github.redshirt53072.growthapi.message.MessageManager;
+import com.github.redshirt53072.growthapi.util.Flag;
+import com.github.redshirt53072.growthapi.util.TextManager;
 import com.github.redshirt53072.dimmanager.data.DimData;
 import com.github.redshirt53072.dimmanager.general.WorldManager;
 

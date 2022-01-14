@@ -10,10 +10,10 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.World;
 
-import com.github.redshirt53072.baseapi.config.ConfigManager;
-import com.github.redshirt53072.baseapi.util.DataFolder;
-import com.github.redshirt53072.baseapi.util.Flag;
-import com.github.redshirt53072.dimmanager.general.DimManager;
+import com.github.redshirt53072.growthapi.config.ConfigManager;
+import com.github.redshirt53072.growthapi.util.DataFolder;
+import com.github.redshirt53072.growthapi.util.Flag;
+import com.github.redshirt53072.dimmanager.DimManager;
 
 public class DimData {
 	

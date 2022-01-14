@@ -11,16 +11,15 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-import com.github.redshirt53072.baseapi.message.MessageManager;
-import com.github.redshirt53072.baseapi.util.Flag;
+import com.github.redshirt53072.growthapi.item.ItemUtil;
+import com.github.redshirt53072.growthapi.message.MessageManager;
+import com.github.redshirt53072.growthapi.util.Flag;
+import com.github.redshirt53072.dimmanager.DimManager;
 import com.github.redshirt53072.dimmanager.data.DimData;
-import com.github.redshirt53072.dimmanager.general.DimManager;
 import com.github.redshirt53072.dimmanager.general.WorldManager;
 
 public class DimAllCommand implements TabExecutor{
@@ -101,14 +100,7 @@ public class DimAllCommand implements TabExecutor{
 		if(item.getType().equals(Material.AIR)){
 			return;
 		}
-		Item i = (Item) p.getWorld().spawnEntity(p.getLocation(), EntityType.DROPPED_ITEM);
-		i.setItemStack(item);
-		i.setPickupDelay(0);
-		i.setOwner(p.getUniqueId());
-		i.setGlowing(true);
-		i.setInvulnerable(true);
-		i.setCustomName(p.getName() + "の落とし物");
-		i.setCustomNameVisible(true);
+		ItemUtil.dropItem(p, item);
 	}
 	
 	

@@ -10,20 +10,19 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 
-import com.github.redshirt53072.baseapi.database.SqlSender;
-import com.github.redshirt53072.baseapi.general.BaseApi;
+import com.github.redshirt53072.growthapi.database.SQLSender;
+import com.github.redshirt53072.growthapi.BaseAPI;
 
-public class WorldSqlSender extends SqlSender{
+public class WorldSqlSender extends SQLSender{
 	
 	public WorldSqlSender(Connection connect) {
-    	super(connect,"player_loc",BaseApi.getInstance());
+    	super(connect,"player_loc",BaseAPI.getInstance());
     }
 	
 	public void insert(String name,UUID player,UUID world) {
         try (PreparedStatement statement = connectData.prepareStatement(
         		"INSERT INTO player_loc (dim, player, world, x, y, z, yaw, pitch) VALUES (?, ?,?,?,?,?,?,?);"
         )){
-        	super.logFiner("INSERT " + name + "," + player + "," + world + ",0,70,0,0,0");
             statement.setString(1, name);
             statement.setString(2, player.toString());
             statement.setString(3, world.toString());
@@ -45,8 +44,7 @@ public class WorldSqlSender extends SqlSender{
         try (PreparedStatement statement = connectData.prepareStatement(
         		"UPDATE player_loc SET world = ?, x = ?, y = ?, z = ?, yaw = ?, pitch = ? WHERE dim = ? AND player = ?;"
         )){
-        	super.logFiner("UPDATE SET world = "+ loc.getWorld().getUID() + ", x = "+ loc.getBlockX() + ", y = "+ loc.getBlockY() + ", z = " + loc.getBlockZ() + ", yaw = "+ loc.getYaw() + ", pitch = " + loc.getPitch() + "(dim = " + name + ",player = " + player.toString() + ")");
-            statement.setString(1, loc.getWorld().getUID().toString());
+        	statement.setString(1, loc.getWorld().getUID().toString());
             statement.setDouble(2, loc.getX());
             statement.setDouble(3, loc.getY());
             statement.setDouble(4, loc.getZ());
@@ -67,7 +65,6 @@ public class WorldSqlSender extends SqlSender{
     	try (PreparedStatement statement = connectData.prepareStatement(
         		"SELECT world, x, y, z, yaw, pitch FROM player_loc WHERE dim = ? AND player = ?;"
         )){
-        	super.logFiner("SELECT world, x, y, z, yaw, pitch FROM player_loc WHERE dim = " + dim + " AND player = " + player.toString());
 
             statement.setString(1, dim);
             statement.setString(2, player.toString());

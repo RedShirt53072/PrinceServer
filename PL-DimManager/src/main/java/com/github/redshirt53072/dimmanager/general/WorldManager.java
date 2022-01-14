@@ -11,12 +11,13 @@ import org.bukkit.World;
 import org.bukkit.World.Environment;
 import org.bukkit.entity.Player;
 
-import com.github.redshirt53072.baseapi.database.SqlDataLoader;
-import com.github.redshirt53072.baseapi.util.DataFolder;
+import com.github.redshirt53072.growthapi.database.SQLInterface;
+import com.github.redshirt53072.growthapi.util.DataFolder;
+import com.github.redshirt53072.dimmanager.DimManager;
 import com.github.redshirt53072.dimmanager.data.DimData;
 import com.github.redshirt53072.dimmanager.data.WorldSqlSender;
 
-public class WorldManager extends SqlDataLoader{
+public class WorldManager extends SQLInterface{
 	private static List<String> worlds = new ArrayList<String>();
 	private static List<String> allDims = new ArrayList<String>();
 	
@@ -26,11 +27,10 @@ public class WorldManager extends SqlDataLoader{
 	
 	public void login(Player p) {
 		//sql
-		String plName = p.getName();
 		DataFolder<World> world = new DataFolder<World>();
 		Bukkit.getWorlds().forEach(w ->{if(w.getEnvironment().equals(Environment.NORMAL)) {
 			world.setData(w);
-		}});;
+		}});
 		new Thread() {
             @Override
             public void run() {
@@ -41,7 +41,6 @@ public class WorldManager extends SqlDataLoader{
         			sender.insert("normal", p.getUniqueId(), world.getData().getUID());
         		}
         		close();
-            	logEnd("player_loc","に" + plName + "の初期処理を");
             }
     	}.start();
     	//config
@@ -67,7 +66,6 @@ public class WorldManager extends SqlDataLoader{
 		if(!p.getWorld().getEnvironment().equals(Environment.CUSTOM)) {
 			UUID uuid = p.getUniqueId();
 			Location loc = p.getLocation().clone();
-			String plName = p.getName();
 			new Thread() {
 	            @Override
 	            public void run() {
@@ -76,7 +74,6 @@ public class WorldManager extends SqlDataLoader{
 	        		sender.update("normal", uuid,loc);
 	        		
 	        		close();
-	            	logEnd("player_loc","に" + plName + "の座標保存処理を");
 	            }
 	    	}.start();
 		}
@@ -89,7 +86,6 @@ public class WorldManager extends SqlDataLoader{
 		Location loc = sender.read(p.getUniqueId(), "normal");
 		
 		close();
-    	logEnd("player_loc","に" + p.getName() + "の座標読み込み処理を");
     	return loc;
 	}
 	
