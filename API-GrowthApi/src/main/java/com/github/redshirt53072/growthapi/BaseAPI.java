@@ -43,7 +43,7 @@ public final class BaseAPI extends GrowthPlugin{
 	public void onEnable() {
 		//general
 		name = "BaseAPI";
-		version = "2.0.0";
+		version = "2.1.0";
 		plugin = this;
 		LogManager.registerLogger(this);
 		this.saveDefaultConfig();

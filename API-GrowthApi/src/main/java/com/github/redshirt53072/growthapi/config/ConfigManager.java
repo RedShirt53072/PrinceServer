@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.logging.Level;
 
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.inventory.ItemStack;
 
 import com.github.redshirt53072.growthapi.message.LogManager;
 import com.github.redshirt53072.growthapi.server.GrowthPlugin;
@@ -16,7 +17,7 @@ import com.github.redshirt53072.growthapi.server.GrowthPlugin;
  * 
  */
 
-public class ConfigManager  {
+public final class ConfigManager  {
 	/** 読み取ったconfigインスタンス*/
 	private FileConfiguration config;
 	/** configLoader*/
@@ -74,7 +75,7 @@ public class ConfigManager  {
         return i;
     }
 	/**
-	 * キーのリストを取得する
+	 * その階層のキーのリストを取得する
 	 * @param path 読み取りパス
 	 * @param keyName キーの名前
 	 * @return キーのリスト
@@ -122,6 +123,19 @@ public class ConfigManager  {
         }
     }
 	/**
+	 * ItemStackのデータを読み取り
+	 * @param path 読み取りパス
+	 * @return doubleデータ
+	 */
+	public ItemStack getItemStack(String path){
+		if (config.contains(path) && config.isItemStack(path)) {
+			return config.getItemStack(path);
+        }else {
+			return null;
+        }
+    }
+	
+	/**
 	 * Stringの配列を読み取り
 	 * 第二引数を空文字にするとパス内全部を読み取ってリスト化できる
 	 * @param path 読み取りパス
@@ -158,6 +172,25 @@ public class ConfigManager  {
 		return results;
 	}
 	/**
+	 * ItemStackの配列を読み取り
+	 * 第二引数を空文字にするとパス内全部を読み取ってリスト化できる
+	 * @param path 読み取りパス
+	 * @param keyName 配列のキー
+	 * @return ItemStackリスト
+	 */
+	public List<ItemStack> getItemArray(String path,String keyName){
+		List<ItemStack> results = new ArrayList<ItemStack>();
+		for(String key : getKeys(path,keyName)) {
+			ItemStack data = getItemStack(path + key);
+			if(data == null) {
+				continue;
+			}
+			results.add(data);
+		}
+		return results;
+	}
+	
+	/**
 	 * doubleの配列を読み取り
 	 * 第二引数を空文字にするとパス内全部を読み取ってリスト化できる
 	 * @param path 読み取りパス
@@ -175,6 +208,7 @@ public class ConfigManager  {
 		}
 		return results;
 	}
+	
 	
 	/**
 	 * データの有無を調べる
@@ -208,6 +242,19 @@ public class ConfigManager  {
 	public void logWarning(String path,String message) {
 		LogManager.logError("[config]" + filePath + "#" + path + message, plugin, new Throwable(), Level.WARNING);
 	}
+	
+	/**
+	 * configでのエラーをログに流す
+	 * @param path 読み取りパス
+	 * @param message メッセージ
+	 * @param ex Exception
+	 * 
+	 */
+	public void logException(String path,String message,Exception ex) {
+		LogManager.logError("[config]" + filePath + "#" + path + message, plugin, ex, Level.WARNING);
+	}
+	
+	
 	/**
 	 * configが書き換えや読み取りをログに流す
 	 * @param path 読み取りパス
