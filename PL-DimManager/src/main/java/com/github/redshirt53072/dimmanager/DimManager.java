@@ -54,8 +54,6 @@ public final class DimManager extends GrowthPlugin{
 			GrowthPluginManager.stopServer("前提機能の無効化による", GrowthPluginManager.StopReason.ERROR);
 		}
 		
-		//command
-		DimSubCommand.register();
 		
 		//event
 		new PlayerLogin();
@@ -64,6 +62,8 @@ public final class DimManager extends GrowthPlugin{
 		WorldManager.reload();
 		
 		//command
+		DimSubCommand.register();
+		
 		this.getCommand("world").setExecutor(new WorldCommand());
 		this.getCommand("alldim").setExecutor(new DimAllCommand());
 		//message

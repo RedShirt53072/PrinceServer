@@ -12,12 +12,13 @@ import org.bukkit.World.Environment;
 import org.bukkit.entity.Player;
 
 import com.github.redshirt53072.growthapi.database.SQLInterface;
+import com.github.redshirt53072.growthapi.server.EmergencyListener;
 import com.github.redshirt53072.growthapi.util.DataFolder;
 import com.github.redshirt53072.dimmanager.DimManager;
 import com.github.redshirt53072.dimmanager.data.DimData;
 import com.github.redshirt53072.dimmanager.data.WorldSqlSender;
 
-public class WorldManager extends SQLInterface{
+public class WorldManager extends SQLInterface implements EmergencyListener{
 	private static List<String> worlds = new ArrayList<String>();
 	private static List<String> allDims = new ArrayList<String>();
 	
@@ -78,6 +79,15 @@ public class WorldManager extends SQLInterface{
 	    	}.start();
 		}
 		
+	}
+	
+	
+
+	@Override
+	public void onEmergency() {
+		for(Player p : Bukkit.getOnlinePlayers()){
+			logout(p);	
+		}
 	}
 	
 	public Location readLoc(Player p) {
