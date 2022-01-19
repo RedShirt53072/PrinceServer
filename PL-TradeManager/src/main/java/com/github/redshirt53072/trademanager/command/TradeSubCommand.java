@@ -6,6 +6,7 @@ import java.util.UUID;
 import java.util.function.Predicate;
 
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -47,11 +48,15 @@ public class TradeSubCommand implements SubCommand{
 		
 		switch(args[1]) {
 		case "modify":
+			if(!p.getGameMode().equals(GameMode.CREATIVE)) {
+				MessageManager.sendSpecial(ChatColor.RED + "[error]クリエイティブモードにしてからもう一度コマンドを送信してください。", p);
+	        	return;
+			}
 			new HubGui().registerPlayer(p);
 			MessageManager.sendSpecial("交易設定GUIを開きました。", p);
 			return;
 		case "toggle":
-			if(args.length < 4) {
+			if(args.length < 3) {
 				MessageManager.sendSpecial(ChatColor.RED + "[error]必要な項目が未記入です。", p);
 	        	return;
 	        }
@@ -68,22 +73,25 @@ public class TradeSubCommand implements SubCommand{
 				MessageManager.sendSpecial(ChatColor.RED + "[error]無効なUUIDです。", p);	
 				return;	
 			}
-			if(entity.getType().equals(EntityType.VILLAGER)) {
+			if(!entity.getType().equals(EntityType.VILLAGER)) {
 				MessageManager.sendSpecial(ChatColor.RED + "[error]そのUUIDのエンティティは村人ではありません。", p);	
 				return;	
 			}
 			
 			VillagerManager manager = new VillagerManager((Villager)entity);
-			if(args[3].equals("enable")) {
-				MessageManager.sendSpecial(entity.getCustomName() + "の交易テーブルの適用を有効化しました。", p);
-	        	manager.setVersion(0);
-				return;
+			if(args.length > 3) {
+				if(args[3].equals("enable")) {
+					MessageManager.sendSpecial(entity.getCustomName() + "の交易テーブルの適用を有効化しました。", p);
+		        	manager.setVersion(0);
+					return;
+				}
+				if(args[3].equals("disable")) {
+					MessageManager.sendSpecial(entity.getCustomName() + "の交易テーブルの適用を無効化しました。", p);
+					manager.setVersion(-1);
+					return;
+				}	
 			}
-			if(args[3].equals("disable")) {
-				MessageManager.sendSpecial(entity.getCustomName() + "の交易テーブルの適用を無効化しました。", p);
-				manager.setVersion(-1);
-				return;
-			}
+			
 			int now = manager.getVersion();
 			if(now > -1) {
 				MessageManager.sendSpecial(entity.getCustomName() + "の交易テーブルの適用を無効化しました。", p);
@@ -124,6 +132,9 @@ public class TradeSubCommand implements SubCommand{
         				return false;
         			};
         			RayTraceResult result = p.getWorld().rayTraceEntities(loc, p.getLocation().getDirection(), 7, pre);
+        			if(result == null) {
+        				return tab;	
+        			}
         			Entity hit = result.getHitEntity();
         			if(null != hit) {
         				LivingEntity hit2 = (LivingEntity)hit;
@@ -131,7 +142,7 @@ public class TradeSubCommand implements SubCommand{
             			tab.add(hit.getUniqueId().toString());
         			}
         		}
-        		if(args.length == 5) {
+        		if(args.length == 4) {
         			tab.add("enable");
         			tab.add("disable");
         		}

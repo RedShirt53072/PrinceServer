@@ -61,8 +61,8 @@ public final class TradeConfig {
 	
 	private static void writeRecipe(ConfigManager manager,String path,MerchantRecipe recipe) {
 		List<ItemStack> buyItems = recipe.getIngredients();
-		for(int i = 2 < buyItems.size() ? 2 : buyItems.size();i > 0;i--) {
-			manager.setData(path + ".buy" + i, buyItems.get(i - 1));	
+		for(int i = 0;i < Math.min(2,buyItems.size());i++) {
+			manager.setData(path + ".buy" + (i + 1), buyItems.get(i));	
 		}
 		manager.setData(path + ".sell", recipe.getResult());
 		manager.setData(path + ".villagerexp", recipe.getVillagerExperience());
@@ -170,6 +170,9 @@ public final class TradeConfig {
 		
 		public ProfessionData(int version){
 			this.version = version;
+			for(int i = 1;i < 6;i++) {
+				data.put(i, new LevelData(0));
+			}
 		}
 		
 		public void addLevel(int level,LevelData levelData) {
@@ -188,9 +191,6 @@ public final class TradeConfig {
 			List<LevelData> result = new ArrayList<LevelData>();
 			for(int i = 1;i < 6;i++) {
 				LevelData ld = data.get(Integer.valueOf(i));
-				if(ld == null) {
-					ld = new LevelData(0);
-				}
 				result.add(ld);
 			}
 			return result;
@@ -198,9 +198,6 @@ public final class TradeConfig {
 		
 		public LevelData getLevelData(int level){
 			LevelData ld = data.get(Integer.valueOf(level));
-			if(ld == null) {
-				ld = new LevelData(0);
-			}
 			return ld;
 		}
 		/*

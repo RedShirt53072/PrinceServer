@@ -39,10 +39,12 @@ public final class VillagerManager extends PlayerNBTLoader{
 		return data.get(prof);
 	}
 	
-	public static void setProfessionData(Profession prof,ProfessionData profData){
-		profData.setVersion(data.get(prof).getVersion() + 1);
-		data.replace(prof, profData);
+	public static int setProfessionData(Profession prof,ProfessionData profData){
+		int version = data.get(prof).getVersion() + 1;
+		profData.setVersion(version);
+		data.put(prof, profData);
 		TradeConfig.save(data);
+		return version;
 	}
 	
 	
@@ -54,7 +56,17 @@ public final class VillagerManager extends PlayerNBTLoader{
     	super(entity,TradeManager.getInstance());
     }
 
-	
+	public void setLevel(int level) {
+    	writeInt("level",level);
+    }
+    
+    public int getLevel() {
+    	Integer level = readInt("level");
+    	if(level == null) {
+        	return 0;
+    	}
+    	return level;
+    }
 	
 	public void setVersion(int ver) {
     	writeInt("version",ver);
@@ -96,14 +108,32 @@ public final class VillagerManager extends PlayerNBTLoader{
     	}
     	
 		
-		public void setSell(ItemStack sellItems) {
-			sell = sellItems;
+		public void setSell(ItemStack sellItem) {
+			if(sellItem != null) {
+				if(sellItem.getType().equals(Material.AIR)) {
+					sell = null;
+					return;
+				}
+			}
+			sell = sellItem;
 		}
 		public void setBuy1(ItemStack buy) {
+			if(buy != null) {
+				if(buy.getType().equals(Material.AIR)) {
+					buy1 = null;
+					return;
+				}
+			}
 			buy1 = buy;
 		}
 		
 		public void setBuy2(ItemStack buy) {
+			if(buy != null) {
+				if(buy.getType().equals(Material.AIR)) {
+					buy2 = null;
+					return;
+				}
+			}
 			buy2 = buy;
 		}
 		

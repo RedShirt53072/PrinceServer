@@ -1,6 +1,7 @@
 package com.github.redshirt53072.trademanager;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.event.Listener;
@@ -12,7 +13,12 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.VillagerAcquireTradeEvent;
 import org.bukkit.event.entity.VillagerCareerChangeEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.Merchant;
+import org.bukkit.inventory.MerchantInventory;
 import org.bukkit.inventory.MerchantRecipe;
 
 import com.github.redshirt53072.trademanager.data.VillagerManager;
@@ -30,19 +36,35 @@ public final class VillagerEvent implements Listener {
         Villager vil = event.getEntity();
     	Profession prof = event.getProfession();
         if(prof.equals(Profession.NONE)){
+        	VillagerManager manager = new VillagerManager(vil);
+        	manager.setLevel(0);
+        	manager.setVersion(0);
+        	
     		return;
     	}
-        
-        vil.setRecipes(VillagerManager.getNewRecipe(prof, 1));
    	}
     @EventHandler(priority = EventPriority.NORMAL)
     public void levelup(VillagerAcquireTradeEvent event) {
+    	if(!event.getEntity().getType().equals(EntityType.VILLAGER)) {
+    		return;
+    	}
     	event.setCancelled(true);
-        Villager vil = (Villager)event.getEntity();
-        List<MerchantRecipe> recipes = vil.getRecipes();
-        recipes.addAll(VillagerManager.getNewRecipe(vil.getProfession(), vil.getVillagerLevel()));
-    	vil.setRecipes(recipes);
-   	}
+    }
+    @EventHandler(priority = EventPriority.NORMAL)
+    public void openVillager(InventoryOpenEvent event) {
+    	Inventory inv = event.getInventory();
+    	if(!inv.getType().equals(InventoryType.MERCHANT)) {
+    		return;
+    	}
+    	MerchantInventory minv = (MerchantInventory)inv;
+    	Merchant m = minv.getMerchant();
+    	for(MerchantRecipe mr : m.getRecipes()){
+    		int sp = mr.getSpecialPrice();
+    		if(sp != 0) {
+    			mr.setSpecialPrice(0);
+    		}
+    	}
+    }
     @EventHandler(priority = EventPriority.NORMAL)
     public void talkVillager(PlayerInteractEntityEvent event) {
     	Entity clicked = event.getRightClicked();
@@ -54,14 +76,32 @@ public final class VillagerEvent implements Listener {
     	if(prof.equals(Profession.NONE)) {
     		return;
     	}
-    	int vilVersion = new VillagerManager(vil).getVersion();
+    	VillagerManager manager = new VillagerManager(vil);
+    	int vilVersion = manager.getVersion();
     	if(vilVersion < 0) {
     		return;
     	}
     	int tableVersion = VillagerManager.getTableVersion(prof);
-    	if(vilVersion != tableVersion) {
+    	if(vilVersion == 0) {
+    		manager.setVersion(tableVersion);
+    	}else if(vilVersion != tableVersion) {
         	vil.setRecipes(VillagerManager.getAllRecipe(prof, vil.getVillagerLevel()));
-        	new VillagerManager(vil).setVersion(tableVersion);
+        	manager.setVersion(tableVersion);
+        	return;
     	}
+    	
+        int oldLevel = manager.getLevel();
+    	int nowLevel = vil.getVillagerLevel();
+        if(oldLevel == nowLevel) {
+        	return;
+        }
+        List<MerchantRecipe> recipes = new ArrayList<MerchantRecipe>();
+        recipes.addAll(vil.getRecipes());
+        for(int i = nowLevel;i > oldLevel;i--) {
+        	recipes.addAll(VillagerManager.getNewRecipe(vil.getProfession(), i));	
+        }
+        vil.setRecipes(recipes);
+    	
+    	manager.setLevel(nowLevel);
    	}
 }

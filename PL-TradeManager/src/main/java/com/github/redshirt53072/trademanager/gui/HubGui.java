@@ -2,6 +2,7 @@ package com.github.redshirt53072.trademanager.gui;
 
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -20,8 +21,12 @@ public class HubGui extends Gui{
     @Override
     public boolean onClick(InventoryClickEvent event){
     	int slot = event.getRawSlot();
-    	if(slot > profData.length - 1 ||slot < 0) {
+    	
+    	if(slot > 17 ||slot < 0) {
     		return false;
+    	}
+    	if(slot > profData.length - 1) {
+    		return true;
     	}
     	
     	event.setCancelled(true);
@@ -36,9 +41,9 @@ public class HubGui extends Gui{
 	public void onRegister() {
     	inv = Bukkit.createInventory(null, 18, "交易テーブル編集-職業選択");
     	profData = ProfData.values();
-    	for(int i = 0;i < 27;i++) {
+    	for(int i = 0;i < 18;i++) {
     		if(i < profData.length) {
-        		inv.setItem(i, createItem(profData[i].getIconItem(),profData[i].getName() + "の交易を編集する", null, 1, null, -1));	
+        		inv.setItem(i, createItem(profData[i].getIconItem(),ChatColor.WHITE + profData[i].getName() + "の交易を編集する", null, 1, null, -1));	
         		continue;
     		}
     		inv.setItem(i, createItem(Material.BLACK_STAINED_GLASS_PANE ," ", null, 1, null, -1));

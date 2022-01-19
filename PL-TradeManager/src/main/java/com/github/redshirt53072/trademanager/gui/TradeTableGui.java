@@ -4,6 +4,7 @@ package com.github.redshirt53072.trademanager.gui;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -15,6 +16,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.MerchantRecipe;
 
 import com.github.redshirt53072.growthapi.gui.Gui;
+import com.github.redshirt53072.growthapi.message.LogManager;
 import com.github.redshirt53072.growthapi.message.MessageManager;
 import com.github.redshirt53072.trademanager.TradeManager;
 import com.github.redshirt53072.trademanager.data.TradeConfig.LevelData;
@@ -27,6 +29,8 @@ public class TradeTableGui  extends Gui{
 	private ProfData prof;
 	private List<TradeData> trades = new ArrayList<TradeData>();
 	private int[] rolls = {0,0,0,0,0};
+	private int[] amounts = {0,0,0,0,0};
+	
 	private int viewIndex = 1;
 	private int warning = -1;
 	
@@ -39,6 +43,34 @@ public class TradeTableGui  extends Gui{
     public boolean onClick(InventoryClickEvent event){
     	int slot = event.getRawSlot();
 		int index = viewIndex + slot / 9 - 1;
+		/*
+		for(TradeData td : trades) {
+			LogManager.logInfo("level:" + td.getLevel() + ",exp:" + td.getVilExp(), plugin, Level.INFO);
+			if(td.getBuy1() == null) {	
+				LogManager.logInfo("buy1:null", plugin, Level.INFO);
+			}else {
+				LogManager.logInfo("buy1:" + td.getBuy1().getType().toString(), plugin, Level.INFO);
+			}
+			if(td.getBuy2() == null) {	
+				LogManager.logInfo("buy2:null", plugin, Level.INFO);
+			}else {
+				LogManager.logInfo("buy2:" + td.getBuy2().getType().toString(), plugin, Level.INFO);
+			}
+			if(td.getSell() == null) {	
+				LogManager.logInfo("sell:null", plugin, Level.INFO);
+			}else {
+				LogManager.logInfo("sell:" + td.getSell().getType().toString(), plugin, Level.INFO);
+			}
+		}*/
+		
+		if(slot < 0 || slot > 53) {
+			
+			if(event.getClick().equals(ClickType.DOUBLE_CLICK)) {
+				return true;
+			}
+			
+			return false;
+		}
 		
     	if(slot == 2) {
     		//save
@@ -57,7 +89,7 @@ public class TradeTableGui  extends Gui{
     		for(TradeData td : trades) {
     			MerchantRecipe recipe = td.convert();
     			if(recipe == null) {
-    				continue;
+        			continue;
     			}
     			result.getLevelData(td.getLevel()).addRecipe(recipe);
     		}
@@ -66,8 +98,10 @@ public class TradeTableGui  extends Gui{
     			result.getLevelData(i).setRoll(rolls[i - 1]);
     		}
     		
-    		VillagerManager.setProfessionData(prof.getProfession(), result);
+    		int version = VillagerManager.setProfessionData(prof.getProfession(), result);
     		warning = -1;
+    		//職業表示
+    		inv.setItem(0, createItem(prof.getIconItem(),ChatColor.WHITE + prof.getName() + "(これまでに" + ChatColor.GOLD + version + "回" + ChatColor.WHITE + "更新済み)",null,1,null,0));
     		inv.setItem(2, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE + "交易設定は最新の状態です",null,1,null,3400));
     		player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1,0.5F);
     		return true;
@@ -81,24 +115,42 @@ public class TradeTableGui  extends Gui{
     	}
     	if(slot < 9 && slot > 3) {
     		//アンロック数
-    		if(warning == -1) {
-    			warning = 0;
-    		}
+    		
     		ClickType type = event.getClick();
     		if(type.equals(ClickType.RIGHT)) {
-        		rolls[slot - 3] -= 1;
+    			if(rolls[slot - 4] < 1) {
+    				player.playSound(player.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1,0.5F);
+    				return true;
+    			}
+    			if(warning == -1) {
+            		checkWarning();
+        		}
+    			rolls[slot - 4] -= 1;
         	    unlockRender();
     			player.playSound(player.getLocation(), Sound.BLOCK_SHULKER_BOX_CLOSE, 1,1);
         		return true;
     		}
-    		if(type.equals(ClickType.MIDDLE)) {
-        		rolls[slot - 3] = 0;
+    		if(type.equals(ClickType.MIDDLE) || type.equals(ClickType.DROP)) {
+    			if(rolls[slot - 4] == 0) {
+    				player.playSound(player.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1,0.5F);
+    				return true;
+    			}
+    			if(warning == -1) {
+            		checkWarning();
+        		}
+    			rolls[slot - 4] = 0;
     			player.playSound(player.getLocation(), Sound.BLOCK_SHULKER_BOX_CLOSE, 1,1);
         	    unlockRender();
     			return true;
     		}
-
-    		rolls[slot - 3] += 1;
+    		if(rolls[slot - 4] == 50) {
+    			player.playSound(player.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1,0.5F);
+				return true;
+			}
+    		if(warning == -1) {
+        		checkWarning();
+    		}
+    		rolls[slot - 4] += 1;
     		player.playSound(player.getLocation(), Sound.BLOCK_SHULKER_BOX_OPEN, 1,1);
     	    unlockRender();    		
     	    return true;
@@ -109,38 +161,68 @@ public class TradeTableGui  extends Gui{
     	int line = slot % 9;
     	if(line == 0) {
     		//addRecipe
+    		amounts[slot / 9 - 1] += 1;
     		trades.add(new TradeData(slot / 9));
+    		Collections.sort(trades);
     		checkWarning();
     		render();
     		//総交易数
-        	inv.setItem(0, createItem(Material.BOOK,ChatColor.WHITE + prof.getName() + "の総交易数:" + ChatColor.GOLD + trades.size() + "種類",null,1,null,0));
+        	inv.setItem(1, createItem(Material.BOOK,ChatColor.WHITE + prof.getName() + "の総交易数:" + ChatColor.GOLD + trades.size() + "種類",null,Math.max(trades.size(),1),null,0));
     		player.playSound(player.getLocation(), Sound.UI_CARTOGRAPHY_TABLE_TAKE_RESULT, 1,1);
     	}
     	if(line == 2 || line == 3 || line == 5) {
     		//トレードアイテム
-    		ItemStack old = event.getCurrentItem();
-    		ItemStack newItem = event.getCursor();
-    		TradeData td = trades.get(index);
-			if(old.getItemMeta().getCustomModelData() == 3405) {
-    			if(newItem == null) {
-    				return true;
-    			}
-        		player.playSound(player.getLocation(), Sound.ENTITY_ITEM_PICKUP, 1,1);
-    			event.setCurrentItem(null);
-        		if(line == 2) {
-    				td.setBuy1(newItem);
-    			}
-        		if(line == 3) {
-    				td.setBuy2(newItem);
-    			}
-        		if(line == 5) {
-    				td.setSell(newItem);
-    			}
-        		checkWarning();
-    			return false;
+    		ItemStack newItem = event.getCursor().clone();
+    		if(index > trades.size() || trades.size() == 0) {
+    			return true;
     		}
+    		
+    		TradeData td = trades.get(index - 1);
+    		ItemStack savedItem = null;
+    		if(line == 2) {
+    			savedItem = td.getBuy1();
+			}
+    		if(line == 3) {
+    			savedItem = td.getBuy2();
+    		}
+    		if(line == 5) {
+    			savedItem = td.getSell();
+    		}
+    		if(savedItem != null) {
+    			if(!savedItem.getType().equals(Material.AIR)) {
+    				player.playSound(player.getLocation(), Sound.ENTITY_ITEM_PICKUP, 1,1);
+    	    		
+    				if(line == 2) {
+    					td.setBuy1(newItem);
+    				}
+    	    		if(line == 3) {
+    					td.setBuy2(newItem);
+    				}
+    	    		if(line == 5) {
+    					td.setSell(newItem);
+    				}
+    	    		trades.set(index - 1,td);
+    	    		player.getOpenInventory().setCursor(savedItem);
+    	    		setRecipe(slot / 9,td);
+    	    		if(newItem != null) {
+    	    			if(!(newItem.getType().equals(Material.AIR))){
+    	    				return true;
+    	        		}
+    	    		}
+    	    		checkWarning();
+    				return true;	
+        		}
+    		}
+    		if(newItem == null) {
+				return true;
+			}
+			if(newItem.getType().equals(Material.AIR)) {
+				return true;
+			}
+			
     		player.playSound(player.getLocation(), Sound.ENTITY_ITEM_PICKUP, 1,1);
-			if(line == 2) {
+			
+    		if(line == 2) {
 				td.setBuy1(newItem);
 			}
     		if(line == 3) {
@@ -149,50 +231,71 @@ public class TradeTableGui  extends Gui{
     		if(line == 5) {
 				td.setSell(newItem);
 			}
-    		if(newItem == null) {
-				event.setCurrentItem(createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE + "( 空 )",null,1,null,3405));
-				checkWarning();
-    		}
-    		return false;
+    		trades.set(index - 1,td);		
+    		setRecipe(slot / 9,td);
+    		
+    		checkWarning();
+			return true;
     	}
 
     	if(line == 6) {
-    		//vilexp
-    		TradeData td = trades.get(index);
+    		if(index > trades.size() || trades.size() == 0) {
+    			return true;
+    		}
+    		//vilexpq
+    		TradeData td = trades.get(index - 1);
     		if(warning == -1) {
-    			warning = 0;
+        		checkWarning();
     		}
     		ClickType type = event.getClick();
     		if(type.equals(ClickType.RIGHT)) {
     			//plus5
+        		if(td.getVilExp() == 50) {
+            		player.playSound(player.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1,0.5F);
+        			return true;
+        		}
     			td.setVilExp(Math.min(td.getVilExp() + 5,50));
+        		trades.set(index - 1,td);
     			setRecipe(slot / 9 ,td);
     			player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1,0.8F);			
         		return true;
     		}
-    		if(type.equals(ClickType.MIDDLE)) {
+    		if(type.equals(ClickType.MIDDLE) || type.equals(ClickType.DROP)) {
     			//reset
+    			if(td.getVilExp() == 0) {
+            		player.playSound(player.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1,0.5F);
+        			return true;
+        		}
     			td.setVilExp(0);
+        		trades.set(index - 1,td);
     			setRecipe(slot / 9 ,td);
     			player.playSound(player.getLocation(), Sound.ITEM_BOTTLE_FILL, 1,1);
     			return true;
     		}
     		//plus1
+    		if(td.getVilExp() == 50) {
+        		player.playSound(player.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1,0.5F);
+    			return true;
+    		}
     		td.setVilExp(Math.min(td.getVilExp() + 1,50));
+    		trades.set(index - 1,td);
 			setRecipe(slot / 9 ,td);
 			player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1,1.5F);			
     		return true;
     	}
     	
     	if(line == 7) {
-    		//delete
-    		trades.remove(index);
-    		render();
-    		if(warning == -1) {
-    			warning = 0;
+    		if(index > trades.size() || trades.size() == 0) {
+    			return true;
     		}
+    		//delete
+    		amounts[trades.get(index - 1).getLevel() - 1] -= 1;
+    		trades.remove(index - 1);
+    		render();
+        	checkWarning();
+    		
     		//総交易数
-        	inv.setItem(0, createItem(Material.BOOK,ChatColor.WHITE + prof.getName() + "の総交易数:" + ChatColor.GOLD + trades.size() + "種類",null,1,null,0));
+        	inv.setItem(1, createItem(Material.BOOK,ChatColor.WHITE + prof.getName() + "の総交易数:" + ChatColor.GOLD + trades.size() + "種類",null,Math.max(trades.size(),1),null,0));
         	
     		player.playSound(player.getLocation(), Sound.BLOCK_BEACON_DEACTIVATE, 1,1);
     		return true;
@@ -200,28 +303,44 @@ public class TradeTableGui  extends Gui{
     	
     	//スクロール
     	if(slot == 17) {
-    		viewIndex = Math.min(viewIndex + 5,trades.size());
+    		if(viewIndex <= 1) {
+        		player.playSound(player.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1,0.5F);
+    			return true;
+    		}
+    		viewIndex = Math.max(viewIndex - 5,1);
     		
     		render();
     		player.playSound(player.getLocation(), Sound.UI_LOOM_TAKE_RESULT, 1,0.7F);
     		return true;
     	}
     	if(slot == 26) {
-    		viewIndex = Math.min(viewIndex + 1,trades.size());
-    		
-    		render();
-    		player.playSound(player.getLocation(), Sound.UI_LOOM_TAKE_RESULT, 1,1);
-    		return true;
-    	}
-    	if(slot == 44) {
+    		if(viewIndex <= 1) {
+        		player.playSound(player.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1,0.5F);
+    			return true;
+    		}
     		viewIndex = Math.max(viewIndex - 1,1);
     		
     		render();
     		player.playSound(player.getLocation(), Sound.UI_LOOM_TAKE_RESULT, 1,1);
     		return true;
     	}
+    	if(slot == 44) {
+    		if(viewIndex == trades.size()) {
+    			player.playSound(player.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1,0.5F);
+    			return true;
+    		}
+    		viewIndex = Math.min(viewIndex + 1,trades.size());
+    		
+    		render();
+    		player.playSound(player.getLocation(), Sound.UI_LOOM_TAKE_RESULT, 1,1);
+    		return true;
+    	}
     	if(slot == 53) {
-    		viewIndex = Math.max(viewIndex - 5,1);
+    		if(viewIndex == trades.size()) {
+    			player.playSound(player.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1,0.5F);
+    			return true;
+    		}
+    		viewIndex = Math.min(viewIndex + 5,trades.size());
     		
     		render();
     		player.playSound(player.getLocation(), Sound.UI_LOOM_TAKE_RESULT, 1,0.7F);
@@ -236,7 +355,8 @@ public class TradeTableGui  extends Gui{
     	ProfessionData baseData = VillagerManager.getProfessionData(prof.getProfession());
 		for(int i = 1;i < 6; i++) {
 			LevelData ld = baseData.getLevelData(i);
-			rolls[i] = ld.getRoll();
+			rolls[i - 1] = ld.getRoll();
+			amounts[i - 1] = ld.getAllRecipe().size();
 			for(MerchantRecipe mr : ld.getAllRecipe()) {
 				trades.add(new TradeData(i,mr));
 			}
@@ -247,16 +367,12 @@ public class TradeTableGui  extends Gui{
     	//職業表示
 		inv.setItem(0, createItem(prof.getIconItem(),ChatColor.WHITE + prof.getName() + "(これまでに" + ChatColor.GOLD + baseData.getVersion() + "回" + ChatColor.WHITE + "更新済み)",null,1,null,0));
 		//総交易数
-    	inv.setItem(0, createItem(Material.BOOK,ChatColor.WHITE + prof.getName() + "の総交易数:" + ChatColor.GOLD + trades.size() + "種類",null,1,null,0));
+    	inv.setItem(1, createItem(Material.BOOK,ChatColor.WHITE + prof.getName() + "の総交易数:" + ChatColor.GOLD + trades.size() + "種類",null,Math.max(trades.size(),1),null,0));
     	
 		//保存とキャンセル
     	inv.setItem(2, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE + "交易設定は最新の状態です",null,1,null,3400));
 		inv.setItem(3, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE + "キャンセルして職業一覧に戻る",null,1,null,3401));
 		
-		//交易追加ボタン
-		for(int i = 1;i < 6;i++) {
-			inv.setItem(i * 9, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE.toString() + i + "レベルで開放される交易を追加する",null,1,null,3030 + i));
-		}
 		
 		//スクロールボタン
 		inv.setItem(17, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE +"上に5個スクロール",null,1,null,3312));
@@ -281,8 +397,12 @@ public class TradeTableGui  extends Gui{
 		warning = 0;
 		for(TradeData td : trades) {
 			if(td.getSell() != null) {
-				if(td.getBuy1() != null || td.getBuy2() != null) {
-					continue;
+				if(td.getBuy1() != null) {
+					if(!td.getSell().getType().equals(Material.AIR)) {
+						if(!td.getBuy1().getType().equals(Material.AIR)) {
+							continue;
+						}
+					}
 				}
 			}
 			warning ++;
@@ -294,7 +414,7 @@ public class TradeTableGui  extends Gui{
 		}
 		ArrayList<String> lore = new ArrayList<String>();
 		lore.add(ChatColor.RED.toString() + warning + "個の交易で購入もしくは売却アイテムが未設定になっています");
-		inv.setItem(2, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE + "交易設定への編集を保存する",lore,Math.min(warning,64),null,3406));
+		inv.setItem(2, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE + "交易設定への編集を保存する",lore,Math.max(1,Math.min(warning,64)),null,3406));
 	}
 	
 	private void render() {
@@ -305,21 +425,30 @@ public class TradeTableGui  extends Gui{
 			}
 			inv.setItem(9 + i, createItem(Material.WHITE_STAINED_GLASS_PANE," ",null,1,null,0));
 		}
-		
 		//交易
 		if(viewIndex > trades.size()) {
 			viewIndex = trades.size();
 		}
-		for(int i = 0;i < 5;i++){
-			if(viewIndex + i > trades.size()){
-				return;
-			}
-			setRecipe(i,trades.get(viewIndex + i));
+		if(viewIndex == 0 && trades.size() > 0) {
+			viewIndex = 1;
+		}
+		
+		//交易追加ボタン
+		for(int i = 1;i < 6;i++) {
+			inv.setItem(i * 9, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE.toString() + i + "レベルで開放される交易を追加する",null,Math.max(1,amounts[i - 1]),null,3030 + i));
 		}
 		
 		//スクロール位置
-		inv.setItem(35, createItem(Material.BOOK,ChatColor.WHITE + "現在" + viewIndex + "～" +  Math.min(viewIndex + 4,trades.size()) + "個目の交易を表示中",null,Math.min(viewIndex, 64),null,0));
-				
+		inv.setItem(35, createItem(Material.BOOK,ChatColor.WHITE + "現在" + viewIndex + "～" +  Math.min(viewIndex + 4,trades.size()) + "個目の交易を表示中",null,Math.max(1,Math.min(viewIndex, 64)),null,0));
+		
+		for(int i = 0;i < 5;i++){
+			if(viewIndex + i > trades.size() || trades.size() == 0){
+				break;
+			}
+			setRecipe(i + 1,trades.get(viewIndex + i - 1));
+		}
+		
+			
 	}
 	
 
@@ -332,13 +461,13 @@ public class TradeTableGui  extends Gui{
 	
 	
 	private void setUnlockRecipe(int level){
-    	int roll = rolls[level];
+    	int roll = rolls[level - 1];
     	
 		ArrayList<String> rollLore = new ArrayList<String>();
-		rollLore.add(ChatColor.WHITE + "設定可能な交易アンロック上限数の範囲:" + ChatColor.GOLD + "0 ~ 50");
+		rollLore.add(ChatColor.WHITE + "設定可能な交易アンロック上限数の範囲:" + ChatColor.GOLD + "0 ～ 50");
 		rollLore.add(ChatColor.WHITE + "-左クリックで交易アンロック上限数を" + ChatColor.GOLD + "1" + ChatColor.WHITE + "増やす");
 		rollLore.add(ChatColor.WHITE + "-右クリックで交易アンロック上限数を" + ChatColor.GOLD + "1" + ChatColor.WHITE + "減らす");
-		rollLore.add(ChatColor.WHITE + "-ミドルクリックで交易アンロック上限数を" + ChatColor.GOLD + "0" + ChatColor.WHITE + "に設定");
+		rollLore.add(ChatColor.WHITE + "-Qもしくはミドルクリックで交易アンロック上限数を" + ChatColor.GOLD + "0" + ChatColor.WHITE + "に設定");
     	int model = 3020;
 		if(roll > 0) {
 			model = 3000;
@@ -346,7 +475,7 @@ public class TradeTableGui  extends Gui{
 		if(roll > 50) {
 			roll = 50;
 		}
-    	inv.setItem(3 + level, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE + "交易アンロック上限数:" + roll,rollLore,roll,null,model + level));	
+    	inv.setItem(3 + level, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE + "交易アンロック上限数:" + roll,rollLore,Math.max(roll,1),null,model + level));	
     }
 	
     private void setRecipe(int location,TradeData trade) {
@@ -354,28 +483,34 @@ public class TradeTableGui  extends Gui{
     	ItemStack buy2 = trade.getBuy2();
     	if(buy1 == null) {
     		inv.setItem(location * 9 + 2, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE + "( 空 )",null,1,null,3405));
+        }else if(buy1.getType().equals(Material.AIR)){
+        	inv.setItem(location * 9 + 2, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE + "( 空 )",null,1,null,3405));
         }else {	
         	inv.setItem(location * 9 + 2, buy1);	
     	}
     	if(buy2 == null) {
     		inv.setItem(location * 9 + 3, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE + "( 空 )",null,1,null,3405));    		
+        }else if(buy2.getType().equals(Material.AIR)){
+        	inv.setItem(location * 9 + 3, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE + "( 空 )",null,1,null,3405));
         }else {
-        	inv.setItem(location * 9 + 3, buy2);	    		
+        	inv.setItem(location * 9 + 3, buy2);
         }
 
-		inv.setItem(location * 9 + 4, createItem(Material.WHITE_STAINED_GLASS_PANE,"",null,1,null,3300));
+		inv.setItem(location * 9 + 4, createItem(Material.WHITE_STAINED_GLASS_PANE," ",null,1,null,3300));
 		ItemStack sell = trade.getSell();
 		if(sell == null) {
 			inv.setItem(location * 9 + 5, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE + "( 空 )",null,1,null,3405));
-		}else {
+		}else if(sell.getType().equals(Material.AIR)){
+        	inv.setItem(location * 9 + 5, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE + "( 空 )",null,1,null,3405));
+        }else {
 			inv.setItem(location * 9 + 5, sell);
 		}
 		int exp = trade.getVilExp();
 		ArrayList<String> expLore = new ArrayList<String>();
-		expLore.add(ChatColor.WHITE + "設定可能な経験値の範囲:" + ChatColor.GOLD + "0EXP ~ 50EXP");
+		expLore.add(ChatColor.WHITE + "設定可能な経験値の範囲:" + ChatColor.GOLD + "0EXP ～ 50EXP");
 		expLore.add(ChatColor.WHITE + "-左クリックで経験値を" + ChatColor.GOLD + "1EXP" + ChatColor.WHITE + "増やす");
 		expLore.add(ChatColor.WHITE + "-右クリックで経験値を" + ChatColor.GOLD + "5EXP" + ChatColor.WHITE + "増やす");
-		expLore.add(ChatColor.WHITE + "-ミドルクリックで経験値を" + ChatColor.GOLD + "0EXP" + ChatColor.WHITE + "に設定");
+		expLore.add(ChatColor.WHITE + "-Qもしくはミドルクリックで経験値を" + ChatColor.GOLD + "0EXP" + ChatColor.WHITE + "に設定");
 		if(exp < 1) {
 			inv.setItem(location * 9 + 6, createItem(Material.GLASS_BOTTLE,ChatColor.WHITE + "村人への経験値:" + ChatColor.GOLD + "0EXP",expLore,1,null,0));
 		}else {
