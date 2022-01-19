@@ -145,7 +145,7 @@ public final class ConfigManager  {
 	public List<String> getStringArray(String path,String keyName){
 		List<String> results = new ArrayList<String>();
 		for(String key : getKeys(path,keyName)) {
-			String data = getString(path + key);
+			String data = getString(path + "." + key);
 			if(data == null) {
 				continue;
 			}
@@ -163,7 +163,7 @@ public final class ConfigManager  {
 	public List<Integer> getIntArray(String path,String keyName){
 		List<Integer> results = new ArrayList<Integer>();
 		for(String key : getKeys(path,keyName)) {
-			Integer data = getInt(path + key);
+			Integer data = getInt(path + "." + key);
 			if(data == null) {
 				continue;
 			}
@@ -181,7 +181,7 @@ public final class ConfigManager  {
 	public List<ItemStack> getItemArray(String path,String keyName){
 		List<ItemStack> results = new ArrayList<ItemStack>();
 		for(String key : getKeys(path,keyName)) {
-			ItemStack data = getItemStack(path + key);
+			ItemStack data = getItemStack(path + "." + key);
 			if(data == null) {
 				continue;
 			}
@@ -200,7 +200,7 @@ public final class ConfigManager  {
 	public List<Double> getDoubleArray(String path,String keyName){
 		List<Double> results = new ArrayList<Double>();
 		for(String key : getKeys(path,keyName)) {
-			Double data = getDouble(path + key);
+			Double data = getDouble(path + "." + key);
 			if(data == null) {
 				continue;
 			}

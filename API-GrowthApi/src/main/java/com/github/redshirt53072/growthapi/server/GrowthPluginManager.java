@@ -51,9 +51,13 @@ public final class GrowthPluginManager{
 	 */
 	public static void stopServer(String message,StopReason reason) {
 		//EmergencyListenerの実行
-		emergencies.forEach(eme -> {
-			eme.onEmergency();
-		});
+		try {
+			emergencies.forEach(eme -> {
+				eme.onEmergency();
+			});
+		}catch(Exception ex){
+			LogManager.logError("サーバーデータの保存中にエラーが発生しました。" ,BaseAPI.getInstance(), ex, Level.SEVERE);	
+		}
 		
 		LogManager.logInfo("サーバーが停止しました。理由:" + message + reason.toString(), BaseAPI.getInstance(), Level.INFO);
 		BaseAPI.getInstance().getServer().shutdown();
