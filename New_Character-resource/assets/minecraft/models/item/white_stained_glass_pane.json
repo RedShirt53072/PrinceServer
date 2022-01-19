@@ -72,7 +72,7 @@
         { "predicate": {"custom_model_data":3402}, "model": "item/util/minus"},
         { "predicate": {"custom_model_data":3403}, "model": "item/util/plus"},
         { "predicate": {"custom_model_data":3404}, "model": "item/util/roll"},
-        { "predicate": {"custom_model_data":3405}, "model": "item/util/slot"}
-        
+        { "predicate": {"custom_model_data":3405}, "model": "item/util/slot"},
+        { "predicate": {"custom_model_data":3406}, "model": "item/util/red_roll"}
     ]
 }
