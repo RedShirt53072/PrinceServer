@@ -1,6 +1,7 @@
 package com.github.redshirt53072.growthapi.gui;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,9 +67,12 @@ public final class GuiManager implements EmergencyListener{
 	
 	@Override
 	public void onEmergency() {
-		data.forEach((player,gui) -> {
-			gui.onEmergency();
-		});
+		Collection<Gui> guiCols = data.values();
+		List<Gui> guis = new ArrayList<Gui>();
+		guis.addAll(guiCols);
+		for(int i = guis.size() - 1;i > -1;i--) {
+			guis.get(i).onEmergency();
+		}
 		data.clear();
 	}
 	
