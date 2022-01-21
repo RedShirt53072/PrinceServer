@@ -31,7 +31,7 @@ public final class TradeManager extends GrowthPlugin{
 		//general
 		name = "TradeManager";
 		plugin = this;
-		version = "2.1.0";
+		version = "2.1.1";
 		LogManager.registerLogger(this);
 		this.saveDefaultConfig();
 		//依存チェック

@@ -43,7 +43,7 @@ public final class VillagerManager extends PlayerNBTLoader{
 		int version = data.get(prof).getVersion() + 1;
 		profData.setVersion(version);
 		data.put(prof, profData);
-		TradeConfig.save(data);
+		TradeConfig.saveProfession(prof, profData);
 		return version;
 	}
 	

@@ -35,20 +35,16 @@ public final class TradeConfig {
 	
 	
 	//configの書き込み
-	public static void save(Map<Profession,ProfessionData> data) {
+	public static void saveProfession(Profession prof,ProfessionData data) {
+		String path = prof.toString();
 		ConfigManager manager = new ConfigManager(TradeManager.getInstance(),"trades","data.yml");
-		data.forEach((pro,proData) -> {
-			writeProfession(manager,pro.toString(),proData);
-		});
-		manager.logConfig("", "を更新しました。");
-	}
-	
-	private static void writeProfession(ConfigManager manager,String path,ProfessionData data) {
+		manager.deleteData(path);
 		List<LevelData> levels = data.getAllLevel();
 		manager.setData(path + ".version",data.getVersion());
 		for(int i = 0;i < levels.size() ;i++){
 			writeLevelData(manager,path + ".level" + (i + 1),levels.get(i));
 		}
+		manager.logConfig(path, "を更新しました。");
 	}
 	
 	private static void writeLevelData(ConfigManager manager,String path,LevelData data) {
