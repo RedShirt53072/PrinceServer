@@ -5,6 +5,9 @@ I'm sorry, but I can only support these plugins in Japanese.
 ただ、MySQLの構築やVaultの導入が必要だったり、仕様のハードコーディングが強いので、そのままの状態で使えるサーバーはあんまり多くないんじゃないかな...とは思います。  
 そのあたりの依存をできるだけなくして一般向けのプラグインに作り直す作業もそのうちやろうとは思っています。  
 また、ソースコードもMITライセンスのもと自由にダウンロード/改造などが可能です。  
+再配布などの際はLicense_PrinceServerとReadMe_PrinceServerのファイルを同梱しておいてください。
+また、配布場所のReadMe,GitHubのReadMeなどにこのページのリンクを貼っていただけると分かりやすいと思います。  
+(心配な場合はご相談ください。)
 
 # Prince Serverリソースパック
 赤シャツ/princeなどが制作し、Prince Serverで使用されているリソースパックです。  
