@@ -1,3 +1,4 @@
+I'm sorry, but I can only support these plugins in Japanese.
 # Prince Serverプラグイン群
 赤シャツが制作し、Prince Serverに提供されているプラグインたちです。  
 プラグインのダウンロードは自由にできます。  
