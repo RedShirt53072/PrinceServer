@@ -18,45 +18,54 @@ public class PlayerNBTLoader {
 	private GrowthPlugin plugin;
 	private PersistentDataContainer data;
 	
-    public PlayerNBTLoader(Entity entity,GrowthPlugin plugin) {
+    protected PlayerNBTLoader(Entity entity,GrowthPlugin plugin) {
     	this.plugin = plugin;
     	data = entity.getPersistentDataContainer();
     }
     
-    public void writeInt(String keyword,int value) {
+    protected void writeInt(String keyword,int value) {
     	NamespacedKey key = new NamespacedKey(plugin,keyword);
     	data.set(key, PersistentDataType.INTEGER, value);
     }
-    public void writeDouble(String keyword,double value) {
+    protected void writeIntArray(String keyword,int[] value) {
+    	NamespacedKey key = new NamespacedKey(plugin,keyword);
+    	data.set(key, PersistentDataType.INTEGER_ARRAY,value);
+    }
+    protected void writeDouble(String keyword,double value) {
     	NamespacedKey key = new NamespacedKey(plugin,keyword);
     	data.set(key, PersistentDataType.DOUBLE, value);
     }
-    public void writeString(String keyword,String value) {
+    protected void writeString(String keyword,String value) {
     	NamespacedKey key = new NamespacedKey(plugin,keyword);
     	data.set(key, PersistentDataType.STRING, value);
     }
-    public Integer readInt(String keyword) {
+    protected Integer readInt(String keyword) {
     	NamespacedKey key = new NamespacedKey(plugin,keyword);
     	return data.get(key, PersistentDataType.INTEGER);
     }
-    public Double readDouble(String keyword) {
+    protected int[] readIntArray(String keyword) {
+    	NamespacedKey key = new NamespacedKey(plugin,keyword);
+    	return data.get(key, PersistentDataType.INTEGER_ARRAY);
+    }
+    
+    protected Double readDouble(String keyword) {
     	NamespacedKey key = new NamespacedKey(plugin,keyword);
     	return data.get(key, PersistentDataType.DOUBLE);
     }
-    public String readString(String keyword) {
+    protected String readString(String keyword) {
     	NamespacedKey key = new NamespacedKey(plugin,keyword);
     	return data.get(key, PersistentDataType.STRING);
     }
-    public boolean hasString(String keyword) {
+    protected boolean hasString(String keyword) {
     	NamespacedKey key = new NamespacedKey(plugin,keyword);
     	return data.has(key, PersistentDataType.STRING);
     }
     
-    public void remove(String keyword) {
+    protected void remove(String keyword) {
     	NamespacedKey key = new NamespacedKey(plugin,keyword);
     	data.remove(key);	
     }
-    public List<String> getAllKey() {
+    protected List<String> getAllKey() {
     	Set<NamespacedKey> keys = data.getKeys();
     	List<String> keyList = new ArrayList<String>();
     	keys.forEach(key ->{

@@ -18,56 +18,56 @@ public class ItemNBTLoader {
 	private ItemMeta meta;
 	private ItemStack item;
 	
-    public ItemNBTLoader(ItemStack item,GrowthPlugin plugin) {
+    protected ItemNBTLoader(ItemStack item,GrowthPlugin plugin) {
     	this.item = item;
     	this.plugin = plugin;
     	updateMeta();
     }
-    public void writeInt(String keyword,int value) {
+    protected void writeInt(String keyword,int value) {
     	updateMeta();
     	NamespacedKey key = new NamespacedKey(plugin,keyword);
     	data.set(key, PersistentDataType.INTEGER, value);
     	confirmChange();
     }
-    public void writeDouble(String keyword,double value) {
+    protected void writeDouble(String keyword,double value) {
     	updateMeta();
     	NamespacedKey key = new NamespacedKey(plugin,keyword);
     	data.set(key, PersistentDataType.DOUBLE, value);
     	confirmChange();
     }
-    public void writeString(String keyword,String value) {
+    protected void writeString(String keyword,String value) {
     	updateMeta();
     	NamespacedKey key = new NamespacedKey(plugin,keyword);
     	data.set(key, PersistentDataType.STRING, value);
     	confirmChange();
     }
-    public Integer readInt(String keyword) {
+    protected Integer readInt(String keyword) {
     	updateMeta();
     	NamespacedKey key = new NamespacedKey(plugin,keyword);
     	return data.get(key, PersistentDataType.INTEGER);
     }
-    public Double readDouble(String keyword) {
+    protected Double readDouble(String keyword) {
     	updateMeta();
     	NamespacedKey key = new NamespacedKey(plugin,keyword);
     	return data.get(key, PersistentDataType.DOUBLE);
     }
-    public String readString(String keyword) {
+    protected String readString(String keyword) {
     	updateMeta();
     	NamespacedKey key = new NamespacedKey(plugin,keyword);
     	return data.get(key, PersistentDataType.STRING);
     }
-    public boolean hasString(String keyword) {
+    protected boolean hasString(String keyword) {
     	updateMeta();
     	NamespacedKey key = new NamespacedKey(plugin,keyword);
     	return data.has(key, PersistentDataType.STRING);
     }
     
-    public void remove(String keyword) {
+    protected void remove(String keyword) {
     	updateMeta();
     	NamespacedKey key = new NamespacedKey(plugin,keyword);
     	data.remove(key);	
     }
-    public List<String> getAllKey() {
+    protected List<String> getAllKey() {
     	updateMeta();
     	Set<NamespacedKey> keys = data.getKeys();
     	List<String> keyList = new ArrayList<String>();

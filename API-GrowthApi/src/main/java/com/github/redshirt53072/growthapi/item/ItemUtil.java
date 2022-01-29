@@ -2,6 +2,7 @@ package com.github.redshirt53072.growthapi.item;
 
 
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
@@ -9,8 +10,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
-
-
 
 
 public class ItemUtil {
@@ -66,13 +65,21 @@ public class ItemUtil {
 			count -= stack;
 		}
 	}
+	public static void dropPublicItem(Location loc,ItemStack item) {
+		//足元ドロップ
+		Item i = (Item) loc.getWorld().spawnEntity(loc, EntityType.DROPPED_ITEM);
+		i.setItemStack(item);
+		i.setPickupDelay(5);
+		i.setCustomName("落とし物");
+		i.setCustomNameVisible(true);
+	}
+	
 	public static void dropItem(Player p,ItemStack item) {
 		//足元ドロップ
 		Item i = (Item) p.getWorld().spawnEntity(p.getLocation(), EntityType.DROPPED_ITEM);
 		i.setItemStack(item);
 		i.setPickupDelay(0);
 		i.setOwner(p.getUniqueId());
-		i.setGlowing(true);
 		i.setInvulnerable(true);
 		i.setCustomName(p.getName() + "の落とし物");
 		i.setCustomNameVisible(true);
