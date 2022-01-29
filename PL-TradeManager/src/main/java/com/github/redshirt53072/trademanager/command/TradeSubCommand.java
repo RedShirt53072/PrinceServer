@@ -21,7 +21,9 @@ import org.bukkit.util.RayTraceResult;
 
 import com.github.redshirt53072.growthapi.command.ManagementCommand;
 import com.github.redshirt53072.growthapi.command.SubCommand;
+import com.github.redshirt53072.growthapi.item.ItemTag;
 import com.github.redshirt53072.growthapi.message.MessageManager;
+import com.github.redshirt53072.trademanager.bundle.Bundle;
 import com.github.redshirt53072.trademanager.data.VillagerManager;
 import com.github.redshirt53072.trademanager.gui.HubGui;
 
@@ -54,6 +56,11 @@ public class TradeSubCommand implements SubCommand{
 			}
 			new HubGui().registerPlayer(p);
 			MessageManager.sendSpecial("交易設定GUIを開きました。", p);
+			return;
+		case "getbundle" :
+			for(ItemTag it : ItemTag.values()){
+				p.getInventory().addItem(Bundle.getNewBox(it));
+			}
 			return;
 		case "toggle":
 			if(args.length < 3) {
@@ -117,6 +124,7 @@ public class TradeSubCommand implements SubCommand{
 		if(args.length == 2) {
             tab.add("modify");
             tab.add("toggle");
+            tab.add("getbundle");
         }else {
         	String text1 = args[1];
         	if (text1.equals("toggle")) {

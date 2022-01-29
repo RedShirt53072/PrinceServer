@@ -33,9 +33,9 @@ public final class EmeraldCommand implements TabExecutor{
 		if(args[0].equals("deposit")) {
 			//預ける
 			int price = 0;
-			price += ItemUtil.countItem(p, new ItemStack(Material.EMERALD), true);
-			price += ItemUtil.countItem(p, new ItemStack(Material.EMERALD_BLOCK), true) * 64;
-			price += ItemUtil.countItem(p, ItemUtil.getLiquidEmerald(), true) * 4096;
+			price += ItemUtil.countItem(p, new ItemStack(Material.EMERALD), 100000);
+			price += ItemUtil.countItem(p, new ItemStack(Material.EMERALD_BLOCK), 100000) * 64;
+			price += ItemUtil.countItem(p, ItemUtil.getLiquidEmerald(), 100000) * 4096;
 			
 			if(price == 0) {
 				MessageManager.sendWarning(ChatColor.RED + "[error]インベントリ内にエメラルドがありませんでした。", p);

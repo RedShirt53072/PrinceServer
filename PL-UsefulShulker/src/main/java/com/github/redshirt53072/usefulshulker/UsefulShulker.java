@@ -30,14 +30,14 @@ public final class UsefulShulker extends GrowthPlugin{
 	public void onEnable() {
 		//general
 		name = "UsefulShulker";
-		version = "2.0.0";
+		version = "2.2.0";
 		plugin = this;
 		LogManager.registerLogger(this);
 		this.saveDefaultConfig();
 		
 		
 		//依存チェック
-		if(!BaseAPI.getInstance().checkVersion("2.0.0")) {
+		if(!BaseAPI.getInstance().checkVersion("2.2.0")) {
 			LogManager.logError("前提プラグイン(GrowthAPI)のバージョンが正しくありません。", this, new Throwable(), Level.SEVERE);
 			GrowthPluginManager.stopServer("プラグインバージョンの不整合による", StopReason.ERROR);
 		}

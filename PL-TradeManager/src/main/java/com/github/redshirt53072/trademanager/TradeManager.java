@@ -31,11 +31,11 @@ public final class TradeManager extends GrowthPlugin{
 		//general
 		name = "TradeManager";
 		plugin = this;
-		version = "2.1.1";
+		version = "2.2.0";
 		LogManager.registerLogger(this);
 		this.saveDefaultConfig();
 		//依存チェック
-		if(!BaseAPI.getInstance().checkVersion("2.1.0")) {
+		if(!BaseAPI.getInstance().checkVersion("2.2.0")) {
 			LogManager.logError("前提プラグイン(GrowthAPI)のバージョンが正しくありません。", this, new Throwable(), Level.SEVERE);
 			GrowthPluginManager.stopServer("プラグインバージョンの不整合による", StopReason.ERROR);
 		}

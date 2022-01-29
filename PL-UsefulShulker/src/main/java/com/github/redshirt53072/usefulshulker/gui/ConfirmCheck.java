@@ -60,7 +60,7 @@ public class ConfirmCheck  extends Gui{
     	
 		int cost = EnderGui.calcCost(payPage, player);
 
-		inv.setItem(11, createItem(Material.LIME_WOOL,ChatColor.GOLD.toString() + cost + ChatColor.WHITE +"Ɇ支払って確定する",null,1,null,0));
+		inv.setItem(11, createItem(Material.LIME_WOOL,ChatColor.GOLD.toString() + cost + "Ɇ" + ChatColor.WHITE + "支払って確定する",null,1,null,0));
 		inv.setItem(15, createItem(Material.RED_WOOL,ChatColor.WHITE + "キャンセルする",null,1,null,0));
 		player.openInventory(inv);
 		player.playSound(player.getLocation(), Sound.BLOCK_BEACON_ACTIVATE, 1,1);

@@ -48,7 +48,7 @@ public class EnderGui extends Gui{
 			if(lockedPage < index) {
 				model += 10;
 				text = text + ChatColor.RED + "<未開放>";
-				lore.add(ChatColor.WHITE + "合計" + ChatColor.GOLD + calcCost(index - 1,player) + "Ɇでこのスロットを開放できます。");
+				lore.add(ChatColor.WHITE + "合計" + ChatColor.GOLD + calcCost(index - 1,player) + "Ɇ" + ChatColor.WHITE + "でこのスロットを開放できます。");
 			}
 			inv.setItem(index + 26, createItem(Material.WHITE_STAINED_GLASS_PANE,text,lore,1,null,model));
 		}
