@@ -25,35 +25,27 @@ public final class BundleEvent implements Listener {
     public void mouseClick(PlayerInteractEvent event) {
         Action action = event.getAction();
         if (action.equals(Action.RIGHT_CLICK_BLOCK) || action.equals(Action.RIGHT_CLICK_AIR)){
-        	boolean conti = checkItemClick(event);
-        	if(!conti) {
+        	
+        	Player player = event.getPlayer();
+        	
+        	PlayerInventory inv = player.getInventory();
+        	ItemStack item = inv.getItemInMainHand();
+        	if(item == null) {
         		return;
         	}
+        	if(!item.getType().equals(Material.COMMAND_BLOCK)) {
+        		return;
+        	}
+        	if(!item.getItemMeta().hasCustomModelData()) {
+        		return;
+        	}
+        	if(item.getItemMeta().getCustomModelData() != 3001) {
+        		return;
+        	}
+        	Bundle.openGui(player,item.clone());
+        	event.setCancelled(true);
+        	return;
     	}
    	}
-    
-    private boolean checkItemClick(PlayerInteractEvent event) {
-    	Player player = event.getPlayer();
-    	if(player.isSneaking()) {
-    		return true;
-    	}
-    	PlayerInventory inv = player.getInventory();
-    	ItemStack item = inv.getItemInMainHand();
-    	if(item == null) {
-    		return true;
-    	}
-    	if(!item.getType().equals(Material.COMMAND_BLOCK)) {
-    		return true;
-    	}
-    	if(!item.getItemMeta().hasCustomModelData()) {
-    		return true;
-    	}
-    	if(item.getItemMeta().getCustomModelData() == 3001) {
-    		return true;
-    	}
-    	Bundle.openGui(player,item);
-    	event.setCancelled(true);
-    	return false;
-    }
     
 }

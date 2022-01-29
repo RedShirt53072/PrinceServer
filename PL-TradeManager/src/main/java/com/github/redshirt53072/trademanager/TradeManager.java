@@ -8,6 +8,7 @@ import com.github.redshirt53072.growthapi.message.LogManager;
 import com.github.redshirt53072.growthapi.server.GrowthPlugin;
 import com.github.redshirt53072.growthapi.server.GrowthPluginManager;
 import com.github.redshirt53072.growthapi.server.GrowthPluginManager.StopReason;
+import com.github.redshirt53072.trademanager.bundle.BundleEvent;
 import com.github.redshirt53072.trademanager.command.TradeSubCommand;
 import com.github.redshirt53072.trademanager.data.VillagerManager;
 
@@ -46,7 +47,8 @@ public final class TradeManager extends GrowthPlugin{
 		TradeSubCommand.register();
 		//listener
 		new VillagerEvent();
-	
+		new BundleEvent();
+		
 		//message
 		LogManager.logInfo(this.getPluginName() + "を読み込みました", this, Level.INFO);
 	}

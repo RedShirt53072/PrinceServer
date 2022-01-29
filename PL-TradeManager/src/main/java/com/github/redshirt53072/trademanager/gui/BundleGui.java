@@ -32,13 +32,17 @@ public class BundleGui extends Gui{
     	if(slot > 26 ||slot < 0) {
     		return true;
     	}
-    	if(slot > tag.getItems().size() - 1) {
-    		ItemStack nowItem = new ItemStack(tag.getItems().get(slot));
-    		ItemUtil.countItem(player, nowItem, item.getAmount());
-    		ItemUtil.giveItem(player, nowItem, item.getAmount());
-    		close();
-        	player.playSound(player.getLocation(), Sound.ITEM_BUNDLE_DROP_CONTENTS, 1,1);
+    	if(slot >= tag.getItems().size()) {
+    		return true;
     	}
+    	ItemUtil.countItem(player, item, item.getAmount());
+    	Material mate = tag.getItems().get(slot);
+    	if(!mate.equals(Material.AIR)) {
+    		ItemStack nowItem = new ItemStack(mate);
+    		ItemUtil.giveItem(player, nowItem, item.getAmount());
+    	}
+		close();
+    	player.playSound(player.getLocation(), Sound.ITEM_BUNDLE_DROP_CONTENTS, 1,1);
     	return true;
     }
     
@@ -56,7 +60,10 @@ public class BundleGui extends Gui{
     	List<Material> items = tag.getItems();
     	for(int i = 0;i < 27;i++) {
     		if(i < items.size()) {
-        		inv.setItem(i, createItem(items.get(i),"", lore, amount, null, -1));	
+    			if(items.get(i).equals(Material.AIR)) {
+    				continue;
+    			}
+        		inv.setItem(i, createItem(items.get(i),"", lore, amount, null, -1));
         		continue;
     		}
     		inv.setItem(i, createItem(Material.BLACK_STAINED_GLASS_PANE ," ", null, 1, null, -1));
