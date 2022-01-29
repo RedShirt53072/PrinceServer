@@ -23,7 +23,10 @@ public class ItemUtil {
 		return le;
 	}
 	
-	public static int countItem(Player p,ItemStack item,boolean autoRemove) {
+	
+	
+	public static int countItem(Player p,ItemStack item,int maxRemove) {
+		int removed = 0;
 		int count = 0;
 		PlayerInventory inv = p.getInventory();
 		for(int i = 0;i < 37;i++) {
@@ -37,12 +40,20 @@ public class ItemUtil {
 				continue;
 			}
 			if(stack.isSimilar(item)){
-				count += stack.getAmount();
-				if(autoRemove) {
-					if(i == 36) {
-						inv.setItemInOffHand(null);
+				int amount = stack.getAmount();
+				count += amount;
+				if(maxRemove > removed) {
+					if(maxRemove > amount + removed) {
+						if(i == 36) {
+							inv.setItemInOffHand(null);
+						}else {
+							inv.clear(i);
+						}
+						removed += amount;
 					}else {
-						inv.clear(i);
+						int toRemove =  maxRemove - removed;
+						stack.setAmount(amount - toRemove);
+						removed += toRemove;
 					}
 				}
 			}
