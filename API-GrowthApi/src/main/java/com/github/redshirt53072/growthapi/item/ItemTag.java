@@ -8,6 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.Tag;
 
 public enum ItemTag {
+	NONE("無",getList(Material.AIR)),
 	CONCRETE("コンクリート",getList(
 			Material.BLACK_CONCRETE,
 			Material.WHITE_CONCRETE,
