@@ -60,7 +60,7 @@ public enum ItemTag {
 			Material.MAGENTA_STAINED_GLASS_PANE,
 			Material.LIME_STAINED_GLASS_PANE,
 			Material.LIGHT_GRAY_STAINED_GLASS_PANE,
-			Material.GLASS)),
+			Material.GLASS_PANE)),
 	GLASS("ガラス",getList(
 			Material.BLACK_STAINED_GLASS,
 			Material.WHITE_STAINED_GLASS,
