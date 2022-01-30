@@ -10,6 +10,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
+import com.github.redshirt53072.growthapi.item.ItemTag;
 import com.github.redshirt53072.trademanager.TradeManager;
 
 
@@ -40,6 +41,11 @@ public final class BundleEvent implements Listener {
         		return;
         	}
         	if(item.getItemMeta().getCustomModelData() != 3001) {
+        		return;
+        	}
+        	ItemTag tag = new Bundle(item).getType();
+        	if(tag.equals(ItemTag.NONE)) {
+        		SpecialItem.doRandom(player, item);
         		return;
         	}
         	Bundle.openGui(player,item.clone());

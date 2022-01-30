@@ -24,6 +24,8 @@ import com.github.redshirt53072.growthapi.command.SubCommand;
 import com.github.redshirt53072.growthapi.item.ItemTag;
 import com.github.redshirt53072.growthapi.message.MessageManager;
 import com.github.redshirt53072.trademanager.bundle.Bundle;
+import com.github.redshirt53072.trademanager.bundle.SpecialItem;
+import com.github.redshirt53072.trademanager.bundle.SpecialItem.SpecialItems;
 import com.github.redshirt53072.trademanager.data.VillagerManager;
 import com.github.redshirt53072.trademanager.gui.HubGui;
 
@@ -60,6 +62,9 @@ public class TradeSubCommand implements SubCommand{
 		case "getbundle" :
 			for(ItemTag it : ItemTag.values()){
 				p.getInventory().addItem(Bundle.getNewBox(it));
+			}
+			for(SpecialItems si : SpecialItems.values()){
+				p.getInventory().addItem(SpecialItem.getNewBox(si));
 			}
 			return;
 		case "toggle":
