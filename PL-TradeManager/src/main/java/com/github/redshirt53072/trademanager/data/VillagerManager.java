@@ -30,7 +30,7 @@ public final class VillagerManager extends PlayerNBTLoader{
 		List<MerchantRecipe> recipes = new ArrayList<MerchantRecipe>();
 		ProfessionData profData = data.get(prof);
 		for(int i = 1; i <= level;i++) {
-			recipes.addAll(profData.getLevelData(level).getRandomRecipe());
+			recipes.addAll(profData.getLevelData(i).getRandomRecipe());
 		}			
 		return recipes;
 	}
