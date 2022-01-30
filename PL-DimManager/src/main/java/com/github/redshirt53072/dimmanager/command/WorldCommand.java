@@ -11,6 +11,8 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -72,6 +74,11 @@ public class WorldCommand implements TabExecutor{
     	    				for(ItemStack item : inv.getContents()){
     	    					drop(p,item);
     	    				}
+    	    				ExperienceOrb orb = (ExperienceOrb)p.getWorld().spawnEntity(p.getLocation(), EntityType.EXPERIENCE_ORB);
+    	    				orb.setExperience(p.getTotalExperience());
+    	    				orb.setCustomNameVisible(true);
+    	    				orb.setCustomName(p.getName() + "の経験値");
+    	    				p.setTotalExperience(0);
     	    				inv.clear();
     	    			}
     	    			if(old.equals(GameMode.CREATIVE) && !mode.equals(GameMode.CREATIVE)) {
@@ -79,6 +86,11 @@ public class WorldCommand implements TabExecutor{
     	    				for(ItemStack item : inv.getContents()){
     	    					drop(p,item);
     	    				}
+    	    				ExperienceOrb orb = (ExperienceOrb)p.getWorld().spawnEntity(p.getLocation(), EntityType.EXPERIENCE_ORB);
+    	    				orb.setExperience(p.getTotalExperience());
+    	    				orb.setCustomNameVisible(true);
+    	    				orb.setCustomName(p.getName() + "の経験値");
+    	    				p.setTotalExperience(0);
     	    				inv.clear();
     	    			}
     	    			
