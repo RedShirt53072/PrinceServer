@@ -23,7 +23,7 @@ Minecraft Java版 1.18.1で限定公開中。
 現在は限定公開のため、サーバー参加をしたい場合はprince(twitter:@nog_prince)にDMを送っておいてください。  
 
 # 連絡先
-Prince Serverへの連絡は可能ならDiscordサーバー内、そうでない場合はprince(twitter:@nog_prince)へどうぞ。  
+Prince Serverへの連絡はできればDiscordサーバー内、それが厳しい場合はprince(twitter:@nog_prince)へどうぞ。  
 
 プラグインなど私の制作物に関しては以下にDMで連絡をいただければ起きている時は対応します。  
 discord:redshirt#3338  
