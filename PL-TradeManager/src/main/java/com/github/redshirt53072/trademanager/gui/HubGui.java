@@ -33,7 +33,7 @@ public class HubGui extends Gui{
     	
     	close();
     	
-    	new TradeTableGui(profData[slot]).registerPlayer(player);
+    	new TradeTableGui(profData[slot]).open(player);
         return true;
     }
     

@@ -1,21 +1,57 @@
 package com.github.redshirt53072.newfishing.data;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import org.bukkit.block.Biome;
 
+import com.github.redshirt53072.newfishing.data.FishData.BiomeGroup;
+import com.github.redshirt53072.newfishing.data.FishData.FishingBiome;
+
 public class RarityLootData {
-	private ArrayList<Biome> type;
-	private ArrayList<TimeLootData> data;
+	private ArrayList<FishData> day = new ArrayList<FishData>();
+	private ArrayList<FishData> night = new ArrayList<FishData>();
+	private ArrayList<FishData> all = new ArrayList<FishData>();
 	
-	public RarityLootData(ArrayList<Biome> type,ArrayList<TimeLootData> data) {
-		this.type = type;
-    	this.data = data;
+	private int rarity = 1;
+	
+	public RarityLootData(int rarity,ArrayList<FishData> dayData,ArrayList<FishData> nightData,ArrayList<FishData> allData) {
+		this.rarity = rarity;
+		this.all = allData;
+    	this.day = dayData;
+    	this.night = nightData;
     }
-	public ArrayList<Biome> getType() {
-    	return type;
+	public int getRarity() {
+    	return rarity;
     }
-	public ArrayList<TimeLootData> getData(){
-		return data;
+	public ArrayList<FishData> getDayData(){
+		return day;
+	}
+	public ArrayList<FishData> getNightData(){
+		return night;
+	}
+	public ArrayList<FishData> getAllData(){
+		return all;
+	}
+	
+	public FishData lootFish(boolean isDay,Biome biome){
+		BiomeGroup group = FishingBiome.valueOf(biome.toString()).getGroup();
+		ArrayList<FishData> data;
+		if(isDay) {
+			data = day;
+		}else {
+			data = night;
+		}
+		ArrayList<FishData> table = new ArrayList<FishData>();
+		
+		for(FishData fd : data) {
+			for(BiomeGroup bg : fd.getBiome()){
+				if(bg.equals(group)) {
+					table.add(fd);
+					break;
+				}
+			}
+		}
+		return table.get(new Random().nextInt(table.size()));
 	}
 }

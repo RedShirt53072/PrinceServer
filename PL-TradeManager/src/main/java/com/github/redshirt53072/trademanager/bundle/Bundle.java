@@ -35,7 +35,7 @@ public class Bundle extends ItemNBTLoader {
     }
     public static void openGui(Player p,ItemStack item) {
     	savedItem = item;
-    	new BundleGui().registerPlayer(p);
+    	new BundleGui().open(p);
 	}
     
     public static ItemStack getSavedItem() {

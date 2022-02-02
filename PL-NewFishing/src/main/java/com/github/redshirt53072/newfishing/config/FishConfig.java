@@ -2,81 +2,139 @@ package com.github.redshirt53072.newfishing.config;
 
 import java.util.ArrayList;
 
+import org.bukkit.ChatColor;
+
 import com.github.redshirt53072.growthapi.config.ConfigManager;
 import com.github.redshirt53072.newfishing.NewFishing;
 import com.github.redshirt53072.newfishing.data.FishData;
+import com.github.redshirt53072.newfishing.data.FishData.BiomeGroup;
+import com.github.redshirt53072.newfishing.data.FishData.Time;
 import com.github.redshirt53072.newfishing.data.RarityLootData;
 
 public final class FishConfig {
-	
-	public ArrayList<RarityLootData> getAllData() {
+	/*
+	rarity1: 
+  		fish1:
+    		id: "mura_sake"
+    		name: "村上の鮭"
+    		size: 100
+    		texture: 1
+    		price: 10
+    		time: DAY
+    		biome:
+      			biome1: FROZEN_OCEAN
+      			biome2: DEEP_OCEAN
+    		lore: 
+      			lore1: "aあ"
+      			lore2: "bい"
+     */
+	public static ArrayList<RarityLootData> getAllData() {
 		ConfigManager manager = new ConfigManager(NewFishing.getInstance(),"fish","fish.yml");
+		manager.configInit();
+		
 		ArrayList<RarityLootData> listData = new ArrayList<RarityLootData>();
 		for(int i = 1;i < 6;i ++) {
-			readFish("rarity" + i,manager);
-			
+			listData.add(readRarity(i,manager));
 		}
 		return listData;
 	}
-	private RarityLootData readRarity(String path,ConfigManager manager) {
+	private static RarityLootData readRarity(int rarity,ConfigManager manager) {
+		ArrayList<FishData> dayData = new ArrayList<FishData>();
+		ArrayList<FishData> nightData = new ArrayList<FishData>();
+		ArrayList<FishData> allData = new ArrayList<FishData>();
 		
-	}
-	private FishData readFish(String path,ConfigManager manager) {
-		String id = manager.getString(path + ".id");
-		
-		if(containData(path + ".id")) {
-			id = getStringData(path + ".id");
-		}else {
-			plugin.getLogger().warning("[error]fish.yml内、fish" + loop + "にid(識別名)がありません");
-			plugin.stopFishing();
-		}
-		String name = "temp";
-		if(containData(path + ".name")) {
-			name = getStringData(path + ".name");
-		}else {
-			plugin.getLogger().warning("[error]fish.yml内、fish" + loop + "にname(表示名)がありません");
-			plugin.stopFishing();
-		}
-		
-		ArrayList<String> lore = new ArrayList<String>();
-		
-		if(containData(path + ".lore")) {
-			for(int i = 1;i < 7;i++) {
-				if(containData(path + ".lore.lore" + i)) {
-					lore.add(getStringData(path + ".lore.lore" + i));
-				}
+		String path = "rarity" + rarity;
+		for(String key : manager.getKeys(path, "fish")){
+			FishData fd = readFish(path + "." + key,manager,rarity);
+			if(fd == null) {
+				continue;
 			}
+			allData.add(fd);
+			
+			Time time = fd.getTime();
+			switch (time){
+			case ALL:
+				nightData.add(fd);	
+			case DAY:
+				dayData.add(fd);
+				break;
+			case NIGHT:
+				nightData.add(fd);
+				break;
+			}
+		}
+		return new RarityLootData(rarity,dayData,nightData,allData);
+	}
+	private static FishData readFish(String path,ConfigManager manager,int rarity) {
+		boolean cancel = false;
+		//string
+		String id = manager.getString(path + ".id");
+		if(id == null) {
+			cancel = true;
+			manager.logWarning(path + ".id", "の値が不正です");
+		}
+		String name = manager.getString(path + ".name");
+		if(name == null) {
+			cancel = true;
+			manager.logWarning(path + ".name", "の値が不正です");
 		}else {
-			plugin.getLogger().warning("[error]fish.yml内、fish" + loop + "にloreのリストがありません");
-			plugin.stopFishing();
+			name = ChatColor.WHITE + name;
 		}
-		int size = 0;
-		
-		if(containData(path + ".size")) {
-			size = getIntData(path + ".size");
-		}else {
-			plugin.getLogger().warning("[error]fish.yml内、fish" + loop + "にsize(大きさ係数)がありません");
+		//int
+		Integer size = manager.getInt(path + ".size");
+		if(size == null || size < 1 || size > 5000) {
+			cancel = true;
+			manager.logWarning(path + ".size", "の値が不正です");
 		}
-		int texture = -1;
-		
-		int rarity = 1;
-		if(containData(path + ".rarity")) {
-			rarity = getIntData(path + ".rarity");
-		}else {
-			plugin.getLogger().warning("[error]fish.yml内、fish" + loop + "にrarity(レア度)がありません");
+		Integer texture = manager.getInt(path + ".texture");
+		if(texture == null || texture < 1 || texture > 1000) {
+			cancel = true;
+			manager.logWarning(path + ".texture", "の値が不正です");
 		}
-		if(rarity < 1 || rarity > 7){
-			plugin.getLogger().warning("[error]fish.yml内、fish" + loop + "のrarity(レア度)の値が異常です");
-			rarity = 1;
+		Integer price = manager.getInt(path + ".price");
+		if(price == null || price < 0 || price > 1000000) {
+			cancel = true;
+			manager.logWarning(path + ".price", "の値が不正です");
 		}
-		
-		if(containData(path + ".texture")) {
-			texture = getIntData(path + ".texture");	
+		//enum
+		String rawTime = manager.getString(path + ".time");
+		Time time = null;
+		try{
+			time = Time.valueOf(rawTime);
+		}catch(Exception ex) {
+			cancel = true;
+			manager.logWarning(path + ".time", "の値が不正です");
 		}
-		
-		
-		
-		FishData data = new FishData(id,name,lore,texture,size,rarity);
-		return data;
+		//list
+		ArrayList<String> lore = new ArrayList<String>();
+		for(String key : manager.getKeys(path + ".lore", "lore")) {
+			String lo = manager.getString(path + ".lore." + key);
+			if(lo == null) {
+				manager.logWarning(path + ".lore." + key, "の値が不正です");
+			}
+			lore.add(ChatColor.WHITE + lo);
+		}
+		if(lore.isEmpty()) {
+			manager.logWarning(path + ".lore", "に有効な値が1つも入っていません");
+		}
+		//enum list
+		ArrayList<BiomeGroup> biomeList = new ArrayList<BiomeGroup>();
+		for(String key : manager.getKeys(path + ".biome", "biome")) {
+			String rawBiome = manager.getString(path + ".biome." + key);
+			try{
+				BiomeGroup biome = BiomeGroup.valueOf(rawBiome);
+				biomeList.add(biome);
+			}catch(Exception ex) {
+				manager.logWarning(path + ".biome." + key, "の値が不正です");
+			}
+		}
+		if(biomeList.isEmpty()) {
+			cancel = true;
+			manager.logWarning(path + ".biome", "に有効な値が1つも入っていません");
+		}
+		if(cancel) {
+			return null;
+		}
+		return new FishData(id,name,lore,biomeList, time, texture,size,rarity, price);
 	}
 }

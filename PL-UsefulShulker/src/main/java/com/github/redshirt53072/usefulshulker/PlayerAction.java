@@ -48,7 +48,7 @@ public final class PlayerAction implements Listener {
 	    	}
 	    	
 			//open
-			new EnderGui().registerPlayer(player);
+			new EnderGui().open(player);
         }
    	}
     
@@ -86,14 +86,14 @@ public final class PlayerAction implements Listener {
     			event.setCancelled(true);
     			
     			//open
-    			new EnderGui().registerPlayer(player);
+    			new EnderGui().open(player);
     	   		return false;
     		}
     		return true;
     	}
     	event.setCancelled(true);
     	//open
-    	new ShulkerGui().registerPlayer(player);
+    	new ShulkerGui().open(player);
     	return false;
     }
 }

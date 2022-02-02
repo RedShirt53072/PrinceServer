@@ -5,16 +5,18 @@ import java.util.logging.Level;
 
 import org.bukkit.plugin.RegisteredServiceProvider;
 
+import com.github.redshirt53072.growthapi.command.MaintenanceCommand;
 import com.github.redshirt53072.growthapi.command.ManagementCommand;
+import com.github.redshirt53072.growthapi.command.StopCommand;
 import com.github.redshirt53072.growthapi.database.MySQLConfig;
 import com.github.redshirt53072.growthapi.database.SQLManager;
+import com.github.redshirt53072.growthapi.event.PlayerInOut;
 import com.github.redshirt53072.growthapi.gui.GuiManager;
 import com.github.redshirt53072.growthapi.gui.PlayerInvAction;
 import com.github.redshirt53072.growthapi.message.LogManager;
 import com.github.redshirt53072.growthapi.server.GrowthPlugin;
 import com.github.redshirt53072.growthapi.server.GrowthPluginManager;
 import com.github.redshirt53072.growthapi.server.GrowthPluginManager.StopReason;
-import com.github.redshirt53072.growthapi.server.StopCommand;
 
 import net.milkbowl.vault.economy.Economy;
 
@@ -43,7 +45,7 @@ public final class BaseAPI extends GrowthPlugin{
 	public void onEnable() {
 		//general
 		name = "BaseAPI";
-		version = "2.2.1";
+		version = "2.3.0";
 		plugin = this;
 		LogManager.registerLogger(this);
 		this.saveDefaultConfig();
@@ -53,6 +55,7 @@ public final class BaseAPI extends GrowthPlugin{
 		
 		//event
 		new PlayerInvAction();
+		new PlayerInOut();
 		
 		//vault
 		if (!setupEconomy() ) {
@@ -75,6 +78,8 @@ public final class BaseAPI extends GrowthPlugin{
 		//command
 		this.getCommand("stop").setExecutor(new StopCommand());
 		this.getCommand("manage").setExecutor(new ManagementCommand());
+		this.getCommand("main").setExecutor(new MaintenanceCommand());
+		
 
 		//massage
 		LogManager.logInfo(getPluginName() + "を読み込みました", this, Level.INFO);

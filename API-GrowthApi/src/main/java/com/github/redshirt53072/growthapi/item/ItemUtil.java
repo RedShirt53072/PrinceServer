@@ -1,12 +1,16 @@
 package com.github.redshirt53072.growthapi.item;
 
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -23,7 +27,24 @@ public class ItemUtil {
 		return le;
 	}
 	
-	
+	public static ItemStack buildItem(Material material,String name,List<String> lore,int amount,Enchantment ench,int itemModel){
+		final ItemStack item = new ItemStack(material, amount);
+	    final ItemMeta meta = item.getItemMeta();
+	    meta.setDisplayName(name);
+	    if(lore != null) {
+	    	meta.setLore(lore);
+	    }
+	    if(ench != null) {
+	    	meta.addEnchant(ench, 1, true);
+	    }
+	    if(itemModel > 0) {
+		    meta.setCustomModelData(itemModel);
+	    }
+	    meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+	    meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+	    item.setItemMeta(meta);
+		return item;
+	}
 	
 	public static int countItem(Player p,ItemStack item,int maxRemove) {
 		int removed = 0;

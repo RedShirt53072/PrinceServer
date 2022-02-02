@@ -1,19 +1,33 @@
 package com.github.redshirt53072.newfishing.data;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Random;
+
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import com.github.redshirt53072.newfishing.nbt.FishNBT;
 
 public class FishData {
 	private String id;
 	private String name;
 	private ArrayList<String> lore;
+	private ArrayList<BiomeGroup> biome;
+	private Time time;
 	private int texture;
 	private int size;
 	private int rarity;
 	private int price;
 	
-	public FishData(String id, String name,ArrayList<String> lore,int texture,int size,int rarity,int price) {
+	public FishData(String id, String name,ArrayList<String> lore,ArrayList<BiomeGroup> biome,Time time,int texture,int size,int rarity,int price) {
 		this.id = id;
     	this.name = name;
+    	this.biome = biome;
+    	this.time = time;
     	this.lore = lore;
     	this.texture = texture;
     	this.size = size;
@@ -26,6 +40,12 @@ public class FishData {
 	public String getName() {
     	return name;
 	}
+	public Time getTime() {
+    	return time;
+    }
+	public ArrayList<BiomeGroup> getBiome() {
+    	return biome;
+    }
 	public ArrayList<String> getLore() {
     	return lore;
     }
@@ -41,6 +61,75 @@ public class FishData {
 	public int getrarity() {
     	return rarity;
 	}
+	
+	public ItemStack getNewItem(Player p){
+		ItemStack item = new ItemStack(Material.TROPICAL_FISH);
+		int quality = 1;
+		int multiPrice = price;
+		int multiSize = size;
+		int multiTexture = texture;
+		String star = "";
+		String newName = name;
+		ArrayList<String> newLore = new ArrayList<String>(lore);
+		
+		int random = new Random().nextInt(86);
+		
+		if(random < 1) {
+			quality = 3;
+			multiTexture += 2000;
+			multiPrice *= 2;
+			multiSize *= 1.5 + new Random().nextDouble() / 2;
+			star = "";
+		}else if(random < 6) {
+			quality = 2;
+			multiTexture += 1000;
+			multiPrice *= 1.5;
+			multiSize *= 2 + new Random().nextDouble() / 2;
+			star = "";
+		}else {
+			multiSize *= 0.5 + new Random().nextDouble();
+		}
+		ItemMeta meta = item.getItemMeta();
+		meta.setCustomModelData(multiTexture);
+		
+		
+		switch(rarity) {
+		case 1:
+			newLore.add(ChatColor.WHITE + "レア度：");	
+			break;
+		case 2:
+			newLore.add(ChatColor.WHITE + "レア度：");	
+			break;
+		case 3:
+			newLore.add(ChatColor.WHITE + "レア度：");	
+			break;
+		case 4:
+			newLore.add(ChatColor.WHITE + "レア度：");	
+			break;
+		case 5:
+			newLore.add(ChatColor.WHITE + "レア度：");	
+			break;
+		}
+		
+		newLore.add(ChatColor.WHITE + "大きさ:" + star + multiSize + "(cm)");
+		newLore.add(ChatColor.WHITE + "釣り人:" + p.getName());
+		LocalDateTime now = LocalDateTime.now();
+		String time = now.getYear() + "年" + now.getMonthValue() + "月" + now.getDayOfMonth() + "日";
+		time = time + now.getHour() + "時" + now.getMinute() + "分" + now.getSecond() + "秒";
+		newLore.add(ChatColor.WHITE + time);
+		newLore.add(ChatColor.WHITE + "----------------");
+		
+		newLore.addAll(lore);
+		
+		meta.setLore(newLore);
+		meta.setDisplayName(newName + star);
+		
+		item.setItemMeta(meta);
+		new FishNBT(item).init(multiSize, rarity, quality, p, multiPrice, id);
+		
+		return item;
+	}
+	
 	public static enum FishingBiome{
 		FROZEN_OCEAN(BiomeGroup.FROZEN_OCEAN),
 		DEEP_FROZEN_OCEAN(BiomeGroup.FROZEN_OCEAN),
@@ -127,7 +216,7 @@ public class FishData {
 		private FishingBiome(BiomeGroup group) {
 			this.group = group;
 		}
-		public BiomeGroup getName() {
+		public BiomeGroup getGroup() {
 			return group;
 		}
 	}
@@ -163,8 +252,6 @@ public class FishData {
 			return savedName;
 		}
 	}
-	
-	
 	
 	public static enum Time{
 		ALL("一日中"),

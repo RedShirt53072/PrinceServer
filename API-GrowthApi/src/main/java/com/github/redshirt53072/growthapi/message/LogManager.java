@@ -34,7 +34,7 @@ public final class LogManager {
 	public static void logInfo(String message,GrowthPlugin plugin,Level level) {
 		if(level.equals(Level.INFO) || level.equals(Level.WARNING) || level.equals(Level.SEVERE)) {
 			//op
-			MessageManager.sendOPPlayer("[info]" + message,MessageLevel.SPECIAL);        					
+			MessageManager.sendOPPlayer(MessageLevel.SPECIAL,"[info]" + message);
 		}
 		
 		Logger savedLogger = loggers.get(plugin);
@@ -45,6 +45,7 @@ public final class LogManager {
         // ログの出力
 		savedLogger.log(level, message);
 	}
+	
 	/***
 	 * Throwable(Exception)を用いるログ
 	 * Exceptionをcatchした場合はそのまま投げて良い
@@ -63,8 +64,8 @@ public final class LogManager {
 		
 		
 		//op
-		MessageManager.sendOPPlayer("[error]内容：" + message,MessageLevel.SPECIAL);        				
-		MessageManager.sendOPPlayer("[error]場所：" + location,MessageLevel.SPECIAL);     
+		MessageManager.sendOPPlayer(MessageLevel.SPECIAL,"[error]内容：" + message);        				
+		MessageManager.sendOPPlayer(MessageLevel.SPECIAL,"[error]場所：" + location);     
 		
 		Logger savedLogger = loggers.get(plugin);
 		

@@ -113,7 +113,7 @@ public class EnderGui extends Gui{
     		if(nowEme > calcCost(slot,player)) {
     			save();
     			close();
-    			new ConfirmCheck(slot).registerPlayer(player);
+    			new ConfirmCheck(slot).open(player);
     			return true;
     		}
             player.playSound(player.getLocation(), Sound.BLOCK_CHEST_LOCKED, 1,1);

@@ -51,7 +51,7 @@ public class ConfirmCheck  extends Gui{
     
     private void End() {
     	close();
-    	new EnderGui().registerPlayer(player);
+    	new EnderGui().open(player);
     }
     
 	@Override

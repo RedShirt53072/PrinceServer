@@ -110,7 +110,7 @@ public class TradeTableGui  extends Gui{
     		//close
     		player.playSound(player.getLocation(), Sound.BLOCK_BARREL_CLOSE, 1,1);
     		close();
-        	new HubGui().registerPlayer(player);
+        	new HubGui().open(player);
     		return true;
     	}
     	if(slot < 9 && slot > 3) {

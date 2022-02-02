@@ -34,13 +34,13 @@ public final class DimManager extends GrowthPlugin{
 	public void onEnable() {
 		//general
 		name = "DimManager";
-		version = "2.2.1";
+		version = "2.3.0";
 		plugin = this;
 		LogManager.registerLogger(this);
 		this.saveDefaultConfig();
 		
 		//依存チェック
-		if(!BaseAPI.getInstance().checkVersion("2.2.1")) {
+		if(!BaseAPI.getInstance().checkVersion("2.3.0")) {
 			LogManager.logError("前提プラグイン(GrowthAPI)のバージョンが正しくありません。", this, new Throwable(), Level.SEVERE);
 			GrowthPluginManager.stopServer("プラグインバージョンの不整合による", StopReason.ERROR);
 		}

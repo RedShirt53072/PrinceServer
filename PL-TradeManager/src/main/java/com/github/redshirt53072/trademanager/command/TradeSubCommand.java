@@ -56,7 +56,7 @@ public class TradeSubCommand implements SubCommand{
 				MessageManager.sendSpecial(ChatColor.RED + "[error]クリエイティブモードにしてからもう一度コマンドを送信してください。", p);
 	        	return;
 			}
-			new HubGui().registerPlayer(p);
+			new HubGui().open(p);
 			MessageManager.sendSpecial("交易設定GUIを開きました。", p);
 			return;
 		case "getbundle" :

@@ -12,10 +12,10 @@ public class FishingRodNBT extends ItemNBTLoader{
     	super(item,NewFishing.getInstance());
     }
     public void init(String rodName) {
-    	super.writeString("rodname", rodName);
+    	super.writeString("rodid", rodName);
     }
     
-    public String getFishName() {
-    	return super.readString("rodname");
+    public String getRodID() {
+    	return super.readString("rodid");
     }
 }

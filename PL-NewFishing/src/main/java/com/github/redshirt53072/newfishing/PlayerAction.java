@@ -7,8 +7,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
+import com.github.redshirt53072.newfishing.data.FishManager;
 import com.github.redshirt53072.newfishing.nbt.FishingRodNBT;
 
 public final class PlayerAction implements Listener {
@@ -18,31 +18,28 @@ public final class PlayerAction implements Listener {
     }
     //釣ったとき
     @EventHandler(priority = EventPriority.NORMAL)
-    public void onSpawn(PlayerFishEvent event) {
+    public void onFishing(PlayerFishEvent event) {
     	if(!event.getState().equals(PlayerFishEvent.State.CAUGHT_FISH)) {
     		return;
     	}
     	Player player = event.getPlayer();
     	ItemStack mainItem = player.getInventory().getItemInMainHand();
     	ItemStack offItem = player.getInventory().getItemInOffHand();
+    	ItemStack item;
     	if(mainItem != null) {
-    		if(isFishingRod(mainItem)) {
-    			Item itemEntity = (Item)event.getCaught();
-    			itemEntity.setItemStack(new RollFish(player).roll());	
-    		}
+    		item = mainItem;
     	}else {
     		if(offItem == null) {
     			return;
     		}
-    		if(isFishingRod(offItem)) {
-    			Item itemEntity = (Item)event.getCaught();
-    			itemEntity.setItemStack(new RollFish(player).roll());
-    		}
+    		item = offItem;
     	}
-    }
-    private boolean isFishingRod(ItemStack item){
-    	String rodName = new FishingRodNBT(item).getFishName();
     	
-    	return rodName != null;
+    	String rodName = new FishingRodNBT(item).getRodID();
+    	if(rodName == null) {
+    		return;
+    	}
+    	Item itemEntity = (Item)event.getCaught();
+		itemEntity.setItemStack(FishManager.lootNewFish(player, rodName));
     }
 }

@@ -12,16 +12,16 @@ public class FishNBT extends ItemNBTLoader{
     public FishNBT(ItemStack item) {
     	super(item,NewFishing.getInstance());
     }
-    public void init(double size,int rarity,int quality,Player player,int price,String fishName) {
-    	super.writeDouble("fishsize", size);
+    public void init(int size,int rarity,int quality,Player player,int price,String fishName) {
+    	super.writeInt("fishsize", size);
     	super.writeInt("rarity", rarity);
     	super.writeInt("quality", quality);
     	super.writeString("username", player.getName());
     	super.writeInt("price", price);
     	super.writeString("fishname", fishName);
     }
-    public Double getSize() {
-    	return super.readDouble("fishsize");
+    public Integer getSize() {
+    	return super.readInt("fishsize");
     }
     public Integer getRarity() {
     	return super.readInt("rarity");

@@ -2,6 +2,7 @@ package com.github.redshirt53072.growthapi.message;
 
 
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.github.redshirt53072.growthapi.BaseAPI;
@@ -18,8 +19,8 @@ public final class MessageManager {
 	 * @param text メッセージ
 	 * @param player 対象プレイヤー
 	 */
-	public static void sendWarning(String text,Player player) {
-		player.sendMessage(ChatColor.RED + "【警告】" + text);		
+	public static void sendWarning(String text,CommandSender sender) {
+		sender.sendMessage(ChatColor.RED + "【警告】" + text);		
 	}
 	/**
 	 * 「重要」を送る
@@ -27,8 +28,8 @@ public final class MessageManager {
 	 * @param text メッセージ
 	 * @param player 対象プレイヤー
 	 */
-	public static void sendImportant(String text,Player player) {
-		player.sendMessage(ChatColor.GOLD + "【重要】" + ChatColor.WHITE + text);				
+	public static void sendImportant(String text,CommandSender sender) {
+		sender.sendMessage(ChatColor.GOLD + "【重要】" + ChatColor.WHITE + text);				
 	}
 	/**
 	 * 「情報」を送る
@@ -36,17 +37,18 @@ public final class MessageManager {
 	 * @param text メッセージ
 	 * @param player 対象プレイヤー
 	 */
-	public static void sendInfo(String text,Player player) {
-		player.sendMessage(ChatColor.GREEN + "【情報】" + ChatColor.WHITE + text);			
+	public static void sendInfo(String text,CommandSender sender) {
+		sender.sendMessage(ChatColor.GREEN + "【情報】" + ChatColor.WHITE + text);			
 	}
+	
 	/**
 	 * 「特殊」を送る
 	 * OP用のコマンドやデバッグ機能などに使用する
 	 * @param text メッセージ
 	 * @param player 対象プレイヤー
 	 */
-	public static void sendSpecial(String text,Player player) {
-		player.sendMessage(ChatColor.LIGHT_PURPLE + "【特殊】" + ChatColor.WHITE + text);		
+	public static void sendSpecial(String text,CommandSender sender) {
+		sender.sendMessage(ChatColor.LIGHT_PURPLE + "【特殊】" + ChatColor.WHITE + text);		
 	}
 	
 	/**
@@ -79,11 +81,13 @@ public final class MessageManager {
 	 * @param text メッセージ
 	 * @param level メッセージレベル
 	 */
-	public static void sendOPPlayer(String text,MessageLevel level) {
+	public static void sendOPPlayer(MessageLevel level,String...texts) {
 		for(Player p : BaseAPI.getInstance().getServer().getOnlinePlayers()){
 			if(p.isOp()) {
-				sendText(text,p,level);	
-			}	
+				for(String text : texts) {	
+					sendText(text,p,level);
+				}
+			}
 		}
 	}
 
@@ -93,12 +97,13 @@ public final class MessageManager {
 	 * @param text メッセージ
 	 * @param level メッセージレベル
 	 */
-	public static void sendAllPlayer(String text,MessageLevel level) {
+	public static void sendAllPlayer(MessageLevel level,String...texts) {
 		for(Player p : BaseAPI.getInstance().getServer().getOnlinePlayers()){
-			sendText(text,p,level);
+			for(String text : texts) {	
+				sendText(text,p,level);
+			}
 		}
 	}
-	
 	
 	
 	/**

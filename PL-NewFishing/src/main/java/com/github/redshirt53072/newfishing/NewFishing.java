@@ -9,6 +9,7 @@ import com.github.redshirt53072.growthapi.server.GrowthPluginManager;
 import com.github.redshirt53072.growthapi.server.GrowthPluginManager.StopReason;
 import com.github.redshirt53072.newfishing.command.ReloadSubCommand;
 import com.github.redshirt53072.newfishing.command.SellCommand;
+import com.github.redshirt53072.newfishing.data.FishManager;
 
 
 public class NewFishing extends GrowthPlugin{
@@ -30,13 +31,14 @@ public class NewFishing extends GrowthPlugin{
 		
 		
 		//依存チェック
-		if(!BaseAPI.getInstance().checkVersion("2.2.0")) {
+		if(!BaseAPI.getInstance().checkVersion("2.3.0")) {
 			LogManager.logError("前提プラグイン(GrowthAPI)のバージョンが正しくありません。", this, new Throwable(), Level.SEVERE);
 			GrowthPluginManager.stopServer("プラグインバージョンの不整合による", StopReason.ERROR);
 		}
 		
 	
 		//config
+		FishManager.reload();
 		
 		//command
 		ReloadSubCommand.register();
