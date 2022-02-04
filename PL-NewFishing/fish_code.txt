@@ -5,13 +5,51 @@ Dim timeID(3) As String
 Dim timeName(3) As String
 
 Sub test()
-    Dim result As String
-    Dim index As Integer
+    Dim rare1 As String
+    Dim rare2 As String
+    Dim rare3 As String
+    Dim rare4 As String
+    Dim rare5 As String
+    rare1 = "rarity1:" & vbLf
+    rare2 = "rarity2:" & vbLf
+    rare3 = "rarity3:" & vbLf
+    rare4 = "rarity4:" & vbLf
+    rare5 = "rarity5:" & vbLf
     
+    For i = 0 To 3
+        timeID(i) = Worksheets("概要").Cells(i + 2,3).Value
+        timeName(i) = Worksheets("概要").Cells(i + 2,4).Value
+    Next i
     
+    For i = 0 To 19
+        biomeID(i) = Worksheets("概要").Cells(i + 18,7).Value
+        biomeName(i) = Worksheets("概要").Cells(i + 18,1).Value
+    Next i
     
+    For i = 3 To 1000
+        Dim test As String
+        Dim result As String
+        Dim rarity As Integer
+        test = Worksheets("シート2").Cells(i, 1).Value
+        If test = "" Then
+             Exit For
+        End If
+        rarity = Worksheets("シート2").Cells(i, 3).Value
+        result = getFish(i)
+        If rarity = 1 Then
+            rare1 = rare1 & result
+        ElseIf rarity = 2 Then
+            rare2 = rare2 & result
+        ElseIf rarity = 3 Then
+            rare3 = rare3 & result
+        ElseIf rarity = 4 Then
+            rare4 = rare4 & result
+        ElseIf rarity = 5 Then
+            rare5 = rare5 & result
+        End If
+    Next i
     
-    MsgBox result, vbInformation
+    MsgBox rare1 & rare2 & rare3 & rare4 & rare5, vbInformation
 End Sub
 
 Function getFish(ByVal index As Integer) As String
@@ -56,7 +94,7 @@ Function getTime(ByVal index As Integer) As String
     Dim count As Integer
     result = "    time:" & vbLf
     count = 1
-    rawTime = Worksheets("シート2").Cells(index, 9).Text
+    rawTime = Worksheets("シート2").Cells(index, 9).Value
     For i = 0 To 3
         Dim ti As String
         ti = timeName(i)
@@ -74,7 +112,7 @@ Function getBiome(ByVal index As Integer) As String
     Dim count As Integer
     result = "    biome:" & vbLf
     count = 1
-    rawBiome = Worksheets("シート2").Cells(index, 8).Text
+    rawBiome = Worksheets("シート2").Cells(index, 8).Value
     For i = 0 To 19
         Dim bn As String
         bn = biomeName(i)
