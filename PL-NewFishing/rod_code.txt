@@ -34,7 +34,7 @@ Function getLore(ByVal index As Integer) As String
     Dim length As Integer
     Dim remainder As Integer
     
-    result = "    lore:" & vbCrLf
+    result = "  lore:" & vbCrLf
     rawLore = Worksheets("釣り竿").Cells(index, 3).Text
     
     length = Len(rawLore) \ 20
