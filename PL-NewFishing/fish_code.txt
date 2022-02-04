@@ -1,0 +1,87 @@
+Dim biomeID(19) As String
+Dim biomeName(19) As String
+
+Dim timeID(3) As String
+Dim timeName(3) As String
+
+Sub test()
+    Dim result As String
+    Dim index As Integer
+    
+    
+    
+    
+    MsgBox result, vbInformation
+End Sub
+
+Function getFish(ByVal index As Integer) As String
+    Dim result As String
+    result = "  fish" & index & ":" & vbLf
+    result = result & "    id: " & Worksheets("シート2").Cells(index, 2).Value & vbLf
+    result = result & "    name: " & Worksheets("シート2").Cells(index, 1).Value & vbLf
+    result = result & "    size: " & Worksheets("シート2").Cells(index, 4).Value & vbLf
+    result = result & "    texture: " & Worksheets("シート2").Cells(index, 11).Value & vbLf
+    result = result & "    price: " & Worksheets("シート2").Cells(index, 10).Value & vbLf
+    result = result & getTime(index)
+    result = result & getBiome(index)
+    result = result & getLore(index)
+    getFish = result
+End Function
+
+Function getLore(ByVal index As Integer) As String
+    Dim rawLore As String
+    Dim result As String
+    Dim length As Integer
+    Dim remainder As Integer
+    
+    result = "    lore:" & vbLf
+    rawLore = Worksheets("シート2").Cells(index, 5).Text
+    
+    length = Len(rawLore) \ 10
+    remainder = Len(rawLore) Mod 10
+    
+    For i = 0 To length
+        If length = i Then
+            result = result & "      lore" & i & ": " & Mid(rawLore,i * 10 + 1,remainder) & vbLf
+        Else
+            result = result & "      lore" & i & ": " & Mid(rawLore,i * 10 + 1,10) & vbLf
+        End If
+    Next i
+    getLore = result
+End Function
+
+Function getTime(ByVal index As Integer) As String
+    Dim rawTime As String
+    Dim result As String
+    Dim count As Integer
+    result = "    time:" & vbLf
+    count = 1
+    rawTime = Worksheets("シート2").Cells(index, 9).Text
+    For i = 0 To 3
+        Dim ti As String
+        ti = timeName(i)
+        If 0 <> InStr(rawTime, ti) Then
+            count = count + 1
+            result = result & "      time" & count & ": " & timeID(i) & vbLf
+        End If
+    Next i
+    getTime = result
+End Function
+
+Function getBiome(ByVal index As Integer) As String
+    Dim rawBiome As String
+    Dim result As String
+    Dim count As Integer
+    result = "    biome:" & vbLf
+    count = 1
+    rawBiome = Worksheets("シート2").Cells(index, 8).Text
+    For i = 0 To 19
+        Dim bn As String
+        bn = biomeName(i)
+        If 0 <> InStr(rawBiome, bn) Then
+            count = count + 1
+            result = result & "      biome" & count & ": " & biomeID(i) & vbLf
+        End If
+    Next i
+    getBiome = result
+End Function
