@@ -23,7 +23,7 @@ Sub getFishData()
     
     For i = 0 To 19
         biomeID(i) = Worksheets("概要").Cells(i + 18,7).Value
-        biomeName(i) = Worksheets("概要").Cells(i + 18,1).Value
+        biomeName(i) = Worksheets("概要").Cells(i + 39,1).Value
     Next i
     
     For i = 3 To 1000
