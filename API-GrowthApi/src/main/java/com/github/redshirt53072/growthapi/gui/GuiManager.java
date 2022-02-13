@@ -5,15 +5,11 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
-import com.github.redshirt53072.growthapi.BaseAPI;
 import com.github.redshirt53072.growthapi.server.EmergencyListener;
-
-
 
 public final class GuiManager implements EmergencyListener{
 	private static Map<Player,Gui> data = new HashMap<Player,Gui>();
@@ -32,7 +28,11 @@ public final class GuiManager implements EmergencyListener{
 	}
 	
 	private static Gui getGui(Player player) {
-		return data.get(player); 
+		Gui gui = data.get(player);
+		if(gui == null) {
+			return null;
+		}
+		return gui.getLastGui();
 	}
 	
 	public static void onClick(InventoryClickEvent event) {
@@ -54,9 +54,10 @@ public final class GuiManager implements EmergencyListener{
 		Gui gui = getGui(p);
 		if(gui != null) {
 			//BaseAPI.getInstance().getLogger().log(Level.INFO,"onclose1");
-			remove(p);
+			if(!(gui instanceof ChildGui)){
+				remove(p);
+			}
 			gui.onClose();
-
 			//BaseAPI.getInstance().getLogger().log(Level.INFO,"onclose2");
 		}
 	}
@@ -71,16 +72,13 @@ public final class GuiManager implements EmergencyListener{
 		List<Gui> guis = new ArrayList<Gui>();
 		guis.addAll(guiCols);
 		for(int i = guis.size() - 1;i > -1;i--) {
-			guis.get(i).onEmergency();
+			guis.get(i).getLastGui().onEmergency();
 		}
 		data.clear();
 	}
 	
-	
 	public static void remove(Player player) {
-		//BaseAPI.getInstance().getLogger().log(Level.INFO,"remove");
-		
+		//BaseAPI.getInstance().getLogger().log(Level.INFO,"remove");	
 		data.remove(player);
 	}
-	
 }

@@ -108,8 +108,8 @@ public final class BaseAPI extends GrowthPlugin{
 	}
 	
 	/**
-	 * vaultインスタンスの取得
-	 * @return vaultインスタンス
+	 * MySQLが使えるか
+	 * @return 使えるか
 	 */
 	public static boolean canUseMySQL() {
 		return useMySQL;

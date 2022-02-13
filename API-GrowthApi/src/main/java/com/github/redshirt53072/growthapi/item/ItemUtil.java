@@ -1,52 +1,14 @@
 package com.github.redshirt53072.growthapi.item;
 
-
-import java.util.List;
-
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.inventory.meta.ItemMeta;
-
 
 public class ItemUtil {
-	
-	public static ItemStack getLiquidEmerald() {
-		ItemStack le = new ItemStack(Material.COMMAND_BLOCK);
-		ItemMeta leMeta = le.getItemMeta();
-		leMeta.setCustomModelData(1000);
-		leMeta.setDisplayName(ChatColor.WHITE + "リキッドエメラルド");
-		le.setItemMeta(leMeta);
-		return le;
-	}
-	
-	public static ItemStack buildItem(Material material,String name,List<String> lore,int amount,Enchantment ench,int itemModel){
-		final ItemStack item = new ItemStack(material, amount);
-	    final ItemMeta meta = item.getItemMeta();
-	    meta.setDisplayName(name);
-	    if(lore != null) {
-	    	meta.setLore(lore);
-	    }
-	    if(ench != null) {
-	    	meta.addEnchant(ench, 1, true);
-	    }
-	    if(itemModel > 0) {
-		    meta.setCustomModelData(itemModel);
-	    }
-	    meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-	    meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-	    item.setItemMeta(meta);
-		return item;
-	}
-	
-	public static int countItem(Player p,ItemStack item,int maxRemove) {
+	public static int removeItem(Player p,ItemStack sampleItem,int maxRemove) {
 		int removed = 0;
 		int count = 0;
 		PlayerInventory inv = p.getInventory();
@@ -60,7 +22,7 @@ public class ItemUtil {
 			if(stack == null) {
 				continue;
 			}
-			if(stack.isSimilar(item)){
+			if(stack.isSimilar(sampleItem)){
 				int amount = stack.getAmount();
 				count += amount;
 				if(maxRemove > removed) {
@@ -81,19 +43,43 @@ public class ItemUtil {
 		}
 		return count;
 	}
+	public static int countItem(Player p,ItemStack sampleItem) {
+		int count = 0;
+		PlayerInventory inv = p.getInventory();
+		for(int i = 0;i < 37;i++) {
+			ItemStack stack = null;
+			if(i == 36) {
+				stack = inv.getItemInOffHand();
+			}else {
+				stack = inv.getItem(i);
+			}
+			if(stack == null) {
+				continue;
+			}
+			if(stack.isSimilar(sampleItem)){
+				int amount = stack.getAmount();
+				count += amount;
+			}
+		}
+		return count;
+	}
 	
-	public static void giveItem(Player p,ItemStack item,int count) {
-		int stack = item.getMaxStackSize();
+	public static void giveItem(Player p,ItemStack item) {
+		giveItems(p,item,item.getAmount());
+	}
+	
+	public static void giveItems(Player p,ItemStack sampleItem,int count) {
+		int stack = sampleItem.getMaxStackSize();
 		while(count > 0) {
 			if(count > stack) {
-				item.setAmount(stack);
+				sampleItem.setAmount(stack);
 			}else {
-				item.setAmount(count);
+				sampleItem.setAmount(count);
 			}
 			if(-1 == p.getInventory().firstEmpty()){
-				dropItem(p,item);
+				dropItem(p,sampleItem);
 			}
-			p.getInventory().addItem(item);
+			p.getInventory().addItem(sampleItem);
 			count -= stack;
 		}
 	}

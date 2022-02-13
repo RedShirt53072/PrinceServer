@@ -1,10 +1,13 @@
 package com.github.redshirt53072.growthapi.config;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 
+import org.bukkit.Location;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
@@ -81,7 +84,11 @@ public final class ConfigManager  {
 	 * @return キーのリスト
 	 */
 	public Set<String> getKeys(String path,String keyName){
-		Set<String> keys = config.getConfigurationSection(path).getKeys(false);
+		ConfigurationSection section = config.getConfigurationSection(path);
+		if(section == null) {
+			return new HashSet<String>();
+		}
+		Set<String> keys = section.getKeys(false);
 		keys.removeIf(key -> !key.matches("^" + keyName + ".*"));
 		return keys;
     }
@@ -134,6 +141,20 @@ public final class ConfigManager  {
 			return null;
         }
     }
+	
+	/**
+	 * ItemStackのデータを読み取り
+	 * @param path 読み取りパス
+	 * @return doubleデータ
+	 */
+	public Location getLocation(String path){
+		if (config.contains(path) && config.isLocation(path)) {
+			return config.getLocation(path);
+        }else {
+			return null;
+        }
+    }
+	
 	
 	/**
 	 * Stringの配列を読み取り

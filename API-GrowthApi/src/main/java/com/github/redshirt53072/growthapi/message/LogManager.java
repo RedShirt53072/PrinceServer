@@ -90,7 +90,7 @@ public final class LogManager {
 			plugin.saveDefaultConfig();
 			root = plugin.getDataFolder();	
 			if(root.exists()) {
-				plugin.getLogger().log(Level.WARNING,"プラグインフォルダがありません。");
+				plugin.getLogger().log(Level.WARNING,"プラグインフォルダを作成しました。");
 			}else {
 				plugin.getLogger().log(Level.SEVERE,"プラグインフォルダが作成できません。");
 				return;
