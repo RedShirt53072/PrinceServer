@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -14,8 +15,9 @@ import com.github.redshirt53072.growthapi.command.SubCommand;
 import com.github.redshirt53072.growthapi.message.MessageManager;
 import com.github.redshirt53072.growthapi.util.Flag;
 import com.github.redshirt53072.growthapi.util.TextManager;
+import com.github.redshirt53072.dimmanager.config.DimConfig;
 import com.github.redshirt53072.dimmanager.data.DimData;
-import com.github.redshirt53072.dimmanager.general.WorldManager;
+import com.github.redshirt53072.dimmanager.data.WorldManager;
 
 public class DimSubCommand implements SubCommand{
 	private static DimSubCommand sub;
@@ -29,7 +31,7 @@ public class DimSubCommand implements SubCommand{
 	@Override
     public void onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if(!(sender instanceof Player)) {
-			sender.sendMessage("[error]コンソールからは実行できません。");
+			MessageManager.sendSpecial(ChatColor.RED + "[error]コンソールからは実行できません。", sender);
         	return;
 		}
 		Player p = (Player)sender;
@@ -82,7 +84,7 @@ public class DimSubCommand implements SubCommand{
 				MessageManager.sendSpecial(ChatColor.RED + "[error]無効な座標値です。(" + "," + x+ "," + y+ "," + z+ "," + yaw+ "," + pitch + ")", p);
 	        	return;
 			}
-			boolean result = DimData.addDimension(p.getWorld(), args[2], mode, visible, x, y, z, yaw, pitch);
+			boolean result = DimConfig.addDimension(new DimData(args[2], new Location(p.getWorld(), x, y, z, yaw, pitch), mode, p.getWorld().getUID(),visible));
 			
 			WorldManager.reload();
 			if(result) {
@@ -110,7 +112,7 @@ public class DimSubCommand implements SubCommand{
 	        	return;
 			}
 
-			DimData.delete(args[2]);
+			DimConfig.delete(args[2]);
 			
 			WorldManager.reload();
 			
@@ -136,7 +138,7 @@ public class DimSubCommand implements SubCommand{
 		        	return;	
 				}
 			}
-			DimData.setStart(args[2]);
+			DimConfig.setStart(args[2]);
 			
 			MessageManager.sendSpecial("ログイン時のディメンションを設定しました。(" + args[2] + ")", p);
 	        

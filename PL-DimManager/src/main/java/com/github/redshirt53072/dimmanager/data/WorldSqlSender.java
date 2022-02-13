@@ -13,7 +13,7 @@ import org.bukkit.World;
 import com.github.redshirt53072.growthapi.database.SQLSender;
 import com.github.redshirt53072.growthapi.BaseAPI;
 
-public class WorldSqlSender extends SQLSender{
+class WorldSqlSender extends SQLSender{
 	
 	public WorldSqlSender(Connection connect) {
     	super(connect,"player_loc",BaseAPI.getInstance());

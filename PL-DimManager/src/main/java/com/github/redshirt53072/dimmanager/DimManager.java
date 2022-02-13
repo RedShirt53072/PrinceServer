@@ -1,6 +1,5 @@
 package com.github.redshirt53072.dimmanager;
 
-
 import java.util.logging.Level;
 
 import com.github.redshirt53072.growthapi.BaseAPI;
@@ -11,10 +10,7 @@ import com.github.redshirt53072.growthapi.server.GrowthPlugin;
 import com.github.redshirt53072.dimmanager.command.DimAllCommand;
 import com.github.redshirt53072.dimmanager.command.DimSubCommand;
 import com.github.redshirt53072.dimmanager.command.WorldCommand;
-import com.github.redshirt53072.dimmanager.data.DimData;
-import com.github.redshirt53072.dimmanager.general.PlayerLogin;
-import com.github.redshirt53072.dimmanager.general.WorldManager;
-
+import com.github.redshirt53072.dimmanager.data.WorldManager;
 
 /**
  * BaseApiのメインクラス
@@ -44,16 +40,18 @@ public final class DimManager extends GrowthPlugin{
 			LogManager.logError("前提プラグイン(GrowthAPI)のバージョンが正しくありません。", this, new Throwable(), Level.SEVERE);
 			GrowthPluginManager.stopServer("プラグインバージョンの不整合による", StopReason.ERROR);
 		}
+		//emergency
+		GrowthPluginManager.registerEmergency(new WorldManager());
+		
 		
 		//config
-		DimData.init();
+		WorldManager.reload();
 		
 		//sql
 		if(!BaseAPI.canUseMySQL()) {
 			LogManager.logError("DimManagerではMySQLデータベースの使用が必須ですが、現在無効化されています", this, new Throwable(), Level.SEVERE);
 			GrowthPluginManager.stopServer("前提機能の無効化による", GrowthPluginManager.StopReason.ERROR);
 		}
-		
 		
 		//event
 		new PlayerLogin();

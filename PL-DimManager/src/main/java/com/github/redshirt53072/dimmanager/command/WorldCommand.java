@@ -7,29 +7,24 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 
-import com.github.redshirt53072.growthapi.item.ItemUtil;
 import com.github.redshirt53072.growthapi.message.MessageManager;
+import com.github.redshirt53072.growthapi.storage.PlayerStorage;
 import com.github.redshirt53072.growthapi.util.Flag;
-import com.github.redshirt53072.dimmanager.data.DimData;
 import com.github.redshirt53072.dimmanager.DimManager;
-import com.github.redshirt53072.dimmanager.general.WorldManager;
+import com.github.redshirt53072.dimmanager.data.DimData;
+import com.github.redshirt53072.dimmanager.data.WorldManager;
 
 public class WorldCommand implements TabExecutor{
 	
 	@Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if(!(sender instanceof Player)) {
-			sender.sendMessage("[error]コンソールからは実行できません。");
+			MessageManager.sendSpecial(ChatColor.RED + "[error]コンソールからは実行できません。", sender);
         	return true;
 		}
 		Player p = (Player)sender;
@@ -60,8 +55,9 @@ public class WorldCommand implements TabExecutor{
     				loc = new WorldManager().readLoc(p);
     				mode = GameMode.SURVIVAL;
     			}else {
-    				mode = DimData.getGamemode(args[0]);
-        			loc = DimData.getLocation(args[0]);	
+    				DimData dd = WorldManager.getDimData(args[0]);
+    				loc = dd.getLocation();
+    				mode = dd.getGamemode();
     			}
     			
     	    	Bukkit.getScheduler().runTask(DimManager.getInstance(), new Runnable() {
@@ -70,54 +66,20 @@ public class WorldCommand implements TabExecutor{
     	    			GameMode old = p.getGameMode();
     	    			
     	    			if(mode.equals(GameMode.CREATIVE) && !old.equals(GameMode.CREATIVE)) {
-    	    				PlayerInventory inv = p.getInventory();
-    	    				for(ItemStack item : inv.getContents()){
-    	    					drop(p,item);
-    	    				}
-    	    				ExperienceOrb orb = (ExperienceOrb)p.getWorld().spawnEntity(p.getLocation(), EntityType.EXPERIENCE_ORB);
-    	    				orb.setExperience(p.getTotalExperience());
-    	    				orb.setCustomNameVisible(true);
-    	    				orb.setCustomName(p.getName() + "の経験値");
-    	    				p.setTotalExperience(0);
-    	    				inv.clear();
+    	    				new PlayerStorage().savePlayer(p, true);
     	    			}
     	    			if(old.equals(GameMode.CREATIVE) && !mode.equals(GameMode.CREATIVE)) {
-    	    				PlayerInventory inv = p.getInventory();
-    	    				for(ItemStack item : inv.getContents()){
-    	    					drop(p,item);
-    	    				}
-    	    				ExperienceOrb orb = (ExperienceOrb)p.getWorld().spawnEntity(p.getLocation(), EntityType.EXPERIENCE_ORB);
-    	    				orb.setExperience(p.getTotalExperience());
-    	    				orb.setCustomNameVisible(true);
-    	    				orb.setCustomName(p.getName() + "の経験値");
-    	    				p.setTotalExperience(0);
-    	    				inv.clear();
+    	    				new PlayerStorage().loadPlayer(p);
     	    			}
-    	    			
-    	    			
+    	    			p.setGameMode(mode);
     	    			p.teleport(loc);
-    	    			p.setGameMode(mode);	
     	    		}
     	    	});	
     		}
     	});
 		
-		
-		
-		
 		return true;
     }
-	private void drop(Player p,ItemStack item) {
-		if(item == null) {
-			return;
-		}
-		if(item.getType().equals(Material.AIR)){
-			return;
-		}
-
-		ItemUtil.dropItem(p, item);
-	}
-	
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args){
 		List<String> tab = new ArrayList<String>();
