@@ -13,6 +13,7 @@ import org.bukkit.inventory.ItemStack;
 
 import com.github.redshirt53072.growthapi.message.MessageManager;
 import com.github.redshirt53072.growthapi.util.TextManager;
+import com.github.redshirt53072.growthapi.item.ItemLibrary;
 import com.github.redshirt53072.growthapi.item.ItemUtil;
 import com.github.redshirt53072.growthapi.money.MoneyManager;
 public final class EmeraldCommand implements TabExecutor{
@@ -33,9 +34,9 @@ public final class EmeraldCommand implements TabExecutor{
 		if(args[0].equals("deposit")) {
 			//預ける
 			int price = 0;
-			price += ItemUtil.countItem(p, new ItemStack(Material.EMERALD), 100000);
-			price += ItemUtil.countItem(p, new ItemStack(Material.EMERALD_BLOCK), 100000) * 64;
-			price += ItemUtil.countItem(p, ItemUtil.getLiquidEmerald(), 100000) * 4096;
+			price += ItemUtil.removeItem(p, new ItemStack(Material.EMERALD),640);
+			price += ItemUtil.removeItem(p, new ItemStack(Material.EMERALD_BLOCK),640) * 64;
+			price += ItemUtil.removeItem(p, ItemLibrary.getLiquidEmerald(),640) * 4096;
 			
 			if(price == 0) {
 				MessageManager.sendWarning(ChatColor.RED + "[error]インベントリ内にエメラルドがありませんでした。", p);
@@ -64,9 +65,9 @@ public final class EmeraldCommand implements TabExecutor{
 			int block = (price % 4096) / 64;
 			int eme = (price % 4096) % 64;
 			
-			ItemUtil.giveItem(p, ItemUtil.getLiquidEmerald(), liquid);
-			ItemUtil.giveItem(p, new ItemStack(Material.EMERALD_BLOCK), block);
-			ItemUtil.giveItem(p, new ItemStack(Material.EMERALD), eme);
+			ItemUtil.giveItems(p, ItemLibrary.getLiquidEmerald(), liquid);
+			ItemUtil.giveItems(p, new ItemStack(Material.EMERALD_BLOCK), block);
+			ItemUtil.giveItems(p, new ItemStack(Material.EMERALD), eme);
 
 			MessageManager.sendImportant(price + "Ɇを口座から引き出しました。", p);
 			return true;

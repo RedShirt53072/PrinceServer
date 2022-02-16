@@ -5,11 +5,15 @@ import java.util.logging.Level;
 
 import com.github.redshirt53072.growthapi.BaseAPI;
 import com.github.redshirt53072.growthapi.message.LogManager;
+import com.github.redshirt53072.growthapi.player.PlayerManager;
 import com.github.redshirt53072.growthapi.server.GrowthPlugin;
 import com.github.redshirt53072.growthapi.server.GrowthPluginManager;
 import com.github.redshirt53072.growthapi.server.GrowthPluginManager.StopReason;
+import com.github.redshirt53072.usefulshulker.command.ECOpCommand;
 import com.github.redshirt53072.usefulshulker.command.ECSubCommand;
 import com.github.redshirt53072.usefulshulker.command.EmeraldCommand;
+import com.github.redshirt53072.usefulshulker.data.ECLock;
+import com.github.redshirt53072.usefulshulker.data.EnderChest;
 
 
 /**
@@ -30,29 +34,37 @@ public final class UsefulShulker extends GrowthPlugin{
 	public void onEnable() {
 		//general
 		name = "UsefulShulker";
-		version = "2.3.0";
+		version = "3.0.0";
 		plugin = this;
 		LogManager.registerLogger(this);
 		this.saveDefaultConfig();
 		
 		
 		//依存チェック
-		if(!BaseAPI.getInstance().checkVersion("2.3.0")) {
+		if(!BaseAPI.getInstance().checkVersion("3.0.0")) {
 			LogManager.logError("前提プラグイン(GrowthAPI)のバージョンが正しくありません。", this, new Throwable(), Level.SEVERE);
 			GrowthPluginManager.stopServer("プラグインバージョンの不整合による", StopReason.ERROR);
 		}
 		
-	
+		//sql
+		if(!BaseAPI.canUseMySQL()) {
+			LogManager.logError("UsefulShulkerではMySQLデータベースの使用が必須ですが、現在無効化されています", this, new Throwable(), Level.SEVERE);
+			GrowthPluginManager.stopServer("前提機能の無効化による", GrowthPluginManager.StopReason.ERROR);
+		}
+		new ECLock().reload();
+		
 		//config
 		
 		//command
 		ECSubCommand.register();
+		ECOpCommand.register();
 
 		this.getCommand("emerald").setExecutor(new EmeraldCommand());
+		
 		//listener
 		new PlayerAction();
-		//メモリ
-	
+		PlayerManager.registerInit(new EnderChest());
+		
 		//message
 		LogManager.logInfo(getPluginName() + "を読み込みました", this, Level.INFO);
 	}

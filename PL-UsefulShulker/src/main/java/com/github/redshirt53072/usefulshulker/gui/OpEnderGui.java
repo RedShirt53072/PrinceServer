@@ -1,6 +1,7 @@
 package com.github.redshirt53072.usefulshulker.gui;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -11,45 +12,46 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 
 import com.github.redshirt53072.growthapi.gui.Gui;
 import com.github.redshirt53072.growthapi.item.ItemBuilder;
-import com.github.redshirt53072.growthapi.money.MoneyManager;
 import com.github.redshirt53072.growthapi.player.PlayerManager;
 import com.github.redshirt53072.usefulshulker.UsefulShulker;
 import com.github.redshirt53072.usefulshulker.data.ECLock;
 import com.github.redshirt53072.usefulshulker.data.EnderChest;
 
-public class EnderGui extends Gui{
-	private int openedPage = 1;
+public class OpEnderGui extends Gui{
+	private static List<Player> editPlayers = new ArrayList<Player>();
 	
-	public EnderGui() {
+	private int openedPage = 1;
+	private Player target; 
+	private boolean editMode; 
+	
+	public OpEnderGui(Player target,boolean editMode) {
     	super(UsefulShulker.getInstance());
-    }
-    
-	static public int calcCost(int slot,Player player) {
-		int unlock = ECLock.getPage(player);
-		int totalCost = 0;
-		
-		for(int i = 1;unlock + i <= slot;i++) {
-			totalCost += ((int)Math.pow(2,unlock + i)) * 500;	
-		}
-		
-		return totalCost;
+    	this.target = target;
+    	this.editMode = editMode;
+    	if(editMode) {
+        	editPlayers.add(target);
+    	}
+	}
+	
+	public static boolean isOpenedPlayer(Player player) {
+		return editPlayers.contains(player);
 	}
 	
 	private void load() {
 		//ページ
-    	int unlockedPage = ECLock.getPage(player);
+    	int lockedPage = ECLock.getPage(target);
     	for(int index = 1;index < 10;index ++) {
 			int model = 3010 + index;
-			String text = ChatColor.WHITE.toString() + index + "ページ";
+			String text = index + "ページ";
 			ArrayList<String> lore = new ArrayList<String>();
 			if(openedPage == index) {
 				model -= 10;
 				text = text + ChatColor.YELLOW + "<選択中>";
 			}
-			if(unlockedPage < index) {
+			if(lockedPage < index) {
 				model += 10;
 				text = text + ChatColor.RED + "<未開放>";
-				lore.add(ChatColor.WHITE + "合計" + ChatColor.GOLD + calcCost(index,player) + "Ɇ" + ChatColor.WHITE + "でこのスロットを開放できます。");
+				lore.add(ChatColor.WHITE + "合計" + ChatColor.GOLD + EnderGui.calcCost(index,target) + "Ɇ" + ChatColor.WHITE + "でこのスロットを開放できます。");
 			}
 			inv.setItem(index + 26, new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setLore(lore).setModelData(model).setName(text).build());
 		}
@@ -57,7 +59,7 @@ public class EnderGui extends Gui{
 	
     @Override
     public boolean onClick(InventoryClickEvent event){
-    	if(PlayerManager.isAsyncLocked(player,"ec")) {
+    	if(PlayerManager.isAsyncLocked(target,"ec")) {
     		return true;
     	}
     	int slot = event.getRawSlot();
@@ -71,17 +73,15 @@ public class EnderGui extends Gui{
     		return true;
     	}
     	
-    	if(ECLock.getPage(player) < slot) {
-    		int nowEme = (int) MoneyManager.get(player);
-    		if(nowEme > calcCost(slot,player)) {
-    			new ConfirmCheck(slot).open(this);
-    			return true;
-    		}
-            player.playSound(player.getLocation(), Sound.BLOCK_CHEST_LOCKED, 1,1);
+    	if(ECLock.getPage(target) < slot) {
+    		player.playSound(player.getLocation(), Sound.BLOCK_CHEST_LOCKED, 1,1);
     		return true;
     	}
-    	
-    	new EnderChest().pageChange(player, inv, openedPage,slot);
+    	if(editMode) {
+    		new EnderChest().pageChange(target, inv, openedPage,slot);
+        }else{
+        	new EnderChest().openLoad(target, inv,slot);	
+        }
     	
     	openedPage = slot;
     	load();
@@ -89,17 +89,12 @@ public class EnderGui extends Gui{
         player.playSound(player.getLocation(), Sound.BLOCK_CHEST_OPEN, 1,1);
         return true;
     }
-    @Override
-	public void onReturn() {
-    	load();
-    	super.onReturn();
-    }
     
 	@Override
 	public void onRegister() {
-    	inv = Bukkit.createInventory(null, 36, "エンダーチェスト");
+    	inv = Bukkit.createInventory(null, 36, target.getName() + "-" + (editMode ? "編集モード" : "閲覧モード"));
     	
-    	new EnderChest().openLoad(player, inv, openedPage);
+    	new EnderChest().openLoad(target, inv, openedPage);
     	
     	load();
     	
@@ -108,8 +103,11 @@ public class EnderGui extends Gui{
 	}
 	@Override
 	public void onClose() {
-		if(!PlayerManager.isAsyncLocked(player, "ec")) {
-	    	new EnderChest().closeSave(player, inv, openedPage);
+		if(editMode) {
+        	editPlayers.remove(target);
+        	if(!PlayerManager.isAsyncLocked(target, "ec")) {
+    	    	new EnderChest().closeSave(target, inv, openedPage);
+    		}
 		}
     	player.playSound(player.getLocation(), Sound.BLOCK_ENDER_CHEST_CLOSE, 1,1);
 	}
