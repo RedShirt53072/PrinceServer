@@ -9,14 +9,6 @@ I'm sorry, but I can only support these plugins in Japanese.
 また、配布場所のReadMe,GitHubのReadMeなどにこのページのリンクを貼っていただけると分かりやすいと思います。  
 (心配な場合はご相談ください。)
 
-# Prince Serverリソースパック
-赤シャツ/princeなどが制作し、Prince Serverで使用されているリソースパックです。  
-現状だと主にGUI系のテクスチャが入っています。数字/枠囲み数字/チェックマーク/バツマーク/+記号/-記号など。  
-リソースパックのダウンロードはMITライセンスのもと自由にできます。  
-再配布などの際はLicenseのファイル,ReadMeのファイルを残しておいてください。  
-また、配布場所のReadMe,GitHubのReadMeなどにこのページのリンクを貼っていただけると分かりやすいと思います。  
-(心配な場合はご相談ください。)
-
 # Prince Serverについて
 prince(twitter:@nog_prince)が運営する生活系サーバー。  
 Minecraft Java版 1.18.1で限定公開中。  
