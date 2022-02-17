@@ -56,7 +56,6 @@ End Sub
 Function getFish(ByVal index As Integer) As String
     Dim result As String
     result = "  fish" & index & ":" & vbCrLf
-    result = result & "    id: " & Worksheets("シート2").Cells(index, 2).Value & vbCrLf
     result = result & "    name: " & Worksheets("シート2").Cells(index, 1).Value & vbCrLf
     result = result & "    size: " & Worksheets("シート2").Cells(index, 4).Value & vbCrLf
     result = result & "    texture: " & Worksheets("シート2").Cells(index, 11).Value & vbCrLf
