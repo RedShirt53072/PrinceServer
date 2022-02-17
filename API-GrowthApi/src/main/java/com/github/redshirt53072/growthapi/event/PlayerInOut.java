@@ -2,11 +2,15 @@ package com.github.redshirt53072.growthapi.event;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerLoginEvent.Result;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import com.github.redshirt53072.growthapi.BaseAPI;
 import com.github.redshirt53072.growthapi.command.MaintenanceCommand;
+import com.github.redshirt53072.growthapi.gui.Gui;
+import com.github.redshirt53072.growthapi.gui.GuiManager;
 import com.github.redshirt53072.growthapi.message.MessageManager;
 import com.github.redshirt53072.growthapi.message.MessageManager.MessageLevel;
+import com.github.redshirt53072.growthapi.player.PlayerManager;
 import com.github.redshirt53072.growthapi.server.GrowthPlugin;
 
 import org.bukkit.Bukkit;
@@ -29,9 +33,9 @@ public final class PlayerInOut implements Listener {
     }
     
     @EventHandler(priority = EventPriority.HIGH)
-    public void onLogin(final PlayerLoginEvent event) {
+    public void onLogin(PlayerLoginEvent event) {
+    	Player p = event.getPlayer();
     	if(MaintenanceCommand.isClose()) {
-        	Player p = event.getPlayer();
         	if(p.hasPermission(Bukkit.getPluginManager().getPermission("growth.op"))){
         		MessageManager.sendSpecial("[maintenance]このサーバーはメンテナンス中です。", p);
         		MessageManager.sendOPPlayer(MessageLevel.SPECIAL, ChatColor.YELLOW + p.getName() + "がgrowth.opのパーミッションを利用してログインしました。");
@@ -44,5 +48,14 @@ public final class PlayerInOut implements Listener {
         	}
     		event.disallow(Result.KICK_OTHER, "[maintenance]このサーバーはメンテナンス中です。");
     	}
+    	PlayerManager.initPlayer(p);
+    }
+    @EventHandler(priority = EventPriority.HIGH)
+    public void onLogout(PlayerQuitEvent event) {
+    	Player p = event.getPlayer();
+        Gui gui = GuiManager.getGui(p);
+        if(gui != null) {
+            gui.onEmergency();    	
+        }
     }
 }

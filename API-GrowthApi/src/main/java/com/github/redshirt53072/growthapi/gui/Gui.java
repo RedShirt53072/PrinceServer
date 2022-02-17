@@ -2,10 +2,13 @@ package com.github.redshirt53072.growthapi.gui;
 
 import java.util.logging.Level;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 
+import com.github.redshirt53072.growthapi.item.ItemBuilder;
 import com.github.redshirt53072.growthapi.message.LogManager;
 import com.github.redshirt53072.growthapi.server.GrowthPlugin;
 
@@ -38,7 +41,16 @@ public abstract class Gui {
 		}
 		GuiManager.openGui(this, player);
 		this.player = player;
-	    onRegister();
+		Bukkit.getScheduler().runTask(plugin, new Runnable() {
+    		@Override
+    		public void run() {
+    		    onRegister();
+    		}
+    	});
+	}
+	
+	protected void setEmptyItem(int slot) {
+		inv.setItem(slot, new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setName(" ").setModelData(3410).build());
 	}
 	
 	protected void registerChild(ChildGui child) {
@@ -58,7 +70,7 @@ public abstract class Gui {
 		close();
 	}
 
-	public void onReturn() {
+	protected void onReturn() {
 		child = null;
 		player.openInventory(inv);
 	}

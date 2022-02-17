@@ -2,6 +2,7 @@ package com.github.redshirt53072.growthapi.gui;
 
 import java.util.logging.Level;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import com.github.redshirt53072.growthapi.message.LogManager;
 import com.github.redshirt53072.growthapi.server.GrowthPlugin;
@@ -25,11 +26,14 @@ public abstract class ChildGui extends Gui{
 		this.parent = parent;
 		player = parent.getPlayer();
 		parent.registerChild(this);
+		GuiManager.addNotClose(player);
+		player.closeInventory();
 		onRegister();
 	}
 	/**
 	 * @Deprecated 子GUIはプレイヤーではなく、親GUIから登録してください。
 	 */
+	@Deprecated
 	@Override
 	public void open(Player player) {
 		LogManager.logError("[Gui]子GUIを登録しようとしています。", plugin,new Throwable(), Level.WARNING);
@@ -40,6 +44,15 @@ public abstract class ChildGui extends Gui{
 		GuiManager.addNotClose(player);
 		player.closeInventory();
 		parent.onReturn();
+	}
+	
+	protected void asyncReturn() {
+		Bukkit.getScheduler().runTask(plugin, new Runnable() {
+    		@Override
+    		public void run() {
+    			parent.onReturn();
+    		}
+    	});
 	}
 	
 	@Override

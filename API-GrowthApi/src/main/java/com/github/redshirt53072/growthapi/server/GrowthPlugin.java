@@ -77,14 +77,13 @@ public abstract class GrowthPlugin extends JavaPlugin{
 		if(inNums.get(0) != reqNums.get(0)) {
 			return false;
 		}
-		if(inNums.get(1) > reqNums.get(1)) {
+		if(inNums.get(1) != reqNums.get(1)) {
+			return false;
+		}
+		if(inNums.get(2) >= reqNums.get(2)){
 			return true;
 		}
-		if(inNums.get(1) == reqNums.get(1)){
-			if(inNums.get(2) >= reqNums.get(2)){
-				return true;
-			}
-		}
+		
 		return false;
 	}
 }

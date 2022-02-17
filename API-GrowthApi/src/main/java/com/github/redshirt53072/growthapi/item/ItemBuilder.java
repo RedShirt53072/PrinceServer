@@ -3,7 +3,6 @@ package com.github.redshirt53072.growthapi.item;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
@@ -22,10 +21,16 @@ public class ItemBuilder {
 		itemMeta = item.getItemMeta();
 	}
 	public ItemBuilder setName(String name) {
-		itemMeta.setDisplayName(Color.WHITE + name);
+		itemMeta.setDisplayName(name);
 		return this;
 	}
 	public ItemBuilder setAmount(int amount) {
+		if(amount < 1) {
+			amount = 1;
+		}
+		if(amount > 64) {
+			amount = 64;
+		}
 		item.setAmount(amount);
 		return this;
 	}

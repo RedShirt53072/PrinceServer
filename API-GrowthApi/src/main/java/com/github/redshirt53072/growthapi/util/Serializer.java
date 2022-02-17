@@ -8,6 +8,7 @@ import javax.xml.bind.DatatypeConverter;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.potion.PotionEffect;
@@ -44,6 +45,7 @@ public class Serializer {
 	}
 	public static void toInventory(JsonArray data,PlayerInventory inv) {
 		inv.clear();
+		
         for (int i = 0; i < data.size(); i++) {
         	try {
             	JsonObject jo = data.get(i).getAsJsonObject();
@@ -52,6 +54,31 @@ public class Serializer {
                 inv.setItem(index, item);
     		}catch(Exception ex) {
     			LogManager.logError("インベントリデータのデシリアライズに失敗しました。", BaseAPI.getInstance(),ex, Level.WARNING);
+    		}
+        }
+	}
+	public static void toGui(String rawData,Inventory inv,int min,int max) {
+		JsonArray data = null;
+		try {
+			data = new Gson().fromJson(rawData,JsonArray.class);
+		}catch(Exception ex) {
+			LogManager.logError("GUIデータのデシリアライズに失敗しました。", BaseAPI.getInstance(),ex, Level.WARNING);
+			return;
+		}
+		for (int i = 0; i < data.size(); i++) {
+        	try {
+            	JsonObject jo = data.get(i).getAsJsonObject();
+                ItemStack item = toItem(jo);
+                Integer index = getIndex(jo);
+                if(min > index) {
+                	continue;
+                }
+                if(max < index) {
+                	continue;
+                }
+                inv.setItem(index, item);
+    		}catch(Exception ex) {
+    			LogManager.logError("GUIデータのデシリアライズに失敗しました。", BaseAPI.getInstance(),ex, Level.WARNING);
     		}
         }
 	}
@@ -99,7 +126,6 @@ public class Serializer {
 	}
 	
 	
-	
 	public static JsonObject toJson(ItemStack itemStack,int index) {
 	    YamlConfiguration config = new YamlConfiguration();
 	    config.set("i", itemStack);
@@ -109,7 +135,23 @@ public class Serializer {
 	    jo.addProperty("data", str);
 	    return jo;
 	}
-	
+	public static String toJson(Inventory inv,int min,int max) {
+        JsonArray inventory = new JsonArray();
+        for (int i = 0; i < inv.getSize(); i++) {
+        	if(min > i) {
+            	continue;
+            }
+            if(max < i) {
+            	break;
+            }
+        	ItemStack item = inv.getItem(i);
+        	if (item != null) {
+        		JsonObject values = toJson(item, i);
+                inventory.add(values);
+            }
+        }
+        return new Gson().toJson(inventory);
+    }
 	public static JsonArray toJson(PlayerInventory inv) {
         JsonArray inventory = new JsonArray();
         for (int i = 0; i < inv.getSize(); i++) {

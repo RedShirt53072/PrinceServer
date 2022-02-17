@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
 
 import com.github.redshirt53072.growthapi.server.EmergencyListener;
 
@@ -15,6 +16,11 @@ public final class GuiManager implements EmergencyListener{
 	private static Map<Player,Gui> data = new HashMap<Player,Gui>();
 	private static List<Player> notClosePlayers = new ArrayList<Player>();
 	
+	public static void clearItem(Inventory inv,int min ,int max) {
+		for(int i = min;i <= max;i++) {
+			inv.clear(i);
+		}
+	}
 	
 	public static void openGui(Gui newGui,Player player) {
 		Gui old = getGui(player);
@@ -27,7 +33,7 @@ public final class GuiManager implements EmergencyListener{
 		return;
 	}
 	
-	private static Gui getGui(Player player) {
+	public static Gui getGui(Player player) {
 		Gui gui = data.get(player);
 		if(gui == null) {
 			return null;

@@ -8,6 +8,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import com.github.redshirt53072.growthapi.command.MaintenanceCommand;
 import com.github.redshirt53072.growthapi.command.ManagementCommand;
 import com.github.redshirt53072.growthapi.command.StopCommand;
+import com.github.redshirt53072.growthapi.command.TopManageCommand;
 import com.github.redshirt53072.growthapi.database.MySQLConfig;
 import com.github.redshirt53072.growthapi.database.SQLManager;
 import com.github.redshirt53072.growthapi.event.PlayerInOut;
@@ -45,7 +46,7 @@ public final class BaseAPI extends GrowthPlugin{
 	public void onEnable() {
 		//general
 		name = "BaseAPI";
-		version = "2.3.0";
+		version = "3.0.0";
 		plugin = this;
 		LogManager.registerLogger(this);
 		this.saveDefaultConfig();
@@ -78,6 +79,7 @@ public final class BaseAPI extends GrowthPlugin{
 		//command
 		this.getCommand("stop").setExecutor(new StopCommand());
 		this.getCommand("manage").setExecutor(new ManagementCommand());
+		this.getCommand("topmanage").setExecutor(new TopManageCommand());
 		this.getCommand("main").setExecutor(new MaintenanceCommand());
 		
 
