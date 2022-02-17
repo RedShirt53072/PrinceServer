@@ -14,6 +14,7 @@ import com.github.redshirt53072.usefulshulker.command.ECSubCommand;
 import com.github.redshirt53072.usefulshulker.command.EmeraldCommand;
 import com.github.redshirt53072.usefulshulker.data.ECLock;
 import com.github.redshirt53072.usefulshulker.data.EnderChest;
+import com.github.redshirt53072.usefulshulker.temp.MoveEnderChest;
 
 
 /**
@@ -64,6 +65,7 @@ public final class UsefulShulker extends GrowthPlugin{
 		//listener
 		new PlayerAction();
 		PlayerManager.registerInit(new EnderChest());
+		PlayerManager.registerInit(new MoveEnderChest());
 		
 		//message
 		LogManager.logInfo(getPluginName() + "を読み込みました", this, Level.INFO);

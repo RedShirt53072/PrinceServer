@@ -85,7 +85,6 @@ public class EnderChest extends SQLInterface implements InitListener{
 	@Override
 	public void onInit(Player player) {
 		UUID uuid = player.getUniqueId();
-		
 		new Thread() {
             @Override
             public void run() {

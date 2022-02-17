@@ -50,6 +50,7 @@ public class ConfirmCheck  extends ChildGui{
     	return true;
     }
     
+    
 	@Override
 	public void onRegister() {
     	inv = Bukkit.createInventory(null, 27, payPage + "ページまで拡張しますか？");

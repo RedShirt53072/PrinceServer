@@ -26,6 +26,7 @@ public final class PlayerAction implements Listener {
     	this.plugin = UsefulShulker.getInstance();
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
+    
     //左右クリック
     @EventHandler(priority = EventPriority.NORMAL)
     public void mouseClick(PlayerInteractEvent event) {
