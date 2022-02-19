@@ -38,3 +38,4 @@ Prince serverプラグイン開発は現状私が一人で請け負っていま�
 # 連絡先
 discord:redshirt#3338  
 twitter:@redshirtMC  
+(https://twitter.com/redshirtMC)
