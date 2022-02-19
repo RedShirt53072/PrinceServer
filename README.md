@@ -1,15 +1,11 @@
 # Prince Serverプラグイン群
 赤シャツが制作し、Prince Serverに提供されているプラグインたちです。  
 管理者以外非公開にしています。  
-最新リリースは以下から確認してください。  
-https://github.com/RedShirt53072/PrinceServer/releases/latest  
-リソースパックは以下のレポジトリで管理しています。同じく管理者以外非公開です。  
-https://github.com/RedShirt53072/SwallowResourcePack   
-
+最新リリースは[こちら](https://github.com/RedShirt53072/PrinceServer/releases/latest)から確認してください。    
+リソースパックは[こちら](https://github.com/RedShirt53072/SwallowResourcePack)のレポジトリで管理しています。同じく管理者以外非公開です。  
 
 ## 管理機能
-以下に説明がありますので、目を通しておいてください。  
-https://github.com/RedShirt53072/PrinceServer/blob/main/AdminReadMe.md
+[こちら](https://github.com/RedShirt53072/PrinceServer/blob/main/AdminReadMe.md)に説明がありますので、目を通しておいてください。  
 
 ## 前提環境
 Spigot 1.18.1  
@@ -38,5 +34,4 @@ Prince serverプラグイン開発は現状私が一人で請け負っていま�
 
 # 連絡先
 discord:redshirt#3338  
-twitter:@redshirtMC  
-(https://twitter.com/redshirtMC)
+twitter:[@redshirtMC](https://twitter.com/redshirtMC)  
