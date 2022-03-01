@@ -9,6 +9,7 @@
 
 ## 各プラグインの仕様
 それぞれ以下のページに記述があります。  
+[GrowthAPI](https://github.com/RedShirt53072/PrinceServer/blob/main/GrowthAPI.md)  
 [DimManager](https://github.com/RedShirt53072/PrinceServer/blob/main/DimManager.md)  
 [UsefulShulker](https://github.com/RedShirt53072/PrinceServer/blob/main/UsefulShulker.md)  
 [TradeManager](https://github.com/RedShirt53072/PrinceServer/blob/main/TradeManager.md)  
