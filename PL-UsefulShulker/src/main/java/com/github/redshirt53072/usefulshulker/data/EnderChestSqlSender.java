@@ -7,13 +7,13 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 import com.github.redshirt53072.growthapi.database.SQLSender;
+import com.github.redshirt53072.usefulshulker.UsefulShulker;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
-import com.github.redshirt53072.growthapi.BaseAPI;
 
 class EnderChestSqlSender extends SQLSender{
 	public EnderChestSqlSender(Connection connect) {
-    	super(connect,"player_enderchest",BaseAPI.getInstance());
+    	super(connect,"player_enderchest",UsefulShulker.getInstance());
     }
 	
 	public void init(UUID player) {
@@ -40,9 +40,13 @@ class EnderChestSqlSender extends SQLSender{
             statement.setString(16, data);
             statement.setString(18, data);
             
-            statement.executeUpdate();
+            int result = statement.executeUpdate();
+            
+            if(result > 0) {
+            	super.logInfo("INSERTALL " + player + "; result : " + result);
+            }
         } catch (SQLException e) {
-            super.logSevere("INSERT " + player,e);
+            super.logSevere("INSERTALL " + player,e);
         }
 	}
 	
@@ -97,4 +101,5 @@ class EnderChestSqlSender extends SQLSender{
         }
     	return null;
     }
+    
 }

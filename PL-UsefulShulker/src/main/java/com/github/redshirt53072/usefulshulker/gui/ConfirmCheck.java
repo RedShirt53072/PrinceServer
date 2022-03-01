@@ -10,6 +10,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import com.github.redshirt53072.growthapi.gui.ChildGui;
 import com.github.redshirt53072.growthapi.item.ItemBuilder;
 import com.github.redshirt53072.growthapi.message.MessageManager;
+import com.github.redshirt53072.growthapi.message.TextBuilder;
 import com.github.redshirt53072.growthapi.money.MoneyManager;
 import com.github.redshirt53072.usefulshulker.UsefulShulker;
 import com.github.redshirt53072.usefulshulker.data.ECLock;
@@ -33,12 +34,17 @@ public class ConfirmCheck  extends ChildGui{
     			player.playSound(player.getLocation(), Sound.BLOCK_BEACON_POWER_SELECT, 1,1);
     			ECLock.setPage(player,payPage);
     			MoneyManager.remove(player, cost);
-    			MessageManager.sendImportant(ChatColor.GOLD.toString() + cost + "Ɇ" + ChatColor.WHITE + "を使用してエンダーチェストが" + payPage + "ページまで拡張されました。", player);
+    			MessageManager.sendImportant(new TextBuilder(ChatColor.WHITE)
+    					.addMoneyText(cost)
+    					.addText("を使用してエンダーチェストが")
+    					.addNumText(payPage, "ページ")
+    					.addText("まで拡張されました。")
+    					.build(), player);
     			close();
         		return true;
     		}
     		player.playSound(player.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1,(float)0.5);
-    		MessageManager.sendImportant("Ɇが足りないため、エンダーチェストの拡張ができません。 所持:" + ChatColor.GOLD + nowEme + "Ɇ" + ChatColor.WHITE + "/必要:" + ChatColor.GOLD +  cost + "Ɇ", player);
+    		MessageManager.sendImportant(new TextBuilder(ChatColor.WHITE).addText("Ɇが足りないため、エンダーチェストの拡張ができません。 所持:").addMoneyText(nowEme).addText("/必要:").addMoneyText(cost).build(), player);
     		close();
         	return true;
     	}
@@ -50,14 +56,18 @@ public class ConfirmCheck  extends ChildGui{
     	return true;
     }
     
+    
 	@Override
 	public void onRegister() {
-    	inv = Bukkit.createInventory(null, 27, payPage + "ページまで拡張しますか？");
+    	inv = Bukkit.createInventory(null, 27, TextBuilder.plus(String.valueOf(payPage),"ページまで拡張しますか？"));
     	
 		cost = EnderGui.calcCost(payPage, player);
 
-		inv.setItem(11, new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setName(ChatColor.GOLD.toString() + cost + "Ɇ" + ChatColor.WHITE + "支払って確定する").setModelData(3400).build());
-		inv.setItem(15, new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setName(ChatColor.WHITE + "キャンセルする").setModelData(3401).build());
+		inv.setItem(11, new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setName(new TextBuilder(ChatColor.WHITE)
+				.addMoneyText(cost)
+				.addText("支払って確定する")
+				.build()).setModelData(3400).build());
+		inv.setItem(15, new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setName(TextBuilder.quickBuild(ChatColor.WHITE,"キャンセルする")).setModelData(3401).build());
 		
 		player.openInventory(inv);
 		player.playSound(player.getLocation(), Sound.BLOCK_BEACON_ACTIVATE, 1,1);

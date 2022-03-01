@@ -6,25 +6,26 @@ import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.Sound;
-import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 import com.github.redshirt53072.growthapi.gui.Gui;
 import com.github.redshirt53072.growthapi.item.ItemBuilder;
+import com.github.redshirt53072.growthapi.message.TextBuilder;
 import com.github.redshirt53072.growthapi.player.PlayerManager;
 import com.github.redshirt53072.usefulshulker.UsefulShulker;
 import com.github.redshirt53072.usefulshulker.data.ECLock;
 import com.github.redshirt53072.usefulshulker.data.EnderChest;
 
 public class OpEnderGui extends Gui{
-	private static List<Player> editPlayers = new ArrayList<Player>();
+	private static List<OfflinePlayer> editPlayers = new ArrayList<OfflinePlayer>();
 	
 	private int openedPage = 1;
-	private Player target; 
+	private OfflinePlayer target; 
 	private boolean editMode; 
 	
-	public OpEnderGui(Player target,boolean editMode) {
+	public OpEnderGui(OfflinePlayer target,boolean editMode) {
     	super(UsefulShulker.getInstance());
     	this.target = target;
     	this.editMode = editMode;
@@ -33,7 +34,7 @@ public class OpEnderGui extends Gui{
     	}
 	}
 	
-	public static boolean isOpenedPlayer(Player player) {
+	public static boolean isOpenedPlayer(OfflinePlayer player) {
 		return editPlayers.contains(player);
 	}
 	
@@ -46,16 +47,17 @@ public class OpEnderGui extends Gui{
 			ArrayList<String> lore = new ArrayList<String>();
 			if(openedPage == index) {
 				model -= 10;
-				text = text + ChatColor.YELLOW + "<選択中>";
+				text = new TextBuilder(text,ChatColor.WHITE).addColorText(ChatColor.YELLOW,"<選択中>").build();
 			}
 			if(lockedPage < index) {
 				model += 10;
-				text = text + ChatColor.RED + "<未開放>";
-				lore.add(ChatColor.WHITE + "合計" + ChatColor.GOLD + EnderGui.calcCost(index,target) + "Ɇ" + ChatColor.WHITE + "でこのスロットを開放できます。");
+				text = new TextBuilder(text,ChatColor.WHITE).addColorText(ChatColor.RED, "<未開放>").build();
+				lore.add(new TextBuilder(ChatColor.WHITE).addText("合計").addMoneyText(EnderGui.calcCost(index,target)).addText("でこのスロットを開放できます。").build());
 			}
 			inv.setItem(index + 26, new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setLore(lore).setModelData(model).setName(text).build());
 		}
 	}
+	
 	
     @Override
     public boolean onClick(InventoryClickEvent event){
@@ -92,7 +94,7 @@ public class OpEnderGui extends Gui{
     
 	@Override
 	public void onRegister() {
-    	inv = Bukkit.createInventory(null, 36, target.getName() + "-" + (editMode ? "編集モード" : "閲覧モード"));
+    	inv = Bukkit.createInventory(null, 36, TextBuilder.plus(target.getName(),"-",(editMode ? "編集モード" : "閲覧モード")));
     	
     	new EnderChest().openLoad(target, inv, openedPage);
     	

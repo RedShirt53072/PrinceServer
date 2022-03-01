@@ -5,13 +5,13 @@ import java.util.logging.Level;
 
 import com.github.redshirt53072.growthapi.BaseAPI;
 import com.github.redshirt53072.growthapi.message.LogManager;
+import com.github.redshirt53072.growthapi.message.TextBuilder;
 import com.github.redshirt53072.growthapi.player.PlayerManager;
 import com.github.redshirt53072.growthapi.server.GrowthPlugin;
-import com.github.redshirt53072.growthapi.server.GrowthPluginManager;
-import com.github.redshirt53072.growthapi.server.GrowthPluginManager.StopReason;
-import com.github.redshirt53072.usefulshulker.command.ECOpCommand;
+import com.github.redshirt53072.growthapi.server.PluginManager;
+import com.github.redshirt53072.growthapi.server.PluginManager.StopReason;
 import com.github.redshirt53072.usefulshulker.command.ECSubCommand;
-import com.github.redshirt53072.usefulshulker.command.EmeraldCommand;
+import com.github.redshirt53072.usefulshulker.command.BankCommand;
 import com.github.redshirt53072.usefulshulker.data.ECLock;
 import com.github.redshirt53072.usefulshulker.data.EnderChest;
 
@@ -36,37 +36,32 @@ public final class UsefulShulker extends GrowthPlugin{
 		name = "UsefulShulker";
 		version = "3.0.0";
 		plugin = this;
-		LogManager.registerLogger(this);
-		this.saveDefaultConfig();
+		PluginManager.registerApi(plugin,true);
 		
 		
 		//依存チェック
 		if(!BaseAPI.getInstance().checkVersion("3.0.0")) {
 			LogManager.logError("前提プラグイン(GrowthAPI)のバージョンが正しくありません。", this, new Throwable(), Level.SEVERE);
-			GrowthPluginManager.stopServer("プラグインバージョンの不整合による", StopReason.ERROR);
+			PluginManager.stopServer("プラグインバージョンの不整合による", StopReason.ERROR);
 		}
 		
 		//sql
-		if(!BaseAPI.canUseMySQL()) {
-			LogManager.logError("UsefulShulkerではMySQLデータベースの使用が必須ですが、現在無効化されています", this, new Throwable(), Level.SEVERE);
-			GrowthPluginManager.stopServer("前提機能の無効化による", GrowthPluginManager.StopReason.ERROR);
-		}
 		new ECLock().reload();
 		
 		//config
 		
 		//command
 		ECSubCommand.register();
-		ECOpCommand.register();
 
-		this.getCommand("emerald").setExecutor(new EmeraldCommand());
+		this.getCommand("bank").setExecutor(new BankCommand());
 		
 		//listener
 		new PlayerAction();
 		PlayerManager.registerInit(new EnderChest());
+		//PlayerManager.registerInit(new MoveEnderChest());
 		
 		//message
-		LogManager.logInfo(getPluginName() + "を読み込みました", this, Level.INFO);
+		LogManager.logInfo(TextBuilder.plus(getPluginName(),"を読み込みました"), this, Level.INFO);
 	}
 	
 	
@@ -75,7 +70,7 @@ public final class UsefulShulker extends GrowthPlugin{
 	 */
 	@Override
 	public void onDisable() {
-		LogManager.logInfo(getPluginName() + "を終了しました", this, Level.INFO);	
+		LogManager.logInfo(TextBuilder.plus(getPluginName(),"を終了しました"), this, Level.INFO);	
 	}
 	
 	

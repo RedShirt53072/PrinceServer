@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.logging.Level;
 
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import com.github.redshirt53072.growthapi.BaseAPI;
@@ -17,7 +18,7 @@ public class ECLock extends SQLInterface{
 	public ECLock() {
 		super(BaseAPI.getInstance());
 	}
-	private void save(Player player,int page){
+	private void save(OfflinePlayer player,int page){
 		UUID uuid = player.getUniqueId();
 		new Thread() {
             @Override
@@ -42,7 +43,7 @@ public class ECLock extends SQLInterface{
             }
     	}.start();
 	}
-	public static void setPage(Player player,int page) {
+	public static void setPage(OfflinePlayer player,int page) {
 		if(page > 0 && page < 10) {	
 			new ECLock().save(player, page);
 			data.replace(player.getUniqueId(), page);
@@ -51,7 +52,7 @@ public class ECLock extends SQLInterface{
 		LogManager.logInfo(player.getName() + "のエンダーチェストアンロックページデータベースに不正な値を保存しようとしています。 値：" + page, UsefulShulker.getInstance(), Level.WARNING);
 	}
 	
-	public static int getPage(Player player) {
+	public static int getPage(OfflinePlayer player) {
 		Integer result = data.get(player.getUniqueId());
 		if(result == null) {
 			new ECLock().save(player, 1);

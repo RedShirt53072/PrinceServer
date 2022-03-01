@@ -35,6 +35,8 @@ public class ShulkerGui extends Gui{
     	player.playSound(player.getLocation(), Sound.BLOCK_SHULKER_BOX_OPEN, 1,1);
     	
 	}
+	
+	
 	@Override
 	public boolean onClick(InventoryClickEvent event) {
 		ItemStack item = event.getCurrentItem();

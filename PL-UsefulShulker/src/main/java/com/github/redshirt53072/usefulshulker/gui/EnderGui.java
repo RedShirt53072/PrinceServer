@@ -5,12 +5,13 @@ import java.util.ArrayList;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.Sound;
-import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 import com.github.redshirt53072.growthapi.gui.Gui;
 import com.github.redshirt53072.growthapi.item.ItemBuilder;
+import com.github.redshirt53072.growthapi.message.TextBuilder;
 import com.github.redshirt53072.growthapi.money.MoneyManager;
 import com.github.redshirt53072.growthapi.player.PlayerManager;
 import com.github.redshirt53072.usefulshulker.UsefulShulker;
@@ -24,7 +25,7 @@ public class EnderGui extends Gui{
     	super(UsefulShulker.getInstance());
     }
     
-	static public int calcCost(int slot,Player player) {
+	static public int calcCost(int slot,OfflinePlayer player) {
 		int unlock = ECLock.getPage(player);
 		int totalCost = 0;
 		
@@ -40,20 +41,21 @@ public class EnderGui extends Gui{
     	int unlockedPage = ECLock.getPage(player);
     	for(int index = 1;index < 10;index ++) {
 			int model = 3010 + index;
-			String text = ChatColor.WHITE.toString() + index + "ページ";
+			String text = TextBuilder.quickBuild(ChatColor.WHITE,String.valueOf(index),"ページ");
 			ArrayList<String> lore = new ArrayList<String>();
 			if(openedPage == index) {
 				model -= 10;
-				text = text + ChatColor.YELLOW + "<選択中>";
+				text = new TextBuilder(text,ChatColor.WHITE).addColorText(ChatColor.YELLOW,"<選択中>").build();
 			}
 			if(unlockedPage < index) {
 				model += 10;
-				text = text + ChatColor.RED + "<未開放>";
-				lore.add(ChatColor.WHITE + "合計" + ChatColor.GOLD + calcCost(index,player) + "Ɇ" + ChatColor.WHITE + "でこのスロットを開放できます。");
+				text = new TextBuilder(text,ChatColor.WHITE).addColorText(ChatColor.RED, "<未開放>").build();
+				lore.add(new TextBuilder(ChatColor.WHITE).addText("合計").addMoneyText(calcCost(index,player)).addText("でこのスロットを開放できます。").build());
 			}
 			inv.setItem(index + 26, new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setLore(lore).setModelData(model).setName(text).build());
 		}
 	}
+	
 	
     @Override
     public boolean onClick(InventoryClickEvent event){

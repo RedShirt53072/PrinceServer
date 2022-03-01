@@ -9,24 +9,21 @@ import java.util.Map;
 import java.util.UUID;
 
 import com.github.redshirt53072.growthapi.database.SQLSender;
-import com.github.redshirt53072.growthapi.BaseAPI;
+import com.github.redshirt53072.usefulshulker.UsefulShulker;
 
 class ECLockSqlSender extends SQLSender{
 	public ECLockSqlSender(Connection connect) {
-    	super(connect,"pl_ec_unlocked_page",BaseAPI.getInstance());
+    	super(connect,"pl_ec_unlocked_page",UsefulShulker.getInstance());
     }
 	
 	public void insert(UUID player,int page) {
         try (PreparedStatement statement = connectData.prepareStatement(
-        		"INSERT INTO pl_ec_unlocked_page (uuid, page) VALUES (?,?);"
+        		"INSERT IGNORE INTO pl_ec_unlocked_page (uuid, page) VALUES (?,?);"
         )){
             statement.setString(1, player.toString());
             statement.setInt(2, page);
             
-            int result = statement.executeUpdate();
-            if(result != 1) {
-            	super.logWarning("INSERT " + player);
-            }
+            statement.executeUpdate();
         } catch (SQLException e) {
             super.logSevere("INSERT " + player,e);
         }

@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
 import com.github.redshirt53072.growthapi.message.MessageManager;
+import com.github.redshirt53072.growthapi.message.SoundManager;
 import com.github.redshirt53072.growthapi.player.PlayerManager;
 import com.github.redshirt53072.usefulshulker.gui.EnderGui;
 import com.github.redshirt53072.usefulshulker.gui.OpEnderGui;
@@ -16,6 +17,7 @@ import com.github.redshirt53072.usefulshulker.gui.ShulkerGui;
 
 import org.bukkit.event.block.Action;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -47,6 +49,10 @@ public final class PlayerAction implements Listener {
 	    	}
 			event.setCancelled(true);
 	    	if(!player.hasPermission(Bukkit.getPluginManager().getPermission("enderchest.open"))) {
+	    		return;
+	    	}
+	    	if(player.getGameMode().equals(GameMode.CREATIVE)) {
+	    		SoundManager.sendCancel(player);
 	    		return;
 	    	}
 	    	if(PlayerManager.isAsyncLocked(player,"ec")) {
@@ -95,10 +101,14 @@ public final class PlayerAction implements Listener {
     	    	if(!player.hasPermission(Bukkit.getPluginManager().getPermission("enderchest.open"))) {
     	    		return true;
     	    	}
+    	    	if(player.getGameMode().equals(GameMode.CREATIVE)) {
+    	    		SoundManager.sendCancel(player);
+    	    		return true;
+    	    	}
     	    	if(PlayerManager.isAsyncLocked(player,"ec")) {
     	    		return true;
     	    	}
-
+    	    	
     	    	if(OpEnderGui.isOpenedPlayer(player)) {
     	    		MessageManager.sendSpecial("現在メンテナンスのため、一時的にエンダーチェストが開けなくなっています。", player);
     	    		MessageManager.sendSpecial("数分待ってもこのメッセージが表示される場合は運営にご報告ください。", player);

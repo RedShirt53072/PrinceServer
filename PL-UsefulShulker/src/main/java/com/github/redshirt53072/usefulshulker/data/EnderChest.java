@@ -3,6 +3,7 @@ package com.github.redshirt53072.usefulshulker.data;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
@@ -17,7 +18,7 @@ public class EnderChest extends SQLInterface implements InitListener{
 	public EnderChest() {
 		super(BaseAPI.getInstance());
 	}
-	public void closeSave(Player player,Inventory inv,int page){
+	public void closeSave(OfflinePlayer player,Inventory inv,int page){
 		PlayerManager.addAsyncLock("ec", player);
 		UUID uuid = player.getUniqueId();
 		String playerData = Serializer.toJson(inv,0,26);
@@ -37,7 +38,7 @@ public class EnderChest extends SQLInterface implements InitListener{
     	}.start();
 	}
 	
-	public void openLoad(Player player,Inventory inv,int page) {
+	public void openLoad(OfflinePlayer player,Inventory inv,int page) {
 		UUID uuid = player.getUniqueId();
 		PlayerManager.addAsyncLock("ec", player);
 		new Thread() {
@@ -58,7 +59,7 @@ public class EnderChest extends SQLInterface implements InitListener{
             }
     	}.start();
 	}
-	public void pageChange(Player player,Inventory inv,int oldPage,int newPage) {
+	public void pageChange(OfflinePlayer player,Inventory inv,int oldPage,int newPage) {
 		UUID uuid = player.getUniqueId();
 		String playerData = Serializer.toJson(inv,0,26);
 		PlayerManager.addAsyncLock("ec", player);
@@ -85,7 +86,6 @@ public class EnderChest extends SQLInterface implements InitListener{
 	@Override
 	public void onInit(Player player) {
 		UUID uuid = player.getUniqueId();
-		
 		new Thread() {
             @Override
             public void run() {
