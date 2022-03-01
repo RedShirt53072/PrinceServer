@@ -6,107 +6,113 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.World;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.World.Environment;
 import org.bukkit.entity.Player;
 
 import com.github.redshirt53072.growthapi.database.SQLInterface;
+import com.github.redshirt53072.growthapi.player.InitListener;
+import com.github.redshirt53072.growthapi.player.LogoutListener;
+import com.github.redshirt53072.growthapi.player.PlayerManager;
 import com.github.redshirt53072.growthapi.server.EmergencyListener;
-import com.github.redshirt53072.growthapi.util.DataFolder;
 import com.github.redshirt53072.dimmanager.DimManager;
-import com.github.redshirt53072.dimmanager.config.DimConfig;
 import com.github.redshirt53072.dimmanager.data.DimData.DimAllData;
 
-public class WorldManager extends SQLInterface implements EmergencyListener{
-	private static List<String> worlds = new ArrayList<String>();
-	private static List<String> allDims = new ArrayList<String>();
+public class WorldManager extends SQLInterface implements EmergencyListener,InitListener,LogoutListener{
+	private static List<DimData> worlds = new ArrayList<DimData>();
 	
 	private static DimAllData dimData;
-	private static UUID normal;
 	
 	public WorldManager() {
 		super(DimManager.getInstance());
 	}
-	
-	public void login(Player p) {
+	@Override
+	public void onInit(Player p) {
 		//sql
 		new Thread() {
             @Override
             public void run() {
             	connect();
             	WorldSqlSender sender = new WorldSqlSender(connectData);
-        		Location loc = sender.read(p.getUniqueId(), "normal");
-        		if(loc == null) {
-        			sender.insert("normal", p.getUniqueId(), normal);
+        		
+        		for(DimData dd : dimData.getDimData()){
+        			sender.insert(dd.getName(), p.getUniqueId(), dd.getLocation());
         		}
         		close();
             }
     	}.start();
 	}
+	@Override
+	public void onLogout(Player p) {
+		saveNormal(p);
+	}
 	
-	public void logout(Player p) {
+	public void saveNormal(Player p) {
 		//sql
 		if(!p.getWorld().getEnvironment().equals(Environment.CUSTOM)) {
-			UUID uuid = p.getUniqueId();
-			Location loc = p.getLocation().clone();
-			new Thread() {
-	            @Override
-	            public void run() {
-	            	connect();
-	            	WorldSqlSender sender = new WorldSqlSender(connectData);
-	        		sender.update("normal", uuid,loc);
-	        		close();
-	            }
-	    	}.start();
+			writeLoc(p,"normal",p.getLocation());
 		}
 	}
 	
 	@Override
 	public void onEmergency() {
 		for(Player p : Bukkit.getOnlinePlayers()){
-			logout(p);
+			saveNormal(p);
 		}
 	}
 	
-	public Location readLoc(Player p) {
+	public Location readLoc(OfflinePlayer p,String worldName) {
 		connect();
     	WorldSqlSender sender = new WorldSqlSender(connectData);
-		Location loc = sender.read(p.getUniqueId(), "normal");
+		Location loc = sender.read(p.getUniqueId(), worldName);
 		
 		close();
     	return loc;
 	}
 	
+	public void writeLoc(Player p,String worldName,Location loc) {
+		Location loc2 = loc.clone();
+		UUID uuid = p.getUniqueId();
+		PlayerManager.addAsyncLock("dim", p);
+		new Thread() {
+            @Override
+            public void run() {
+            	connect();
+            	WorldSqlSender sender = new WorldSqlSender(connectData);
+        		sender.update(worldName,uuid, loc2);
+        		close();
+        		PlayerManager.removeAsyncLock("dim", p);
+            }
+		}.start();
+	}
+	
     public static void reload() {
     	//configから読み込み
     	dimData = DimConfig.reload();
-    	allDims = new ArrayList<String>();
-    	for(DimData dd : dimData.getDimData()){
-    		allDims.add(dd.getName());
-    	}
-    	allDims.add("normal");
     	
-    	worlds = new ArrayList<String>();
+    	worlds = new ArrayList<DimData>();
     	for(DimData dd : dimData.getDimData()){
-    		if(dd.isVisible()) {	
-    			worlds.add(dd.getName());
+    		if(dd.isVisible()) {
+    			worlds.add(dd);
     	    }
     	}
-    	worlds.add("normal");
-    	
-    	DataFolder<World> world = new DataFolder<World>();
-		Bukkit.getWorlds().forEach(w ->{if(w.getEnvironment().equals(Environment.NORMAL)) {
-			world.setData(w);
-		}});
-		normal = world.getData().getUID();
-    }
-    
-    public static UUID getNormal() {
-    	return normal;
     }
     
     public static DimData getStart() {
     	return dimData.getStart();
+    }
+    
+    public static DimData getNormal() {
+    	for(DimData dd : dimData.getDimData()){
+    		if(dd.getName().equals("normal")) {
+    			return dd;
+    		}
+    	};
+    	return null;
+    }
+    
+    public static List<DimData> getHomeData() {
+    	return dimData.getHomeDim();
     }
     
     public static DimData getDimData(String name) {
@@ -127,13 +133,11 @@ public class WorldManager extends SQLInterface implements EmergencyListener{
     	return null;
     }
     
-    public static List<String> getWorlds() {
+    public static List<DimData> getWorlds() {
     	return worlds;
     }
     
-    public static List<String> getAllDims() {
-    	return allDims;
+    public static List<DimData> getAllDims() {
+    	return dimData.getDimData();
     }
-    
-    
 }
