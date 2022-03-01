@@ -86,7 +86,10 @@ configに登録があれば、メンテナンス時以外でもエラーログ�
 からそれぞれのプラグインの管理コマンドにアクセスできます。  
 コンソールはもちろんのこと、growth.opがあればプレイヤーからでも実行できます。  
 具体的なサブコマンドはそれぞれ別のページにまとめてあります。
-* DimManager
+* [GrowthAPI](https://github.com/RedShirt53072/PrinceServer/blob/main/GrowthAPI.md)  
+* [DimManager](https://github.com/RedShirt53072/PrinceServer/blob/main/DimManager.md)  
+* [UsefulShulker](https://github.com/RedShirt53072/PrinceServer/blob/main/UsefulShulker.md)  
+* [TradeManager](https://github.com/RedShirt53072/PrinceServer/blob/main/TradeManager.md)  
 
 
 ## コンソール用コマンド一覧
