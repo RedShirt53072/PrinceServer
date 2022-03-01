@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.MerchantRecipe;
 
 import com.github.redshirt53072.growthapi.config.ConfigManager;
+import com.github.redshirt53072.growthapi.message.TextBuilder;
 import com.github.redshirt53072.trademanager.TradeManager;
 
 public final class TradeConfig {
@@ -40,9 +41,9 @@ public final class TradeConfig {
 		ConfigManager manager = new ConfigManager(TradeManager.getInstance(),"trades","data.yml");
 		manager.deleteData(path);
 		List<LevelData> levels = data.getAllLevel();
-		manager.setData(path + ".version",data.getVersion());
+		manager.setData(TextBuilder.plus(path,".version"),data.getVersion());
 		for(int i = 0;i < levels.size() ;i++){
-			writeLevelData(manager,path + ".level" + (i + 1),levels.get(i));
+			writeLevelData(manager,TextBuilder.plus(path,".level",String.valueOf(i + 1)),levels.get(i));
 		}
 		manager.logConfig(path, "を更新しました。");
 	}
@@ -50,18 +51,18 @@ public final class TradeConfig {
 	private static void writeLevelData(ConfigManager manager,String path,LevelData data) {
 		List<MerchantRecipe> recipes = data.getAllRecipe();
 		for(int i = 0;i < recipes.size() ;i++){
-			writeRecipe(manager,path + ".trade" + (i + 1),recipes.get(i));
+			writeRecipe(manager,TextBuilder.plus(path,".trade",String.valueOf(i + 1)),recipes.get(i));
 		}
-		manager.setData(path + ".roll", data.getRoll());
+		manager.setData(TextBuilder.plus(path,".roll"), data.getRoll());
 	}
 	
 	private static void writeRecipe(ConfigManager manager,String path,MerchantRecipe recipe) {
 		List<ItemStack> buyItems = recipe.getIngredients();
 		for(int i = 0;i < Math.min(2,buyItems.size());i++) {
-			manager.setData(path + ".buy" + (i + 1), buyItems.get(i));	
+			manager.setData(TextBuilder.plus(path, ".buy",String.valueOf(i + 1)), buyItems.get(i));	
 		}
-		manager.setData(path + ".sell", recipe.getResult());
-		manager.setData(path + ".villagerexp", recipe.getVillagerExperience());
+		manager.setData(TextBuilder.plus(path,".sell"), recipe.getResult());
+		manager.setData(TextBuilder.plus(path,".villagerexp"), recipe.getVillagerExperience());
 	}
 	//config書き込み終了
 	
@@ -84,17 +85,17 @@ public final class TradeConfig {
 	
 	
 	private static ProfessionData readProfession(ConfigManager manager,String path) {
-		ProfessionData data = new ProfessionData(manager.getInt(path + ".version"));
+		ProfessionData data = new ProfessionData(manager.getInt(TextBuilder.plus(path,".version")));
 		for(int i = 1;i < 6;i++) {
-			data.addLevel(i,readLevelData(manager,path + ".level" + i));
+			data.addLevel(i,readLevelData(manager,TextBuilder.plus(path,".level",String.valueOf(i))));
 		}
 		return data;
 	}
 	
 	private static LevelData readLevelData(ConfigManager manager,String path) {
-		LevelData data = new LevelData(manager.getInt(path + ".roll"));
-		for(int i = 1;manager.containData(path + ".trade" + i);i++) {
-			MerchantRecipe recipe = readRecipe(manager,path + ".trade" + i);
+		LevelData data = new LevelData(manager.getInt(TextBuilder.plus(path,".roll")));
+		for(int i = 1;manager.containData(TextBuilder.plus(path,".trade",String.valueOf(i)));i++) {
+			MerchantRecipe recipe = readRecipe(manager,TextBuilder.plus(path,".trade",String.valueOf(i)));
 			if(recipe != null) {
 				data.addRecipe(recipe);	
 			}
@@ -105,10 +106,10 @@ public final class TradeConfig {
 	private static MerchantRecipe readRecipe(ConfigManager manager,String path) {
 		try {
 			List<ItemStack> buyItems = manager.getItemArray(path, "buy");
-			ItemStack sellItem = manager.getItemStack(path + ".sell");
+			ItemStack sellItem = manager.getItemStack(TextBuilder.plus(path,".sell"));
 			MerchantRecipe recipe = new MerchantRecipe(sellItem,2000000000);
 			recipe.setIngredients(buyItems);
-			recipe.setVillagerExperience(manager.getInt(path + ".villagerexp"));
+			recipe.setVillagerExperience(manager.getInt(TextBuilder.plus(path,".villagerexp")));
 			recipe.setExperienceReward(true);
 			recipe.setPriceMultiplier(0);
 			return recipe;
@@ -196,18 +197,5 @@ public final class TradeConfig {
 			LevelData ld = data.get(Integer.valueOf(level));
 			return ld;
 		}
-		/*
-		@Override
-		public ProfessionData clone() {
-			ProfessionData newData = new ProfessionData(version);
-			for(int i = 1;i < 6;i++) {
-				LevelData ld = data.get(Integer.valueOf(i));
-				if(ld == null) {
-					ld = new LevelData(0);
-				}
-				newData.addLevel(i,ld);
-			}
-			return newData;
-		}*/
 	}
 }

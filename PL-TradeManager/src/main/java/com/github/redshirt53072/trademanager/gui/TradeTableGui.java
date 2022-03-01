@@ -16,14 +16,15 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.MerchantRecipe;
 
 import com.github.redshirt53072.growthapi.gui.Gui;
+import com.github.redshirt53072.growthapi.item.ItemBuilder;
 import com.github.redshirt53072.growthapi.message.LogManager;
 import com.github.redshirt53072.growthapi.message.MessageManager;
 import com.github.redshirt53072.trademanager.TradeManager;
 import com.github.redshirt53072.trademanager.data.TradeConfig.LevelData;
 import com.github.redshirt53072.trademanager.data.TradeConfig.ProfessionData;
+import com.github.redshirt53072.trademanager.data.TradeData;
 import com.github.redshirt53072.trademanager.data.VillagerManager;
 import com.github.redshirt53072.trademanager.data.VillagerManager.ProfData;
-import com.github.redshirt53072.trademanager.data.VillagerManager.TradeData;
 
 public class TradeTableGui  extends Gui{
 	private ProfData prof;
@@ -39,29 +40,11 @@ public class TradeTableGui  extends Gui{
     	this.prof = prof;
     }
     
+    
     @Override
     public boolean onClick(InventoryClickEvent event){
     	int slot = event.getRawSlot();
 		int index = viewIndex + slot / 9 - 1;
-		/*
-		for(TradeData td : trades) {
-			LogManager.logInfo("level:" + td.getLevel() + ",exp:" + td.getVilExp(), plugin, Level.INFO);
-			if(td.getBuy1() == null) {	
-				LogManager.logInfo("buy1:null", plugin, Level.INFO);
-			}else {
-				LogManager.logInfo("buy1:" + td.getBuy1().getType().toString(), plugin, Level.INFO);
-			}
-			if(td.getBuy2() == null) {	
-				LogManager.logInfo("buy2:null", plugin, Level.INFO);
-			}else {
-				LogManager.logInfo("buy2:" + td.getBuy2().getType().toString(), plugin, Level.INFO);
-			}
-			if(td.getSell() == null) {	
-				LogManager.logInfo("sell:null", plugin, Level.INFO);
-			}else {
-				LogManager.logInfo("sell:" + td.getSell().getType().toString(), plugin, Level.INFO);
-			}
-		}*/
 		
 		if(slot < 0 || slot > 53) {
 			
@@ -101,8 +84,8 @@ public class TradeTableGui  extends Gui{
     		int version = VillagerManager.setProfessionData(prof.getProfession(), result);
     		warning = -1;
     		//職業表示
-    		inv.setItem(0, createItem(prof.getIconItem(),ChatColor.WHITE + prof.getName() + "(これまでに" + ChatColor.GOLD + version + "回" + ChatColor.WHITE + "更新済み)",null,1,null,0));
-    		inv.setItem(2, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE + "交易設定は最新の状態です",null,1,null,3400));
+    		inv.setItem(0, ItemBuilder.quickBuild(prof.getIconItem(),1,ChatColor.WHITE + prof.getName() + "(これまでに" + ChatColor.GOLD + version + "回" + ChatColor.WHITE + "更新済み)"));
+    		inv.setItem(2, new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setName(ChatColor.WHITE + "交易設定は最新の状態です").setModelData(3400).build());
     		player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1,0.5F);
     		return true;
     	}
@@ -167,7 +150,7 @@ public class TradeTableGui  extends Gui{
     		checkWarning();
     		render();
     		//総交易数
-        	inv.setItem(1, createItem(Material.BOOK,ChatColor.WHITE + prof.getName() + "の総交易数:" + ChatColor.GOLD + trades.size() + "種類",null,Math.max(trades.size(),1),null,0));
+        	inv.setItem(1, new ItemBuilder(Material.BOOK).setName(ChatColor.WHITE + prof.getName() + "の総交易数:" + ChatColor.GOLD + trades.size() + "種類").setAmount(Math.max(trades.size(),1)).build());
     		player.playSound(player.getLocation(), Sound.UI_CARTOGRAPHY_TABLE_TAKE_RESULT, 1,1);
     	}
     	if(line == 2 || line == 3 || line == 5) {
@@ -295,7 +278,7 @@ public class TradeTableGui  extends Gui{
         	checkWarning();
     		
     		//総交易数
-        	inv.setItem(1, createItem(Material.BOOK,ChatColor.WHITE + prof.getName() + "の総交易数:" + ChatColor.GOLD + trades.size() + "種類",null,Math.max(trades.size(),1),null,0));
+        	inv.setItem(1, new ItemBuilder(Material.BOOK).setName(ChatColor.WHITE + prof.getName() + "の総交易数:" + ChatColor.GOLD + trades.size() + "種類").setAmount(Math.max(trades.size(),1)).build());
         	
     		player.playSound(player.getLocation(), Sound.BLOCK_BEACON_DEACTIVATE, 1,1);
     		return true;
@@ -365,20 +348,20 @@ public class TradeTableGui  extends Gui{
 		
     	inv = Bukkit.createInventory(null, 54, prof.getName() + "の交易設定");
     	//職業表示
-		inv.setItem(0, createItem(prof.getIconItem(),ChatColor.WHITE + prof.getName() + "(これまでに" + ChatColor.GOLD + baseData.getVersion() + "回" + ChatColor.WHITE + "更新済み)",null,1,null,0));
+		inv.setItem(0, ItemBuilder.quickBuild(prof.getIconItem(),1,ChatColor.WHITE + prof.getName() + "(これまでに" + ChatColor.GOLD + baseData.getVersion() + "回" + ChatColor.WHITE + "更新済み)"));
 		//総交易数
-    	inv.setItem(1, createItem(Material.BOOK,ChatColor.WHITE + prof.getName() + "の総交易数:" + ChatColor.GOLD + trades.size() + "種類",null,Math.max(trades.size(),1),null,0));
+    	inv.setItem(1, ItemBuilder.quickBuild(Material.BOOK,Math.max(trades.size(),1),ChatColor.WHITE + prof.getName() + "の総交易数:" + ChatColor.GOLD + trades.size() + "種類"));
     	
 		//保存とキャンセル
-    	inv.setItem(2, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE + "交易設定は最新の状態です",null,1,null,3400));
-		inv.setItem(3, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE + "キャンセルして職業一覧に戻る",null,1,null,3401));
+    	inv.setItem(2, new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setName(ChatColor.WHITE + "交易設定は最新の状態です").setModelData(3400).build());
+		inv.setItem(3, new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setName(ChatColor.WHITE + "キャンセルして職業一覧に戻る").setModelData(3401).build());
 		
 		
 		//スクロールボタン
-		inv.setItem(17, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE +"上に5個スクロール",null,1,null,3312));
-		inv.setItem(26, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE +"上に1個スクロール",null,1,null,3302));
-		inv.setItem(44, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE +"下に1個スクロール",null,1,null,3303));
-		inv.setItem(53, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE +"下に5個スクロール",null,1,null,3313));
+		inv.setItem(17, new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setName(ChatColor.WHITE +"上に5個スクロール").setModelData(3312).build());
+		inv.setItem(26, new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setName(ChatColor.WHITE +"上に1個スクロール").setModelData(3302).build());
+		inv.setItem(44, new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setName(ChatColor.WHITE +"下に1個スクロール").setModelData(3303).build());
+		inv.setItem(53, new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setName(ChatColor.WHITE +"下に5個スクロール").setModelData(3313).build());
 		
 		unlockRender();
 		render();
@@ -409,12 +392,12 @@ public class TradeTableGui  extends Gui{
 		}
 		
 		if(warning == 0) {
-			inv.setItem(2, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE + "交易設定への編集を保存する",null,1,null,3404));	
+			inv.setItem(2, new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setName(ChatColor.WHITE + "交易設定への編集を保存する").setModelData(3404).build());	
 			return;
 		}
 		ArrayList<String> lore = new ArrayList<String>();
 		lore.add(ChatColor.RED.toString() + warning + "個の交易で購入もしくは売却アイテムが未設定になっています");
-		inv.setItem(2, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE + "交易設定への編集を保存する",lore,Math.max(1,Math.min(warning,64)),null,3406));
+		inv.setItem(2, new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setName(ChatColor.WHITE + "交易設定への編集を保存する").setLore(lore).setAmount(Math.max(1,Math.min(warning,64))).setModelData(3406).build());
 	}
 	
 	private void render() {
@@ -423,7 +406,7 @@ public class TradeTableGui  extends Gui{
 			if(line == 0 || line == 8) {
 				continue;
 			}
-			inv.setItem(9 + i, createItem(Material.WHITE_STAINED_GLASS_PANE," ",null,1,null,0));
+			setEmptyItem(i + 9);
 		}
 		//交易
 		if(viewIndex > trades.size()) {
@@ -435,11 +418,11 @@ public class TradeTableGui  extends Gui{
 		
 		//交易追加ボタン
 		for(int i = 1;i < 6;i++) {
-			inv.setItem(i * 9, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE.toString() + i + "レベルで開放される交易を追加する",null,Math.max(1,amounts[i - 1]),null,3030 + i));
+			inv.setItem(i * 9, new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setName(ChatColor.WHITE.toString() + i + "レベルで開放される交易を追加する").setAmount(Math.max(1,amounts[i - 1])).setModelData(3030 + i).build());
 		}
 		
 		//スクロール位置
-		inv.setItem(35, createItem(Material.BOOK,ChatColor.WHITE + "現在" + viewIndex + "～" +  Math.min(viewIndex + 4,trades.size()) + "個目の交易を表示中",null,Math.max(1,Math.min(viewIndex, 64)),null,0));
+		inv.setItem(35, ItemBuilder.quickBuild(Material.BOOK,Math.max(1,Math.min(viewIndex, 64)),ChatColor.WHITE + "現在" + viewIndex + "～" +  Math.min(viewIndex + 4,trades.size()) + "個目の交易を表示中"));
 		
 		for(int i = 0;i < 5;i++){
 			if(viewIndex + i > trades.size() || trades.size() == 0){
@@ -465,9 +448,9 @@ public class TradeTableGui  extends Gui{
     	
 		ArrayList<String> rollLore = new ArrayList<String>();
 		rollLore.add(ChatColor.WHITE + "設定可能な交易アンロック上限数の範囲:" + ChatColor.GOLD + "0 ～ 50");
-		rollLore.add(ChatColor.WHITE + "-左クリックで交易アンロック上限数を" + ChatColor.GOLD + "1" + ChatColor.WHITE + "増やす");
-		rollLore.add(ChatColor.WHITE + "-右クリックで交易アンロック上限数を" + ChatColor.GOLD + "1" + ChatColor.WHITE + "減らす");
-		rollLore.add(ChatColor.WHITE + "-Qもしくはミドルクリックで交易アンロック上限数を" + ChatColor.GOLD + "0" + ChatColor.WHITE + "に設定");
+		rollLore.add(ChatColor.GREEN + "" + ChatColor.UNDERLINE + "左クリック" + ChatColor.RESET + ChatColor.WHITE + "で交易アンロック上限数を" + ChatColor.GOLD + "1" + ChatColor.WHITE + "増やす");
+		rollLore.add(ChatColor.GREEN + "" + ChatColor.UNDERLINE + "右クリック" + ChatColor.RESET + ChatColor.WHITE + "で交易アンロック上限数を" + ChatColor.GOLD + "1" + ChatColor.WHITE + "減らす");
+		rollLore.add(ChatColor.GREEN + "" + ChatColor.UNDERLINE + "Qキーもしくはミドルクリック" + ChatColor.RESET + ChatColor.WHITE + "で交易アンロック上限数を" + ChatColor.GOLD + "0" + ChatColor.WHITE + "に設定");
     	int model = 3020;
 		if(roll > 0) {
 			model = 3000;
@@ -475,63 +458,59 @@ public class TradeTableGui  extends Gui{
 		if(roll > 50) {
 			roll = 50;
 		}
-    	inv.setItem(3 + level, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE + "交易アンロック上限数:" + roll,rollLore,Math.max(roll,1),null,model + level));	
+    	inv.setItem(3 + level, new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setName(ChatColor.WHITE + "交易アンロック上限数:" + roll).setLore(rollLore).setAmount(Math.max(roll,1)).setModelData(model + level).build());	
     }
 	
     private void setRecipe(int location,TradeData trade) {
     	ItemStack buy1 = trade.getBuy1();
     	ItemStack buy2 = trade.getBuy2();
     	if(buy1 == null) {
-    		inv.setItem(location * 9 + 2, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE + "( 空 )",null,1,null,3405));
+    		inv.setItem(location * 9 + 2, new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setName(ChatColor.WHITE + "( 空 )").setModelData(3405).build());
         }else if(buy1.getType().equals(Material.AIR)){
-        	inv.setItem(location * 9 + 2, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE + "( 空 )",null,1,null,3405));
+        	inv.setItem(location * 9 + 2, new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setName(ChatColor.WHITE + "( 空 )").setModelData(3405).build());
         }else {	
         	inv.setItem(location * 9 + 2, buy1);	
     	}
     	if(buy2 == null) {
-    		inv.setItem(location * 9 + 3, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE + "( 空 )",null,1,null,3405));    		
+    		inv.setItem(location * 9 + 3, new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setName(ChatColor.WHITE + "( 空 )").setModelData(3405).build());	
         }else if(buy2.getType().equals(Material.AIR)){
-        	inv.setItem(location * 9 + 3, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE + "( 空 )",null,1,null,3405));
+        	inv.setItem(location * 9 + 3, new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setName(ChatColor.WHITE + "( 空 )").setModelData(3405).build());
         }else {
         	inv.setItem(location * 9 + 3, buy2);
         }
 
-		inv.setItem(location * 9 + 4, createItem(Material.WHITE_STAINED_GLASS_PANE," ",null,1,null,3300));
+		inv.setItem(location * 9 + 4, new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setName(" ").setModelData(3300).build());
 		ItemStack sell = trade.getSell();
 		if(sell == null) {
-			inv.setItem(location * 9 + 5, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE + "( 空 )",null,1,null,3405));
+			inv.setItem(location * 9 + 5, new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setName(ChatColor.WHITE + "( 空 )").setModelData(3405).build());
 		}else if(sell.getType().equals(Material.AIR)){
-        	inv.setItem(location * 9 + 5, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE + "( 空 )",null,1,null,3405));
+        	inv.setItem(location * 9 + 5, new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setName(ChatColor.WHITE + "( 空 )").setModelData(3405).build());
         }else {
 			inv.setItem(location * 9 + 5, sell);
 		}
 		int exp = trade.getVilExp();
 		ArrayList<String> expLore = new ArrayList<String>();
 		expLore.add(ChatColor.WHITE + "設定可能な経験値の範囲:" + ChatColor.GOLD + "0EXP ～ 50EXP");
-		expLore.add(ChatColor.WHITE + "-左クリックで経験値を" + ChatColor.GOLD + "1EXP" + ChatColor.WHITE + "増やす");
-		expLore.add(ChatColor.WHITE + "-右クリックで経験値を" + ChatColor.GOLD + "5EXP" + ChatColor.WHITE + "増やす");
-		expLore.add(ChatColor.WHITE + "-Qもしくはミドルクリックで経験値を" + ChatColor.GOLD + "0EXP" + ChatColor.WHITE + "に設定");
+		expLore.add(ChatColor.GREEN + "" + ChatColor.UNDERLINE + "左クリック" + ChatColor.RESET + ChatColor.WHITE + "で経験値を" + ChatColor.GOLD + "1EXP" + ChatColor.WHITE + "増やす");
+		expLore.add(ChatColor.GREEN + "" + ChatColor.UNDERLINE + "右クリック" + ChatColor.RESET + ChatColor.WHITE + "で経験値を" + ChatColor.GOLD + "5EXP" + ChatColor.WHITE + "増やす");
+		expLore.add(ChatColor.GREEN + "" + ChatColor.UNDERLINE + "Qキーもしくはミドルクリック" + ChatColor.RESET + ChatColor.WHITE + "で経験値を" + ChatColor.GOLD + "0EXP" + ChatColor.WHITE + "に設定");
 		if(exp < 1) {
-			inv.setItem(location * 9 + 6, createItem(Material.GLASS_BOTTLE,ChatColor.WHITE + "村人への経験値:" + ChatColor.GOLD + "0EXP",expLore,1,null,0));
+			inv.setItem(location * 9 + 6, new ItemBuilder(Material.GLASS_BOTTLE).setName(ChatColor.WHITE + "村人への経験値:" + ChatColor.GOLD + "0EXP").setLore(expLore).build());
 		}else {
 			if(exp > 50) {
 				exp = 50;
 			}
-			inv.setItem(location * 9 + 6, createItem(Material.EXPERIENCE_BOTTLE,ChatColor.WHITE + "村人への経験値:" + ChatColor.GOLD + exp + "EXP",expLore,exp,null,0));
+			inv.setItem(location * 9 + 6, new ItemBuilder(Material.EXPERIENCE_BOTTLE).setName(ChatColor.WHITE + "村人への経験値:" + ChatColor.GOLD + exp + "EXP").setLore(expLore).setAmount(exp).build());
 		}
-		inv.setItem(location * 9 + 7, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE + "この交易を" + ChatColor.RED + "削除する",null,1,null,3402));
+		inv.setItem(location * 9 + 7, new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setName(ChatColor.WHITE + "この交易を" + ChatColor.RED + "削除する").setModelData(3402).build());
 		
 		int level = trade.getLevel();
 		if(sell != null) {
 			if(buy1 != null || buy2 != null) {
-				inv.setItem(location * 9 + 1, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE + "開放レベル:" + ChatColor.GOLD + level + "lv",null,1,null,3000 + level));		
+				inv.setItem(location * 9 + 1, new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setName(ChatColor.WHITE + "開放レベル:" + ChatColor.GOLD + level + "lv").setModelData(3000 + level).build());		
 				return;
 			}
 		}
-		inv.setItem(location * 9 + 1, createItem(Material.WHITE_STAINED_GLASS_PANE,ChatColor.WHITE + "開放レベル:" + ChatColor.GOLD + level + "lv",null,1,null,3010 + level));
+		inv.setItem(location * 9 + 1, new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setName(ChatColor.WHITE + "開放レベル:" + ChatColor.GOLD + level + "lv").setModelData(3010 + level).build());
     }
-    
-    
-    
-	
 }

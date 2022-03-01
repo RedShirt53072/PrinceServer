@@ -12,8 +12,10 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.github.redshirt53072.growthapi.gui.Gui;
+import com.github.redshirt53072.growthapi.item.ItemBuilder;
 import com.github.redshirt53072.growthapi.item.ItemTag;
 import com.github.redshirt53072.growthapi.item.ItemUtil;
+import com.github.redshirt53072.growthapi.message.TextBuilder;
 import com.github.redshirt53072.trademanager.TradeManager;
 import com.github.redshirt53072.trademanager.bundle.Bundle;
 
@@ -35,11 +37,11 @@ public class BundleGui extends Gui{
     	if(slot >= tag.getItems().size()) {
     		return true;
     	}
-    	ItemUtil.countItem(player, item, item.getAmount());
+    	ItemUtil.removeItem(player, item, item.getAmount());
     	Material mate = tag.getItems().get(slot);
     	if(!mate.equals(Material.AIR)) {
     		ItemStack nowItem = new ItemStack(mate);
-    		ItemUtil.giveItem(player, nowItem, item.getAmount());
+    		ItemUtil.giveItems(player, nowItem, item.getAmount());
     	}
 		close();
     	player.playSound(player.getLocation(), Sound.ITEM_BUNDLE_DROP_CONTENTS, 1,1);
@@ -55,7 +57,7 @@ public class BundleGui extends Gui{
     	int amount = item.getAmount();
     	
 		ArrayList<String> lore = new ArrayList<String>();
-		lore.add(ChatColor.WHITE + "クリックでこのアイテムを手に入れる");
+		lore.add(new TextBuilder(ChatColor.WHITE).addClick("クリック").addText("でこのアイテムを手に入れる").build());
     	
     	List<Material> items = tag.getItems();
     	for(int i = 0;i < 27;i++) {
@@ -63,15 +65,16 @@ public class BundleGui extends Gui{
     			if(items.get(i).equals(Material.AIR)) {
     				continue;
     			}
-        		inv.setItem(i, createItem(items.get(i),"", lore, amount, null, -1));
+        		inv.setItem(i, new ItemBuilder(items.get(i)).setAmount(amount).setLore(lore).build());
         		continue;
     		}
-    		inv.setItem(i, createItem(Material.BLACK_STAINED_GLASS_PANE ," ", null, 1, null, -1));
+    		inv.setItem(i, new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setName(" ").build());
     	}
     	
     	player.playSound(player.getLocation(), Sound.ITEM_BUNDLE_REMOVE_ONE, 1,1);
         player.openInventory(inv);
 	}
+	
 	@Override
 	public void onClose() {
         player.playSound(player.getLocation(), Sound.ITEM_BUNDLE_INSERT, 1,1);

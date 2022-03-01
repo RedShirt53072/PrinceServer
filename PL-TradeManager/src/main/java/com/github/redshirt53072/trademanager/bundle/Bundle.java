@@ -8,6 +8,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import com.github.redshirt53072.growthapi.item.ItemNBTLoader;
 import com.github.redshirt53072.growthapi.item.ItemTag;
+import com.github.redshirt53072.growthapi.message.TextBuilder;
 import com.github.redshirt53072.trademanager.TradeManager;
 import com.github.redshirt53072.trademanager.gui.BundleGui;
 
@@ -46,7 +47,7 @@ public class Bundle extends ItemNBTLoader {
     	ItemStack item = new ItemStack(Material.COMMAND_BLOCK);
     	ItemMeta meta = item.getItemMeta();
     	meta.setCustomModelData(3001);
-    	meta.setDisplayName(ChatColor.WHITE + tag.getName() + "の詰め合わせ");
+    	meta.setDisplayName(TextBuilder.quickBuild(ChatColor.WHITE,tag.getName(),"の詰め合わせ"));
     	item.setItemMeta(meta);
     	new Bundle(item).setType(tag);
     	return item;

@@ -38,6 +38,7 @@ public class TradeSubCommand implements SubCommand{
 		
 	}
 	
+	
 	@Override
     public void onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if(!(sender instanceof Player)) {
@@ -60,12 +61,17 @@ public class TradeSubCommand implements SubCommand{
 			MessageManager.sendSpecial("交易設定GUIを開きました。", p);
 			return;
 		case "getbundle" :
+			if(!p.getGameMode().equals(GameMode.CREATIVE)) {
+				MessageManager.sendSpecial(ChatColor.RED + "[error]クリエイティブモードにしてからもう一度コマンドを送信してください。", p);
+	        	return;
+			}
 			for(ItemTag it : ItemTag.values()){
 				p.getInventory().addItem(Bundle.getNewBox(it));
 			}
 			for(SpecialItems si : SpecialItems.values()){
 				p.getInventory().addItem(SpecialItem.getNewBox(si));
 			}
+			MessageManager.sendSpecial("全種類の詰め合わせを取り出しました。", p);
 			return;
 		case "toggle":
 			if(args.length < 3) {

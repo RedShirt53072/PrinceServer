@@ -5,9 +5,10 @@ import java.util.logging.Level;
 
 import com.github.redshirt53072.growthapi.BaseAPI;
 import com.github.redshirt53072.growthapi.message.LogManager;
+import com.github.redshirt53072.growthapi.message.TextBuilder;
 import com.github.redshirt53072.growthapi.server.GrowthPlugin;
-import com.github.redshirt53072.growthapi.server.GrowthPluginManager;
-import com.github.redshirt53072.growthapi.server.GrowthPluginManager.StopReason;
+import com.github.redshirt53072.growthapi.server.PluginManager;
+import com.github.redshirt53072.growthapi.server.PluginManager.StopReason;
 import com.github.redshirt53072.trademanager.bundle.BundleEvent;
 import com.github.redshirt53072.trademanager.command.TradeSubCommand;
 import com.github.redshirt53072.trademanager.data.VillagerManager;
@@ -32,13 +33,13 @@ public final class TradeManager extends GrowthPlugin{
 		//general
 		name = "TradeManager";
 		plugin = this;
-		version = "2.2.2";
-		LogManager.registerLogger(this);
-		this.saveDefaultConfig();
+		version = "3.0.0";
+		PluginManager.registerApi(plugin,false);
+
 		//依存チェック
-		if(!BaseAPI.getInstance().checkVersion("2.2.1")) {
+		if(!BaseAPI.getInstance().checkVersion("3.0.0")) {
 			LogManager.logError("前提プラグイン(GrowthAPI)のバージョンが正しくありません。", this, new Throwable(), Level.SEVERE);
-			GrowthPluginManager.stopServer("プラグインバージョンの不整合による", StopReason.ERROR);
+			PluginManager.stopServer("プラグインバージョンの不整合による", StopReason.ERROR);
 		}
 		
 		//config
@@ -50,7 +51,7 @@ public final class TradeManager extends GrowthPlugin{
 		new BundleEvent();
 		
 		//message
-		LogManager.logInfo(this.getPluginName() + "を読み込みました", this, Level.INFO);
+		LogManager.logInfo(TextBuilder.plus(this.getPluginName(),"を読み込みました"), this, Level.INFO);
 	}
 	
 	
@@ -59,7 +60,7 @@ public final class TradeManager extends GrowthPlugin{
 	 */
 	@Override
 	public void onDisable() {
-		LogManager.logInfo(this.getPluginName() + "を終了しました", this, Level.INFO);	
+		LogManager.logInfo(TextBuilder.plus(this.getPluginName(),"を終了しました"), this, Level.INFO);	
 	}
 	
 	

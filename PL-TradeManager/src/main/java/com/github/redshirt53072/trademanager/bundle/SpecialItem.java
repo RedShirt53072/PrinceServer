@@ -17,6 +17,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import com.github.redshirt53072.growthapi.item.ItemNBTLoader;
 import com.github.redshirt53072.growthapi.item.ItemUtil;
+import com.github.redshirt53072.growthapi.message.TextBuilder;
 import com.github.redshirt53072.growthapi.util.LootRoller;
 import com.github.redshirt53072.trademanager.TradeManager;
 
@@ -107,8 +108,8 @@ public class SpecialItem extends ItemNBTLoader {
     		
     		ench.setItemMeta(enchMeta);
 
-    		ItemUtil.countItem(p, item, 1);
-    		ItemUtil.giveItem(p, ench, 1);
+    		ItemUtil.removeItem(p, item, 1);
+    		ItemUtil.giveItem(p, ench);
     		p.playSound(p.getLocation(), Sound.ENTITY_ITEM_PICKUP, 1,1);
     		return;
     	case FIREWORK:
@@ -124,8 +125,8 @@ public class SpecialItem extends ItemNBTLoader {
     				.withFade(Color.fromRGB(new Random().nextInt(256),new Random().nextInt(256),new Random().nextInt(256)))
     				.build());
     		firework.setItemMeta(meta);
-    		ItemUtil.countItem(p, item, 1);
-    		ItemUtil.giveItem(p, firework, 1);
+    		ItemUtil.removeItem(p, item, 1);
+    		ItemUtil.giveItem(p, firework);
     		p.playSound(p.getLocation(), Sound.ENTITY_ITEM_PICKUP, 1,1);
     		return;
 		default:
@@ -137,12 +138,9 @@ public class SpecialItem extends ItemNBTLoader {
     	ItemStack item = new ItemStack(Material.COMMAND_BLOCK);
     	ItemMeta meta = item.getItemMeta();
     	meta.setCustomModelData(3001);
-    	meta.setDisplayName(ChatColor.WHITE + "ランダムな" + tag.getName());
+    	meta.setDisplayName(TextBuilder.quickBuild(ChatColor.WHITE,"ランダムな",tag.getName()));
     	item.setItemMeta(meta);
     	new SpecialItem(item).setType(tag);
     	return item;
     }
-    
-    
-    
 }
