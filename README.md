@@ -7,6 +7,12 @@
 ## 管理機能
 [こちら](https://github.com/RedShirt53072/PrinceServer/blob/main/AdminReadMe.md)に説明がありますので、目を通しておいてください。  
 
+## 各プラグインの仕様
+それぞれ以下のページに記述があります。
+[DimManager](https://github.com/RedShirt53072/PrinceServer/blob/main/DimManager.md)
+[UsefulShulker](https://github.com/RedShirt53072/PrinceServer/blob/main/UsefulShulker.md)
+[TradeManager](https://github.com/RedShirt53072/PrinceServer/blob/main/TradeManager.md)
+
 ## 前提環境
 Spigot 1.18.1  
 Vault 1.7  
