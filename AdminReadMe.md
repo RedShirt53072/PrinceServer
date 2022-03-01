@@ -87,15 +87,15 @@ configに登録があれば、メンテナンス時以外でもエラーログ�
 サーバーを停止します。
 
 ### /main
-* /main close
+* /main close  
 メンテナンスを開始します。
-* /main open
+* /main open  
 メンテナンスの終了を設定します。次の再起動後にメンテナンスは解除されます。
-* /main addop \<player\>
+* /main addop \<player\>  
 growth.opの権限をプレイヤーに付与します。プレイヤーは予めconfigに登録されている必要があります。
-* /main addnormal \<player\>
+* /main addnormal \<player\>  
 メンテナンス時ログイン権限をプレイヤーに付与します。プレイヤーは予めconfigに登録されている必要があります。
-* /main removeperm \<player\>
+* /main removeperm \<player\>  
 growth.op、ログイン権限、バニラOPなどの権限をプレイヤーから剝奪します。
 
 ### /OP
