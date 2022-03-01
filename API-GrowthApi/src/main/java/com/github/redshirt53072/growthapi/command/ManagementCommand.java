@@ -4,10 +4,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
+import org.bukkit.entity.Player;
+
+import com.github.redshirt53072.growthapi.BaseAPI;
+import com.github.redshirt53072.growthapi.message.LogManager;
+import com.github.redshirt53072.growthapi.message.MessageManager;
+import com.github.redshirt53072.growthapi.server.PluginManager;
+import com.github.redshirt53072.growthapi.server.Maintenance;
+import com.github.redshirt53072.growthapi.server.PluginManager.StopReason;
 
 
 /**
@@ -34,16 +43,32 @@ public final class ManagementCommand implements TabExecutor{
 	 */
 	@Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		if(args.length == 0) {
-        	return false;
-        }
-		if(args.length > 0) {
-
-			String arg = args[0];
-			subCommands.forEach((String name , SubCommand subCommand) -> {if(name.equals(arg)) {
-				subCommand.onCommand(sender, command, label, args);
-			}});
+		if(!Maintenance.isMain()) {
+			MessageManager.sendCommandError("現在メンテナンスが行われていません。", sender);
+			return true;
 		}
+		if(sender instanceof Player) {
+			Player p = (Player)sender;
+			if(!Maintenance.canOPCommand(p)) {
+				LogManager.logInfo(p.getName() + "はgrowth.opのパーミッションを不正に取得しています!",BaseAPI.getInstance(),Level.SEVERE);
+	    		PluginManager.kickPlayer(p, "OPパーミッションを取得する", StopReason.GRIEFING);
+				return true;
+			}	
+		}
+		
+		if(args.length == 0) {
+			MessageManager.sendCommandError("必要な項目が未記入です。", sender);
+			return true;
+		}
+		String arg = args[0];
+		for(String name : subCommands.keySet()) {
+			if(name.equals(arg)) {
+				subCommands.get(name).onCommand(sender, command, label, args);
+				return true;
+			}
+		}
+		
+		MessageManager.sendCommandError("無効なサブコマンドです。", sender);
 		return true;
     }
 	/**

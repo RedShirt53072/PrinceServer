@@ -8,13 +8,20 @@ import java.util.Map;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
 
+import com.github.redshirt53072.growthapi.player.LogoutListener;
 import com.github.redshirt53072.growthapi.server.EmergencyListener;
 
-public final class GuiManager implements EmergencyListener{
+public final class GuiManager implements EmergencyListener ,LogoutListener{
 	private static Map<Player,Gui> data = new HashMap<Player,Gui>();
 	private static List<Player> notClosePlayers = new ArrayList<Player>();
 	
+	public static void clearItem(Inventory inv,int min ,int max) {
+		for(int i = min;i <= max;i++) {
+			inv.clear(i);
+		}
+	}
 	
 	public static void openGui(Gui newGui,Player player) {
 		Gui old = getGui(player);
@@ -27,7 +34,7 @@ public final class GuiManager implements EmergencyListener{
 		return;
 	}
 	
-	private static Gui getGui(Player player) {
+	public static Gui getGui(Player player) {
 		Gui gui = data.get(player);
 		if(gui == null) {
 			return null;
@@ -66,6 +73,11 @@ public final class GuiManager implements EmergencyListener{
 		notClosePlayers.add(p);
 	}
 	
+	public static void remove(Player player) {
+		//BaseAPI.getInstance().getLogger().log(Level.INFO,"remove");	
+		data.remove(player);
+	}
+	
 	@Override
 	public void onEmergency() {
 		Collection<Gui> guiCols = data.values();
@@ -77,8 +89,11 @@ public final class GuiManager implements EmergencyListener{
 		data.clear();
 	}
 	
-	public static void remove(Player player) {
-		//BaseAPI.getInstance().getLogger().log(Level.INFO,"remove");	
-		data.remove(player);
+	@Override
+	public void onLogout(Player player) {
+		Gui gui = getGui(player);
+		if(gui != null) {
+			gui.onEmergency();
+		}
 	}
 }

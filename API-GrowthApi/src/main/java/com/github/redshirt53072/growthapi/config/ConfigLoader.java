@@ -8,6 +8,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import com.github.redshirt53072.growthapi.message.LogManager;
+import com.github.redshirt53072.growthapi.message.TextBuilder;
 import com.github.redshirt53072.growthapi.server.GrowthPlugin;
 /**
  * configの操作クラス
@@ -45,7 +46,7 @@ public final class ConfigLoader {
 	 */
 	public ConfigLoader(GrowthPlugin plugin, String dirName,String fileName) {
 		this.plugin = plugin;
-		this.fileName = dirName + "\\" + fileName;
+		this.fileName = TextBuilder.plus(dirName,"\\",fileName);
 		dirFile = new File(plugin.getDataFolder(), dirName);
 		configFile = new File(dirFile, fileName);
 	}

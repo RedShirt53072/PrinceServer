@@ -44,6 +44,7 @@ public enum ItemTag {
 			Material.LIME_CONCRETE_POWDER,
 			Material.LIGHT_GRAY_CONCRETE_POWDER)),
 	GLASS_PANE("ガラス板",getList(
+			Material.GLASS_PANE,
 			Material.BLACK_STAINED_GLASS_PANE,
 			Material.WHITE_STAINED_GLASS_PANE,
 			Material.BLUE_STAINED_GLASS_PANE,
@@ -59,9 +60,9 @@ public enum ItemTag {
 			Material.ORANGE_STAINED_GLASS_PANE,
 			Material.MAGENTA_STAINED_GLASS_PANE,
 			Material.LIME_STAINED_GLASS_PANE,
-			Material.LIGHT_GRAY_STAINED_GLASS_PANE,
-			Material.GLASS_PANE)),
+			Material.LIGHT_GRAY_STAINED_GLASS_PANE)),
 	GLASS("ガラス",getList(
+			Material.GLASS,
 			Material.BLACK_STAINED_GLASS,
 			Material.WHITE_STAINED_GLASS,
 			Material.BLUE_STAINED_GLASS,
@@ -77,8 +78,7 @@ public enum ItemTag {
 			Material.ORANGE_STAINED_GLASS,
 			Material.MAGENTA_STAINED_GLASS,
 			Material.LIME_STAINED_GLASS,
-			Material.LIGHT_GRAY_STAINED_GLASS,
-			Material.GLASS)),
+			Material.LIGHT_GRAY_STAINED_GLASS)),
 	TERRACOTTA("テラコッタ",new ArrayList<Material>(Tag.TERRACOTTA.getValues())),
 	GLAZED_TERRACOTTA("彩釉テラコッタ",getList(
 			Material.BLACK_GLAZED_TERRACOTTA,

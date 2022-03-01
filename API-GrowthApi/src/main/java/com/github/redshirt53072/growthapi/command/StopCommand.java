@@ -3,9 +3,10 @@ package com.github.redshirt53072.growthapi.command;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
-import com.github.redshirt53072.growthapi.server.GrowthPluginManager;
-import com.github.redshirt53072.growthapi.server.GrowthPluginManager.StopReason;
+import com.github.redshirt53072.growthapi.server.PluginManager;
+import com.github.redshirt53072.growthapi.server.PluginManager.StopReason;
 /**
  * デフォルトの/stopのコマンドを置き換えている
  * @author redshirt
@@ -17,7 +18,12 @@ public final class StopCommand implements CommandExecutor{
 	 */
 	@Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		GrowthPluginManager.stopServer("手動コマンドによる", StopReason.NORMAL);
+		if(sender instanceof Player) {
+			PluginManager.kickPlayer((Player)sender, "コンソールのみのコマンドの使用", StopReason.GRIEFING);
+			return true;
+		}
+		
+		PluginManager.stopServer("手動コマンドによる", StopReason.NORMAL);
 		return true;
     }
 }

@@ -12,6 +12,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
 import com.github.redshirt53072.growthapi.message.LogManager;
+import com.github.redshirt53072.growthapi.message.TextBuilder;
 import com.github.redshirt53072.growthapi.server.GrowthPlugin;
 
 /**
@@ -40,7 +41,7 @@ public final class ConfigManager  {
 	public ConfigManager(GrowthPlugin plugin,String fileName) {
 		this.plugin = plugin;
 		this.fileName = fileName;
-		this.filePath = plugin.getPluginName() + "/" + fileName;
+		this.filePath = TextBuilder.plus(plugin.getPluginName(),"/",fileName);
 		this.configLoader = new ConfigLoader(plugin,fileName);
 		this.config = configLoader.getConfig();
 	}
@@ -52,8 +53,8 @@ public final class ConfigManager  {
 	 */
 	public ConfigManager(GrowthPlugin plugin, String dirName,String fileName) {
 		this.plugin = plugin;
-		this.fileName = dirName + "\\" + fileName;;
-		this.filePath = plugin.getPluginName() + "/" + dirName + "/" + fileName;
+		this.fileName = TextBuilder.plus(dirName,"\\",fileName);
+		this.filePath = TextBuilder.plus(plugin.getPluginName(),"/",dirName,"/",fileName);
 		this.configLoader = new ConfigLoader(plugin, dirName,fileName);
 		this.config = configLoader.getConfig();
 	}
@@ -72,7 +73,7 @@ public final class ConfigManager  {
 	 */
 	public int getNextIndex(String path){
 		int i = 1;
-		while(containData(path + i)) {
+		while(containData(TextBuilder.plus(path,String.valueOf(i)))) {
 			i ++;
 		}
         return i;
@@ -89,7 +90,7 @@ public final class ConfigManager  {
 			return new HashSet<String>();
 		}
 		Set<String> keys = section.getKeys(false);
-		keys.removeIf(key -> !key.matches("^" + keyName + ".*"));
+		keys.removeIf(key -> !key.matches(TextBuilder.plus("^",keyName,".*")));
 		return keys;
     }
 	
@@ -166,7 +167,7 @@ public final class ConfigManager  {
 	public List<String> getStringArray(String path,String keyName){
 		List<String> results = new ArrayList<String>();
 		for(String key : getKeys(path,keyName)) {
-			String data = getString(path + "." + key);
+			String data = getString(TextBuilder.plus(path,".",key));
 			if(data == null) {
 				continue;
 			}
@@ -184,7 +185,7 @@ public final class ConfigManager  {
 	public List<Integer> getIntArray(String path,String keyName){
 		List<Integer> results = new ArrayList<Integer>();
 		for(String key : getKeys(path,keyName)) {
-			Integer data = getInt(path + "." + key);
+			Integer data = getInt(TextBuilder.plus(path,".",key));
 			if(data == null) {
 				continue;
 			}
@@ -202,7 +203,7 @@ public final class ConfigManager  {
 	public List<ItemStack> getItemArray(String path,String keyName){
 		List<ItemStack> results = new ArrayList<ItemStack>();
 		for(String key : getKeys(path,keyName)) {
-			ItemStack data = getItemStack(path + "." + key);
+			ItemStack data = getItemStack(TextBuilder.plus(path,".",key));
 			if(data == null) {
 				continue;
 			}
@@ -221,7 +222,7 @@ public final class ConfigManager  {
 	public List<Double> getDoubleArray(String path,String keyName){
 		List<Double> results = new ArrayList<Double>();
 		for(String key : getKeys(path,keyName)) {
-			Double data = getDouble(path + "." + key);
+			Double data = getDouble(TextBuilder.plus(path,".",key));
 			if(data == null) {
 				continue;
 			}
@@ -261,7 +262,7 @@ public final class ConfigManager  {
 	 * @param message メッセージ
 	 */
 	public void logWarning(String path,String message) {
-		LogManager.logError("[config]" + filePath + "#" + path + message, plugin, new Throwable(), Level.WARNING);
+		LogManager.logError(TextBuilder.plus("[config]",filePath,"#",path,message), plugin, new Throwable(), Level.WARNING);
 	}
 	
 	/**
@@ -272,7 +273,7 @@ public final class ConfigManager  {
 	 * 
 	 */
 	public void logException(String path,String message,Exception ex) {
-		LogManager.logError("[config]" + filePath + "#" + path + message, plugin, ex, Level.WARNING);
+		LogManager.logError(TextBuilder.plus("[config]",filePath,"#",path,message), plugin, ex, Level.WARNING);
 	}
 	
 	
@@ -282,6 +283,6 @@ public final class ConfigManager  {
 	 * @param message メッセージ
 	 */
 	public void logConfig(String path,String message) {
-		LogManager.logInfo(filePath + "#" + path + message, plugin, Level.CONFIG);
+		LogManager.logInfo(TextBuilder.plus(filePath,"#",path,message), plugin, Level.CONFIG);
 	}
 }

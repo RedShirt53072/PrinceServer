@@ -2,10 +2,13 @@ package com.github.redshirt53072.growthapi.message;
 
 
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.github.redshirt53072.growthapi.BaseAPI;
+import com.github.redshirt53072.growthapi.server.Maintenance;
 /**
  * プレイヤーにメッセージを送る際に使う
  * @author redshirt
@@ -20,7 +23,10 @@ public final class MessageManager {
 	 * @param player 対象プレイヤー
 	 */
 	public static void sendWarning(String text,CommandSender sender) {
-		sender.sendMessage(ChatColor.RED + "【警告】" + text);		
+		sender.sendMessage(new TextBuilder(ChatColor.RED).addText("【警告】",text).build());	
+		if(sender instanceof Player) {
+			SoundManager.sendAlert((Player)sender);
+		}
 	}
 	/**
 	 * 「重要」を送る
@@ -29,7 +35,10 @@ public final class MessageManager {
 	 * @param player 対象プレイヤー
 	 */
 	public static void sendImportant(String text,CommandSender sender) {
-		sender.sendMessage(ChatColor.GOLD + "【重要】" + ChatColor.WHITE + text);				
+		sender.sendMessage(new TextBuilder(ChatColor.WHITE).addColorText(ChatColor.GOLD,"【重要】").addText(text).build());
+		if(sender instanceof Player) {
+			SoundManager.sendNotice((Player)sender);
+		}
 	}
 	/**
 	 * 「情報」を送る
@@ -38,7 +47,7 @@ public final class MessageManager {
 	 * @param player 対象プレイヤー
 	 */
 	public static void sendInfo(String text,CommandSender sender) {
-		sender.sendMessage(ChatColor.GREEN + "【情報】" + ChatColor.WHITE + text);			
+		sender.sendMessage(new TextBuilder(ChatColor.WHITE).addColorText(ChatColor.GREEN,"【情報】").addText(text).build());			
 	}
 	
 	/**
@@ -48,8 +57,22 @@ public final class MessageManager {
 	 * @param player 対象プレイヤー
 	 */
 	public static void sendSpecial(String text,CommandSender sender) {
-		sender.sendMessage(ChatColor.LIGHT_PURPLE + "【特殊】" + ChatColor.WHITE + text);		
+		sender.sendMessage(new TextBuilder(ChatColor.WHITE).addColorText(ChatColor.LIGHT_PURPLE,"【特殊】").addText(text).build());
 	}
+	
+	/**
+	 * 「特殊」を送る
+	 * OP用のコマンドやデバッグ機能などに使用する
+	 * @param text メッセージ
+	 * @param player 対象プレイヤー
+	 */
+	public static void sendCommandError(String text,CommandSender sender) {
+		sender.sendMessage(new TextBuilder(ChatColor.WHITE).addColorText(ChatColor.RED,"【コマンドエラー】" ).addText(text).build());
+		if(sender instanceof Player) {
+			SoundManager.sendCancel((Player)sender);		
+		}
+	}
+	
 	
 	/**
 	 * 対象プレイヤー1人にメッセージを送る
@@ -58,20 +81,22 @@ public final class MessageManager {
 	 * @param player 対象プレイヤー
 	 * @param level メッセージレベル
 	 */
-	public static void sendText(String text,Player player,MessageLevel level) {
-		switch(level) {
-		case WARNING:
-			sendWarning(text,player);
-			break;
-		case IMPORTANT:
-			sendImportant(text,player);
-			break;
-		case INFO:
-			sendInfo(text,player);
-			break;
-		case SPECIAL:
-			sendSpecial(text,player);
-			break;
+	public static void sendText(CommandSender sender,MessageLevel level,String... texts) {
+		for(String text : texts) {	
+			switch(level) {
+			case WARNING:
+				sendWarning(text,sender);
+				break;
+			case IMPORTANT:
+				sendImportant(text,sender);
+				break;
+			case INFO:
+				sendInfo(text,sender);
+				break;
+			case SPECIAL:
+				sendSpecial(text,sender);
+				break;
+			}
 		}
 	}
 	
@@ -83,9 +108,9 @@ public final class MessageManager {
 	 */
 	public static void sendOPPlayer(MessageLevel level,String...texts) {
 		for(Player p : BaseAPI.getInstance().getServer().getOnlinePlayers()){
-			if(p.isOp()) {
+			if(Maintenance.isOPPlayer(p)) {
 				for(String text : texts) {	
-					sendText(text,p,level);
+					sendText(p,level,text);
 				}
 			}
 		}
@@ -100,7 +125,26 @@ public final class MessageManager {
 	public static void sendAllPlayer(MessageLevel level,String...texts) {
 		for(Player p : BaseAPI.getInstance().getServer().getOnlinePlayers()){
 			for(String text : texts) {	
-				sendText(text,p,level);
+				sendText(p,level,text);
+			}
+		}
+	}
+	
+	/**
+	 * サーバー上の全プレイヤーにメッセージを送る
+	 * メッセージレベルの設定ができる
+	 * @param text メッセージ
+	 * @param level メッセージレベル
+	 */
+	public static void sendNearPlayer(MessageLevel level,Location loc,int maxDistance,String...texts) {
+		World world = loc.getWorld();
+		for(Player p : BaseAPI.getInstance().getServer().getOnlinePlayers()){
+			if(world.equals(p.getWorld())) {
+				if(loc.distanceSquared(p.getLocation()) < maxDistance) {
+					for(String text : texts) {	
+						sendText(p,level,text);
+					}	
+				}
 			}
 		}
 	}

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.github.redshirt53072.growthapi.util.TextManager;
+import com.github.redshirt53072.growthapi.message.TextManager;
 
 
 /**
@@ -23,7 +23,6 @@ public abstract class GrowthPlugin extends JavaPlugin{
 	 */
 	protected String version = "0.0.0";
 	
-
 	/**
 	 * プラグイン名取得
 	 * @return プラグイン名
@@ -77,14 +76,13 @@ public abstract class GrowthPlugin extends JavaPlugin{
 		if(inNums.get(0) != reqNums.get(0)) {
 			return false;
 		}
-		if(inNums.get(1) > reqNums.get(1)) {
+		if(inNums.get(1) != reqNums.get(1)) {
+			return false;
+		}
+		if(inNums.get(2) >= reqNums.get(2)){
 			return true;
 		}
-		if(inNums.get(1) == reqNums.get(1)){
-			if(inNums.get(2) >= reqNums.get(2)){
-				return true;
-			}
-		}
+		
 		return false;
 	}
 }

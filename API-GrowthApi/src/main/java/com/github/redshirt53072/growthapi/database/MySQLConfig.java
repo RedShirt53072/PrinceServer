@@ -1,12 +1,15 @@
 package com.github.redshirt53072.growthapi.database;
 
 import com.github.redshirt53072.growthapi.config.ConfigManager;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import com.github.redshirt53072.growthapi.BaseAPI;
 /**
  * mysqlの接続情報を設定するcore/mysql.ymlを読み込むクラス
  * 
  * デフォルト設定
- * Use: true ->データベースを有効化するかどうか
  * Host: "localhost" ->ホスト名
  * Port: 3306 ->ポート
  * Database:  ->データベース名
@@ -32,11 +35,7 @@ public final class MySQLConfig {
 	/**
 	 * 保存されたユーザー名
 	 */
-	private static String user = "user";
-	/**
-	 * 保存されたパスワード
-	 */
-	private static String password = "pass";
+	private static Map<String,String> users = new HashMap<String,String>();
 	
 	
 	/**
@@ -46,15 +45,6 @@ public final class MySQLConfig {
 	public static boolean init() {
 		ConfigManager manager = new ConfigManager(BaseAPI.getInstance(),"core","mysql.yml");
 		manager.configInit();
-		
-		String tempUse = manager.getString("Use");
-		if(tempUse != null) {
-			if(tempUse.equals("true")) {
-				return false;
-			}else if(tempUse.equals("false")){
-				manager.logWarning("Use", "の読み込みに失敗しました。(値はtrueかfalseである必要があります)");		
-			}
-		}
 		
 		String tempHost = manager.getString("Host");
 		if(tempHost == null) {
@@ -68,23 +58,29 @@ public final class MySQLConfig {
 		}else {
 			port = tempPort;
 		}
-		String tempUser = manager.getString("User");
-		if(tempUser == null) {
-			manager.logWarning("User", "の読み込みに失敗しました。");
-		}else {
-			user = tempUser;
-		}
 		String tempDatabase = manager.getString("Database");
 		if(tempDatabase == null) {
 			manager.logWarning("Database", "の読み込みに失敗しました。");
 		}else {
 			database = tempDatabase;
 		}
-		String tempPass = manager.getString("Password");
-		if(tempPass == null) {
-			manager.logWarning("PassWord", "の読み込みに失敗しました。");
-		}else {
-			password = tempPass;
+		for(String key : manager.getKeys("", "User")) {
+			String user = manager.getString(key + ".Name");	
+			String pass = manager.getString(key + ".Password");	
+			
+			if(user == null) {
+				manager.logWarning(key + ".Name", "の読み込みに失敗しました。");
+				continue;
+			}
+			if(pass == null) {
+				manager.logWarning(key + "PassWord", "の読み込みに失敗しました。");
+				continue;
+			}
+			users.put(user, pass);
+		}
+		
+		if(users.isEmpty()) {
+			manager.logWarning("User", "をひとつも読み込めませんでした。");
 		}
 		
 		manager.logConfig("","を読み込みました。");
@@ -105,13 +101,6 @@ public final class MySQLConfig {
 		return port;
 	}
 	/**
-	 * ユーザー名を取得
-	 * @return ユーザー名
-	 */
-	static String getUser() {
-		return user;
-	}
-	/**
 	 * データベース名を取得
 	 * @return データベース名
 	 */
@@ -122,8 +111,8 @@ public final class MySQLConfig {
 	 * パスワードを取得
 	 * @return パスワード
 	 */
-	static String getPass() {
-		return password;
+	static String getPass(String key) {
+		return users.get(key);
 	}
 	
 }

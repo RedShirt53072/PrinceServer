@@ -1,5 +1,6 @@
 package com.github.redshirt53072.growthapi.item;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
@@ -7,10 +8,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
+import com.github.redshirt53072.growthapi.message.TextBuilder;
+
 public class ItemUtil {
 	public static int removeItem(Player p,ItemStack sampleItem,int maxRemove) {
 		int removed = 0;
-		int count = 0;
 		PlayerInventory inv = p.getInventory();
 		for(int i = 0;i < 37;i++) {
 			ItemStack stack = null;
@@ -24,25 +26,54 @@ public class ItemUtil {
 			}
 			if(stack.isSimilar(sampleItem)){
 				int amount = stack.getAmount();
-				count += amount;
 				if(maxRemove > removed) {
-					if(maxRemove > amount + removed) {
+					if(maxRemove >= amount + removed) {
 						if(i == 36) {
 							inv.setItemInOffHand(null);
 						}else {
 							inv.clear(i);
 						}
 						removed += amount;
+						if(removed == maxRemove) {
+							break;
+						}
 					}else {
 						int toRemove =  maxRemove - removed;
 						stack.setAmount(amount - toRemove);
 						removed += toRemove;
+						break;
 					}
 				}
 			}
 		}
-		return count;
+		return removed;
 	}
+	public static int removeItem(Player p,ItemStack sampleItem) {
+		int removed = 0;
+		PlayerInventory inv = p.getInventory();
+		for(int i = 0;i < 37;i++) {
+			ItemStack stack = null;
+			if(i == 36) {
+				stack = inv.getItemInOffHand();
+			}else {
+				stack = inv.getItem(i);
+			}
+			if(stack == null) {
+				continue;
+			}
+			if(stack.isSimilar(sampleItem)){
+				int amount = stack.getAmount();
+				if(i == 36) {
+					inv.setItemInOffHand(null);
+				}else {
+					inv.clear(i);
+				}
+				removed += amount;
+			}
+		}
+		return removed;
+	}
+	
 	public static int countItem(Player p,ItemStack sampleItem) {
 		int count = 0;
 		PlayerInventory inv = p.getInventory();
@@ -99,7 +130,11 @@ public class ItemUtil {
 		i.setPickupDelay(0);
 		i.setOwner(p.getUniqueId());
 		i.setInvulnerable(true);
-		i.setCustomName(p.getName() + "の落とし物");
+		i.setCustomName(
+				new TextBuilder(ChatColor.WHITE)
+    			.addPlayerName(p) 
+    			.addText("の落とし物")
+    			.build());
 		i.setCustomNameVisible(true);
 	}
 }

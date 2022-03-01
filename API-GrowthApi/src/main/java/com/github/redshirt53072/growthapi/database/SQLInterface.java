@@ -34,7 +34,7 @@ public abstract class SQLInterface {
      */
     protected boolean connect() {
     	try {
-    		connectData = SQLManager.getDataSource().getConnection();
+    		connectData = SQLManager.getDataSource(plugin).getConnection();
     		return true;
     	}catch(SQLException ex) {
     		logSevere(ex);
