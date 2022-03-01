@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.redshirt53072</groupId>
   <artifactId>UsefulShulker</artifactId>
-  <version>3.0.0</version>
+  <version>3.0.0-beta2</version>
 	<repositories>
         <repository>
             <id>spigot-repo</id>
@@ -21,7 +21,7 @@
         <dependency>
         	<groupId>com.github.redshirt53072</groupId>
         	<artifactId>GrowthAPI</artifactId>
-        	<version>3.0.0</version>
+        	<version>3.0.0-beta2</version>
         	<scope>provided</scope>
         </dependency>
     </dependencies>
