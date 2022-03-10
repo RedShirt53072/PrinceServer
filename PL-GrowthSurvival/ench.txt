@@ -1,0 +1,69 @@
+Sub getEnchData()
+    Dim vanilla As String
+    vanilla = "vanilla:" & vbCrLf
+    
+    For i = 3 To 1000
+        Dim test As String
+        Dim result As String
+        test = Worksheets("vanilla").Cells(i, 1).Value
+        If test = "" Then
+             Exit For
+        End If
+        result = getEnch(i)
+        vanilla = vanilla & result
+    Next i
+    
+    MsgBox "hubの17Aにデータを出力しました。"
+    Worksheets("hub").Cells(17, 1).Value = vanilla
+End Sub
+
+Function getEnch(ByVal index As Integer) As String
+    Dim result As String
+    result = "  ench" & index & ":" & vbCrLf
+    result = result & "    name: " & Worksheets("vanilla").Cells(index, 1).Value & vbCrLf
+    result = result & "    id: " & Worksheets("vanilla").Cells(index, 2).Value & vbCrLf
+    result = result & "    maxlevel: " & Worksheets("vanilla").Cells(index, 3).Value & vbCrLf
+    result = result & "    exp: " & Worksheets("vanilla").Cells(index, 4).Value & vbCrLf
+    result = result & getExclusive(index)
+    result = result & getLore(index)
+    getEnch = result
+End Function
+
+Function getLore(ByVal index As Integer) As String
+    Dim rawLore As String
+    Dim result As String
+    Dim length As Integer
+    Dim remainder As Integer
+    
+    result = "    lore:" & vbCrLf
+    rawLore = Worksheets("vanilla").Cells(index, 6).Text
+    
+    length = Len(rawLore) \ 20
+    remainder = Len(rawLore) Mod 20
+    
+    For i = 0 To length
+        If length = i Then
+            result = result & "      lore" & i + 1 & ": " & Mid(rawLore, i * 20 + 1, remainder) & vbCrLf
+        Else
+            result = result & "      lore" & i + 1 & ": " & Mid(rawLore, i * 20 + 1, 20) & vbCrLf
+        End If
+    Next i
+    getLore = result
+End Function
+
+Function getExclusive(ByVal index As Integer) As String
+    Dim result As String
+    Dim count As Integer
+    Dim aarray As Variant
+    
+    result = "    exclusive:" & vbCrLf
+    count = 0
+    aarray = Split(Worksheets("vanilla").Cells(index, 5).Value, ",")
+    
+    For i = 0 To UBound(aarray)
+        count = count + 1
+        result = result & "      ench" & count & ": " & aarray(i) & vbCrLf
+    Next i
+    getExclusive = result
+End Function
+

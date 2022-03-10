@@ -1,0 +1,68 @@
+Sub getEnchData()
+    Dim vanilla As String
+    vanilla = ""
+    
+    For i = 2 To 1000
+        Dim test As String
+        Dim result As String
+        test = Worksheets("toolGroup").Cells(i, 1).Value
+        If test = "" Then
+             Exit For
+        End If
+        result = getGroup(i)
+        vanilla = vanilla & result
+    Next i
+    
+    MsgBox "hubの17Bにデータを出力しました。"
+    Worksheets("hub").Cells(17, 2).Value = vanilla
+End Sub
+
+Function getGroup(ByVal index As Integer) As String
+    Dim result As String
+    Dim id As String
+    id = Worksheets("toolGroup").Cells(index, 2).Value
+    result = "group" & index & ":" & vbCrLf
+    result = result & "  id: " & id & vbCrLf
+    result = result & getEnch(index)
+    
+    result = result & getTool(id)
+    getGroup = result
+End Function
+
+Function getEnch(ByVal index As Integer) As String
+    Dim result As String
+    Dim count As Integer
+    Dim aarray As Variant
+    
+    result = "  ench:" & vbCrLf
+    count = 0
+    aarray = Split(Worksheets("toolGroup").Cells(index, 3).Value, ",")
+    
+    For i = 0 To UBound(aarray)
+        count = count + 1
+        result = result & "    ench" & count & ": " & aarray(i) & vbCrLf
+    Next i
+    getEnch = result
+End Function
+
+Function getTool(ByVal group As String) As String
+    Dim result As String
+    
+    result = ""
+    
+    For i = 3 To 1000
+        Dim test As String
+        test = Worksheets("tool").Cells(i, 3).Value
+        If test = "" Then
+             Exit For
+        End If
+        If test = group Then
+            result = result & "  tool" & i & ":" & vbCrLf
+            result = result & "    id: " & Worksheets("tool").Cells(i, 2).Value & vbCrLf
+            result = result & "    scrap: " & Worksheets("tool").Cells(i, 4).Value & vbCrLf
+        End If
+    Next i
+    
+    getTool = result
+End Function
+

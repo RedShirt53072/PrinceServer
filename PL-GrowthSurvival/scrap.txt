@@ -1,0 +1,27 @@
+Sub getScrapData()
+    Dim scrap As String
+    scrap = ""
+    
+    For i = 2 To 1000
+        Dim test As String
+        Dim result As String
+        test = Worksheets("scrap").Cells(i, 1).Value
+        If test = "" Then
+             Exit For
+        End If
+        result = getEnch(i)
+        scrap = scrap & result
+    Next i
+    
+    MsgBox "hubの17Cにデータを出力しました。"
+    Worksheets("hub").Cells(17, 3).Value = scrap
+End Sub
+
+Function getEnch(ByVal index As Integer) As String
+    Dim result As String
+    result = "item" & index & ":" & vbCrLf
+    result = result & "  name: " & Worksheets("scrap").Cells(index, 2).Value & vbCrLf
+    result = result & "  id: " & Worksheets("scrap").Cells(index, 1).Value & vbCrLf
+    result = result & "  amount: " & Worksheets("scrap").Cells(index, 3).Value & vbCrLf
+    getEnch = result
+End Function
