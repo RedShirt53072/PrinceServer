@@ -9,7 +9,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.redshirt53072</groupId>
   <artifactId>GrowthAPI</artifactId>
-  <version>3.0.0-beta4</version>
+  <version>3.0.0-beta4.1</version>
   <build>
     <plugins>
       <plugin>

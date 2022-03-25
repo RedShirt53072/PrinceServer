@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 /**
  * @see EnchManager
@@ -61,6 +62,17 @@ public class ItemBuilder {
 	
 	public ItemBuilder setHideFlags(ItemFlag...flags) {
 		itemMeta.addItemFlags(flags);
+		return this;
+	}
+	public ItemBuilder removeHideFlags(ItemFlag...flags) {
+		itemMeta.removeItemFlags(flags);
+		return this;
+	}
+	
+	public ItemBuilder setDamage(int damage) {
+		if(itemMeta instanceof Damageable) {
+			((Damageable)itemMeta).setDamage(damage);
+		}
 		return this;
 	}
 	
