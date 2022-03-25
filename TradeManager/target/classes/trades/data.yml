@@ -1,0 +1,3550 @@
+NITWIT:
+  version: 0
+  level1:
+    roll: 0
+  level2:
+    roll: 0
+  level3:
+    roll: 0
+  level4:
+    roll: 0
+  level5:
+    roll: 0
+ARMORER:
+  version: 6
+  level1:
+    roll: 2
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: COAL
+        amount: 15
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 2
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 5
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: IRON_HELMET
+      villagerexp: 1
+    trade3:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 9
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: IRON_CHESTPLATE
+      villagerexp: 1
+    trade4:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 7
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: IRON_LEGGINGS
+      villagerexp: 1
+    trade5:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 4
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: IRON_BOOTS
+      villagerexp: 1
+  level2:
+    roll: 2
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: IRON_INGOT
+        amount: 4
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 10
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 36
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BELL
+      villagerexp: 5
+    trade3:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: CHAINMAIL_LEGGINGS
+      villagerexp: 5
+    trade4:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: CHAINMAIL_BOOTS
+      villagerexp: 5
+  level3:
+    roll: 2
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: LAVA_BUCKET
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 20
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: DIAMOND
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 20
+    trade3:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 5
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: SHIELD
+      villagerexp: 10
+    trade4:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: CHAINMAIL_HELMET
+      villagerexp: 10
+    trade5:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 4
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: CHAINMAIL_CHESTPLATE
+      villagerexp: 10
+  level4:
+    roll: 2
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 26
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: DIAMOND_LEGGINGS
+      villagerexp: 15
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 20
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: DIAMOND_BOOTS
+      villagerexp: 15
+  level5:
+    roll: 2
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 20
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: DIAMOND_HELMET
+      villagerexp: 30
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 28
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: DIAMOND_CHESTPLATE
+      villagerexp: 30
+BUTCHER:
+  version: 3
+  level1:
+    roll: 2
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: CHICKEN
+        amount: 14
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 2
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: RABBIT
+        amount: 4
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 2
+    trade3:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: RABBIT_STEW
+      villagerexp: 2
+    trade4:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: PORKCHOP
+        amount: 7
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 1
+  level2:
+    roll: 2
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: COAL
+        amount: 15
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 2
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: COOKED_PORKCHOP
+        amount: 5
+      villagerexp: 5
+    trade3:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: COOKED_CHICKEN
+        amount: 8
+      villagerexp: 5
+  level3:
+    roll: 2
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: MUTTON
+        amount: 7
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 20
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BEEF
+        amount: 10
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 20
+  level4:
+    roll: 2
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: DRIED_KELP_BLOCK
+        amount: 10
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 30
+  level5:
+    roll: 2
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: SWEET_BERRIES
+        amount: 10
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 30
+CARTOGRAPHER:
+  version: 3
+  level1:
+    roll: 2
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: PAPER
+        amount: 24
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 2
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 7
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: MAP
+      villagerexp: 1
+  level2:
+    roll: 2
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 13
+      buy2:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: COMPASS
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: FILLED_MAP
+      villagerexp: 5
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: GLASS_PANE
+        amount: 11
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 10
+  level3:
+    roll: 2
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: COMPASS
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 20
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 14
+      buy2:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: COMPASS
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: FILLED_MAP
+      villagerexp: 10
+  level4:
+    roll: 2
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 7
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: ITEM_FRAME
+      villagerexp: 15
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: LIGHT_GRAY_BANNER
+      villagerexp: 15
+    trade3:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: GRAY_BANNER
+      villagerexp: 15
+    trade4:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: CYAN_BANNER
+      villagerexp: 15
+    trade5:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: PURPLE_BANNER
+      villagerexp: 15
+    trade6:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BLUE_BANNER
+      villagerexp: 15
+    trade7:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BROWN_BANNER
+      villagerexp: 15
+    trade8:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: RED_BANNER
+      villagerexp: 15
+    trade9:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BLACK_BANNER
+      villagerexp: 15
+    trade10:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: PINK_BANNER
+      villagerexp: 15
+    trade11:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: GREEN_BANNER
+      villagerexp: 15
+    trade12:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: LIME_BANNER
+      villagerexp: 15
+    trade13:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: YELLOW_BANNER
+      villagerexp: 15
+    trade14:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: LIGHT_BLUE_BANNER
+      villagerexp: 15
+    trade15:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: MAGENTA_BANNER
+      villagerexp: 15
+    trade16:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: WHITE_BANNER
+      villagerexp: 15
+    trade17:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: ORANGE_BANNER
+      villagerexp: 15
+  level5:
+    roll: 2
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 8
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: GLOBE_BANNER_PATTERN
+      villagerexp: 30
+CLERIC:
+  version: 4
+  level1:
+    roll: 2
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: ROTTEN_FLESH
+        amount: 32
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 2
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: REDSTONE
+        amount: 2
+      villagerexp: 1
+  level2:
+    roll: 2
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: GOLD_INGOT
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 10
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: LAPIS_LAZULI
+      villagerexp: 5
+  level3:
+    roll: 2
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: RABBIT_FOOT
+        amount: 2
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 20
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 4
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: GLOWSTONE
+      villagerexp: 10
+  level4:
+    roll: 2
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: SCUTE
+        amount: 4
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 30
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: GLASS_BOTTLE
+        amount: 9
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 30
+    trade3:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 5
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: ENDER_PEARL
+      villagerexp: 15
+  level5:
+    roll: 2
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: NETHER_WART
+        amount: 22
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 30
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EXPERIENCE_BOTTLE
+      villagerexp: 30
+FISHERMAN:
+  version: 3
+  level1:
+    roll: 2
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: STRING
+        amount: 20
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 2
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: COAL
+        amount: 10
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 2
+    trade3:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: COD_BUCKET
+      villagerexp: 1
+    trade4:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      buy2:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: COD
+        amount: 6
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: COOKED_COD
+        amount: 6
+      villagerexp: 1
+  level2:
+    roll: 2
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: COD
+        amount: 15
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 10
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      buy2:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: SALMON
+        amount: 6
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: COOKED_SALMON
+        amount: 6
+      villagerexp: 5
+    trade3:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 2
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: CAMPFIRE
+      villagerexp: 5
+  level3:
+    roll: 2
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: SALMON
+        amount: 13
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 20
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 14
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: FISHING_ROD
+      villagerexp: 10
+  level4:
+    roll: 2
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: TROPICAL_FISH
+        amount: 6
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 30
+  level5:
+    roll: 2
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: PUFFERFISH
+        amount: 4
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 30
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: OAK_BOAT
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 30
+FLETCHER:
+  version: 6
+  level1:
+    roll: 2
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: STICK
+        amount: 32
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 2
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: ARROW
+        amount: 16
+      villagerexp: 1
+    trade3:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      buy2:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: GRAVEL
+        amount: 10
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: FLINT
+        amount: 10
+      villagerexp: 1
+  level2:
+    roll: 2
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: FLINT
+        amount: 26
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 10
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 2
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BOW
+      villagerexp: 5
+  level3:
+    roll: 2
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: STRING
+        amount: 14
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 20
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: CROSSBOW
+      villagerexp: 10
+  level4:
+    roll: 2
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: FEATHER
+        amount: 24
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 30
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 14
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BOW
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          enchants:
+            ARROW_DAMAGE: 2
+      villagerexp: 15
+  level5:
+    roll: 2
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: TRIPWIRE_HOOK
+        amount: 8
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 30
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 15
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: CROSSBOW
+        meta:
+          ==: ItemMeta
+          meta-type: CROSSBOW
+          enchants:
+            PIERCING: 2
+            QUICK_CHARGE: 1
+          charged: false
+      villagerexp: 15
+    trade3:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 2
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: TIPPED_ARROW
+        amount: 5
+        meta:
+          ==: ItemMeta
+          meta-type: POTION
+          potion-type: minecraft:slow_falling
+      villagerexp: 30
+      buy2:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: ARROW
+        amount: 5
+    trade4:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 2
+      buy2:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: ARROW
+        amount: 5
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: TIPPED_ARROW
+        amount: 5
+        meta:
+          ==: ItemMeta
+          meta-type: POTION
+          potion-type: minecraft:harming
+      villagerexp: 30
+    trade5:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 2
+      buy2:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: ARROW
+        amount: 5
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: TIPPED_ARROW
+        amount: 5
+        meta:
+          ==: ItemMeta
+          meta-type: POTION
+          potion-type: minecraft:night_vision
+      villagerexp: 30
+    trade6:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 2
+      buy2:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: ARROW
+        amount: 5
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: TIPPED_ARROW
+        amount: 5
+        meta:
+          ==: ItemMeta
+          meta-type: POTION
+          potion-type: minecraft:turtle_master
+      villagerexp: 30
+    trade7:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 2
+      buy2:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: ARROW
+        amount: 5
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: TIPPED_ARROW
+        amount: 5
+        meta:
+          ==: ItemMeta
+          meta-type: POTION
+          potion-type: minecraft:invisibility
+      villagerexp: 30
+    trade8:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 2
+      buy2:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: ARROW
+        amount: 5
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: TIPPED_ARROW
+        amount: 5
+        meta:
+          ==: ItemMeta
+          meta-type: POTION
+          potion-type: minecraft:leaping
+      villagerexp: 30
+    trade9:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 2
+      buy2:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: ARROW
+        amount: 5
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: TIPPED_ARROW
+        amount: 5
+        meta:
+          ==: ItemMeta
+          meta-type: POTION
+          potion-type: minecraft:fire_resistance
+      villagerexp: 30
+    trade10:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 2
+      buy2:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: ARROW
+        amount: 5
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: TIPPED_ARROW
+        amount: 5
+        meta:
+          ==: ItemMeta
+          meta-type: POTION
+          potion-type: minecraft:swiftness
+      villagerexp: 30
+    trade11:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 2
+      buy2:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: ARROW
+        amount: 5
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: TIPPED_ARROW
+        amount: 5
+        meta:
+          ==: ItemMeta
+          meta-type: POTION
+          potion-type: minecraft:slowness
+      villagerexp: 30
+    trade12:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 2
+      buy2:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: ARROW
+        amount: 5
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: TIPPED_ARROW
+        amount: 5
+        meta:
+          ==: ItemMeta
+          meta-type: POTION
+          potion-type: minecraft:weakness
+      villagerexp: 30
+    trade13:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 2
+      buy2:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: ARROW
+        amount: 5
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: TIPPED_ARROW
+        amount: 5
+        meta:
+          ==: ItemMeta
+          meta-type: POTION
+          potion-type: minecraft:poison
+      villagerexp: 30
+    trade14:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 2
+      buy2:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: ARROW
+        amount: 5
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: TIPPED_ARROW
+        amount: 5
+        meta:
+          ==: ItemMeta
+          meta-type: POTION
+          potion-type: minecraft:regeneration
+      villagerexp: 30
+    trade15:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 2
+      buy2:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: ARROW
+        amount: 5
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: TIPPED_ARROW
+        amount: 5
+        meta:
+          ==: ItemMeta
+          meta-type: POTION
+          potion-type: minecraft:water_breathing
+      villagerexp: 30
+    trade16:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 2
+      buy2:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: ARROW
+        amount: 5
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: TIPPED_ARROW
+        amount: 5
+        meta:
+          ==: ItemMeta
+          meta-type: POTION
+          potion-type: minecraft:strength
+      villagerexp: 30
+    trade17:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 2
+      buy2:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: ARROW
+        amount: 5
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: TIPPED_ARROW
+        amount: 5
+        meta:
+          ==: ItemMeta
+          meta-type: POTION
+          potion-type: minecraft:healing
+      villagerexp: 30
+FARMER:
+  version: 11
+  level1:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: WHEAT
+        amount: 20
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 1
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: POTATO
+        amount: 26
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 1
+    trade3:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: CARROT
+        amount: 22
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 1
+    trade4:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BEETROOT
+        amount: 15
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 1
+    trade5:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BREAD
+        amount: 6
+      villagerexp: 6
+    roll: 2
+  level2:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: PUMPKIN
+        amount: 6
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 1
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: PUMPKIN_PIE
+        amount: 4
+      villagerexp: 4
+    trade3:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: APPLE
+        amount: 4
+      villagerexp: 4
+    roll: 2
+  level3:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: MELON
+        amount: 4
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 20
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: COOKIE
+        amount: 18
+      villagerexp: 10
+    roll: 2
+  level4:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: CAKE
+      villagerexp: 15
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: SUSPICIOUS_STEW
+        meta:
+          ==: ItemMeta
+          meta-type: SUSPICIOUS_STEW
+          effects:
+          - ==: PotionEffect
+            effect: 19
+            duration: 280
+            amplifier: 0
+            ambient: true
+            has-particles: true
+            has-icon: true
+      villagerexp: 15
+    trade3:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: SUSPICIOUS_STEW
+        meta:
+          ==: ItemMeta
+          meta-type: SUSPICIOUS_STEW
+          effects:
+          - ==: PotionEffect
+            effect: 19
+            duration: 280
+            amplifier: 0
+            ambient: true
+            has-particles: true
+            has-icon: true
+      villagerexp: 15
+    trade4:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: SUSPICIOUS_STEW
+        meta:
+          ==: ItemMeta
+          meta-type: SUSPICIOUS_STEW
+          effects:
+          - ==: PotionEffect
+            effect: 15
+            duration: 120
+            amplifier: 0
+            ambient: true
+            has-particles: true
+            has-icon: true
+      villagerexp: 15
+    trade5:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: SUSPICIOUS_STEW
+        meta:
+          ==: ItemMeta
+          meta-type: SUSPICIOUS_STEW
+          effects:
+          - ==: PotionEffect
+            effect: 18
+            duration: 140
+            amplifier: 0
+            ambient: true
+            has-particles: true
+            has-icon: true
+      villagerexp: 15
+    trade6:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: SUSPICIOUS_STEW
+        meta:
+          ==: ItemMeta
+          meta-type: SUSPICIOUS_STEW
+          effects:
+          - ==: PotionEffect
+            effect: 8
+            duration: 160
+            amplifier: 0
+            ambient: true
+            has-particles: true
+            has-icon: true
+      villagerexp: 15
+    trade7:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: SUSPICIOUS_STEW
+        meta:
+          ==: ItemMeta
+          meta-type: SUSPICIOUS_STEW
+          effects:
+          - ==: PotionEffect
+            effect: 16
+            duration: 100
+            amplifier: 0
+            ambient: true
+            has-particles: true
+            has-icon: true
+      villagerexp: 15
+    roll: 2
+  level5:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: GOLDEN_CARROT
+        amount: 3
+      villagerexp: 30
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 4
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: GLISTERING_MELON_SLICE
+        amount: 3
+      villagerexp: 30
+    roll: 2
+LEATHERWORKER:
+  version: 2
+  level1:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: LEATHER
+        amount: 6
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 2
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: LEATHER_LEGGINGS
+      villagerexp: 1
+    trade3:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 7
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: LEATHER_CHESTPLATE
+      villagerexp: 1
+    roll: 2
+  level2:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: FLINT
+        amount: 26
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 10
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 5
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: LEATHER_HELMET
+      villagerexp: 5
+    trade3:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 4
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: LEATHER_BOOTS
+      villagerexp: 5
+    roll: 2
+  level3:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: RABBIT_HIDE
+        amount: 9
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 20
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 7
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: LEATHER_CHESTPLATE
+      villagerexp: 1
+    roll: 2
+  level4:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: SCUTE
+        amount: 4
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 30
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 6
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: LEATHER_HORSE_ARMOR
+      villagerexp: 15
+    roll: 2
+  level5:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 6
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: SADDLE
+      villagerexp: 30
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 5
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: LEATHER_HELMET
+      villagerexp: 30
+    roll: 2
+LIBRARIAN:
+  version: 25
+  level1:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: PAPER
+        amount: 24
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 2
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 10
+      buy2:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BOOK
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: ENCHANTED_BOOK
+      villagerexp: 1
+    trade3:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 9
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BOOKSHELF
+      villagerexp: 1
+    roll: 2
+  level2:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BOOK
+        amount: 4
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 10
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 10
+      buy2:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BOOK
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: ENCHANTED_BOOK
+      villagerexp: 5
+    trade3:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: LANTERN
+      villagerexp: 5
+    roll: 2
+  level3:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: INK_SAC
+        amount: 5
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 20
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 10
+      buy2:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BOOK
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: ENCHANTED_BOOK
+      villagerexp: 10
+    trade3:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: GLASS
+        amount: 4
+      villagerexp: 10
+    roll: 2
+  level4:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: WRITABLE_BOOK
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 30
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 10
+      buy2:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BOOK
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: ENCHANTED_BOOK
+      villagerexp: 15
+    trade3:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 5
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: CLOCK
+      villagerexp: 15
+    trade4:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 4
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: COMPASS
+      villagerexp: 15
+    roll: 2
+  level5:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 20
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: NAME_TAG
+      villagerexp: 30
+    roll: 2
+MASON:
+  version: 4
+  level1:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: CLAY_BALL
+        amount: 10
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 2
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BRICK
+        amount: 10
+      villagerexp: 1
+    roll: 2
+  level2:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: STONE
+        amount: 20
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 10
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: CHISELED_STONE_BRICKS
+        amount: 4
+      villagerexp: 5
+    roll: 2
+  level3:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: ANDESITE
+        amount: 16
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 20
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: GRANITE
+        amount: 16
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 20
+    trade3:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: DIORITE
+        amount: 16
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 20
+    trade4:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: POLISHED_DIORITE
+        amount: 4
+      villagerexp: 10
+    trade5:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: POLISHED_ANDESITE
+        amount: 4
+      villagerexp: 10
+    trade6:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: DRIPSTONE_BLOCK
+        amount: 4
+      villagerexp: 10
+    trade7:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: POLISHED_GRANITE
+        amount: 4
+      villagerexp: 10
+    roll: 2
+  level4:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: QUARTZ
+        amount: 12
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 30
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: ORANGE_GLAZED_TERRACOTTA
+      villagerexp: 15
+    trade3:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: GREEN_GLAZED_TERRACOTTA
+      villagerexp: 15
+    trade4:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: PURPLE_GLAZED_TERRACOTTA
+      villagerexp: 15
+    trade5:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BLACK_GLAZED_TERRACOTTA
+      villagerexp: 15
+    trade6:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: WHITE_GLAZED_TERRACOTTA
+      villagerexp: 15
+    trade7:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BLUE_GLAZED_TERRACOTTA
+      villagerexp: 15
+    trade8:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: LIGHT_GRAY_GLAZED_TERRACOTTA
+      villagerexp: 15
+    trade9:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: CYAN_GLAZED_TERRACOTTA
+      villagerexp: 15
+    trade10:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: MAGENTA_GLAZED_TERRACOTTA
+      villagerexp: 15
+    trade11:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: LIGHT_BLUE_GLAZED_TERRACOTTA
+      villagerexp: 15
+    trade12:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: GRAY_GLAZED_TERRACOTTA
+      villagerexp: 15
+    trade13:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: RED_GLAZED_TERRACOTTA
+      villagerexp: 15
+    trade14:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BROWN_GLAZED_TERRACOTTA
+      villagerexp: 15
+    trade15:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: LIME_GLAZED_TERRACOTTA
+      villagerexp: 15
+    trade16:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: PINK_GLAZED_TERRACOTTA
+      villagerexp: 15
+    trade17:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: YELLOW_GLAZED_TERRACOTTA
+      villagerexp: 15
+    roll: 2
+  level5:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: QUARTZ_PILLAR
+      villagerexp: 30
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: QUARTZ_BLOCK
+      villagerexp: 30
+    roll: 2
+TOOLSMITH:
+  version: 2
+  level1:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: COAL
+        amount: 15
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 2
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: STONE_PICKAXE
+      villagerexp: 1
+    trade3:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: STONE_AXE
+      villagerexp: 1
+    trade4:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: STONE_SHOVEL
+      villagerexp: 1
+    trade5:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: STONE_HOE
+      villagerexp: 1
+    roll: 2
+  level2:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: IRON_INGOT
+        amount: 4
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 10
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 36
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BELL
+      villagerexp: 5
+    roll: 2
+  level3:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: FLINT
+        amount: 30
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 20
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 13
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: IRON_AXE
+      villagerexp: 10
+    trade3:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 14
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: IRON_SHOVEL
+      villagerexp: 10
+    trade4:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 15
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: IRON_PICKAXE
+      villagerexp: 10
+    trade5:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 4
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: DIAMOND_HOE
+      villagerexp: 10
+    roll: 2
+  level4:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: DIAMOND
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 30
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 24
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: DIAMOND_AXE
+      villagerexp: 15
+    trade3:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 17
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: DIAMOND_SHOVEL
+      villagerexp: 15
+    roll: 2
+  level5:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 20
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: DIAMOND_PICKAXE
+      villagerexp: 30
+    roll: 2
+WEAPONSMITH:
+  version: 6
+  level1:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: COAL
+        amount: 15
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 2
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: IRON_AXE
+      villagerexp: 1
+    trade3:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 14
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: IRON_SWORD
+      villagerexp: 1
+    roll: 2
+  level2:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 36
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BELL
+      villagerexp: 5
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: IRON_INGOT
+        amount: 4
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 10
+    roll: 2
+  level3:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: FLINT
+        amount: 24
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 20
+    roll: 2
+  level4:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: DIAMOND
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 30
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 24
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: DIAMOND_AXE
+      villagerexp: 15
+    roll: 2
+  level5:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 20
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: DIAMOND_SWORD
+      villagerexp: 30
+    roll: 2
+SHEPHERD:
+  version: 19
+  level1:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: WHITE_WOOL
+        amount: 18
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 2
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BROWN_WOOL
+        amount: 18
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 2
+    trade3:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BLACK_WOOL
+        amount: 18
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 2
+    trade4:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: GRAY_WOOL
+        amount: 18
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 3
+    trade5:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 2
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: SHEARS
+      villagerexp: 1
+    roll: 2
+  level2:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: LIGHT_BLUE_DYE
+        amount: 12
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 10
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: GRAY_DYE
+        amount: 12
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 10
+    trade3:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BLACK_DYE
+        amount: 12
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 10
+    trade4:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: LIME_DYE
+        amount: 12
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 10
+    trade5:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: WHITE_DYE
+        amount: 12
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 10
+    trade6:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BLACK_WOOL
+      villagerexp: 5
+    trade7:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: WHITE_WOOL
+      villagerexp: 5
+    trade8:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BROWN_WOOL
+      villagerexp: 5
+    trade9:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: PURPLE_WOOL
+      villagerexp: 5
+    trade10:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: MAGENTA_WOOL
+      villagerexp: 5
+    trade11:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: ORANGE_WOOL
+      villagerexp: 5
+    trade12:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BLUE_WOOL
+      villagerexp: 5
+    trade13:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: GRAY_WOOL
+      villagerexp: 5
+    trade14:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: YELLOW_WOOL
+      villagerexp: 5
+    trade15:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: LIGHT_BLUE_WOOL
+      villagerexp: 5
+    trade16:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: CYAN_WOOL
+      villagerexp: 5
+    trade17:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: LIME_WOOL
+      villagerexp: 5
+    trade18:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: GREEN_WOOL
+      villagerexp: 5
+    trade19:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: RED_WOOL
+      villagerexp: 5
+    trade20:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: PINK_WOOL
+      villagerexp: 5
+    trade21:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: LIGHT_GRAY_WOOL
+      villagerexp: 5
+    trade22:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: WHITE_CARPET
+        amount: 4
+      villagerexp: 5
+    trade23:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: MAGENTA_CARPET
+        amount: 4
+      villagerexp: 5
+    trade24:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: ORANGE_CARPET
+        amount: 4
+      villagerexp: 5
+    trade25:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: LIGHT_BLUE_CARPET
+        amount: 4
+      villagerexp: 5
+    trade26:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: YELLOW_CARPET
+        amount: 4
+      villagerexp: 5
+    trade27:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: LIME_CARPET
+        amount: 4
+      villagerexp: 5
+    trade28:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: PINK_CARPET
+        amount: 4
+      villagerexp: 5
+    trade29:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: GRAY_CARPET
+        amount: 4
+      villagerexp: 5
+    trade30:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: LIGHT_GRAY_CARPET
+        amount: 4
+      villagerexp: 5
+    trade31:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BLACK_CARPET
+        amount: 4
+      villagerexp: 5
+    trade32:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: RED_CARPET
+        amount: 4
+      villagerexp: 5
+    trade33:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: GREEN_CARPET
+        amount: 4
+      villagerexp: 5
+    trade34:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BROWN_CARPET
+        amount: 4
+      villagerexp: 5
+    trade35:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BLUE_CARPET
+        amount: 4
+      villagerexp: 5
+    trade36:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: PURPLE_CARPET
+        amount: 4
+      villagerexp: 5
+    trade37:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: CYAN_CARPET
+        amount: 4
+      villagerexp: 5
+    roll: 2
+  level3:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: RED_DYE
+        amount: 12
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 20
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: LIGHT_GRAY_DYE
+        amount: 12
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 20
+    trade3:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: YELLOW_DYE
+        amount: 12
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 20
+    trade4:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: ORANGE_DYE
+        amount: 12
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 20
+    trade5:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: PINK_DYE
+        amount: 12
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 20
+    trade6:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BLACK_BED
+      villagerexp: 10
+    trade7:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BROWN_BED
+      villagerexp: 10
+    trade8:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: GREEN_BED
+      villagerexp: 10
+    trade9:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BLUE_BED
+      villagerexp: 10
+    trade10:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: PURPLE_BED
+      villagerexp: 10
+    trade11:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: CYAN_BED
+      villagerexp: 10
+    trade12:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: RED_BED
+      villagerexp: 10
+    trade13:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: WHITE_BED
+      villagerexp: 10
+    trade14:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: LIGHT_BLUE_BED
+      villagerexp: 10
+    trade15:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: ORANGE_BED
+      villagerexp: 10
+    trade16:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: LIGHT_GRAY_BED
+      villagerexp: 10
+    trade17:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: MAGENTA_BED
+      villagerexp: 10
+    trade18:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: YELLOW_BED
+      villagerexp: 10
+    trade19:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: GRAY_BED
+      villagerexp: 10
+    trade20:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: LIME_BED
+      villagerexp: 10
+    trade21:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: PINK_BED
+      villagerexp: 10
+    roll: 2
+  level4:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: LIGHT_GRAY_BANNER
+      villagerexp: 10
+    trade2:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: GRAY_BANNER
+      villagerexp: 10
+    trade3:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: CYAN_BANNER
+      villagerexp: 10
+    trade4:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: PURPLE_BANNER
+      villagerexp: 10
+    trade5:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BLUE_BANNER
+      villagerexp: 10
+    trade6:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BROWN_BANNER
+      villagerexp: 10
+    trade7:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: RED_BANNER
+      villagerexp: 10
+    trade8:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BLACK_BANNER
+      villagerexp: 10
+    trade9:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: PINK_BANNER
+      villagerexp: 10
+    trade10:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: GREEN_BANNER
+      villagerexp: 10
+    trade11:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: LIME_BANNER
+      villagerexp: 10
+    trade12:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: YELLOW_BANNER
+      villagerexp: 10
+    trade13:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: LIGHT_BLUE_BANNER
+      villagerexp: 10
+    trade14:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: MAGENTA_BANNER
+      villagerexp: 10
+    trade15:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: WHITE_BANNER
+      villagerexp: 10
+    trade16:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 3
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: ORANGE_BANNER
+      villagerexp: 10
+    trade17:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: GREEN_DYE
+        amount: 12
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 30
+    trade18:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BROWN_DYE
+        amount: 12
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 30
+    trade19:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: BLUE_DYE
+        amount: 12
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 30
+    trade20:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: PURPLE_DYE
+        amount: 12
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 30
+    trade21:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: MAGENTA_DYE
+        amount: 12
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 30
+    trade22:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: CYAN_DYE
+        amount: 12
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+      villagerexp: 30
+    roll: 2
+  level5:
+    trade1:
+      buy1:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: EMERALD
+        amount: 2
+      sell:
+        ==: org.bukkit.inventory.ItemStack
+        v: 2865
+        type: PAINTING
+        amount: 3
+      villagerexp: 30
+    roll: 2
