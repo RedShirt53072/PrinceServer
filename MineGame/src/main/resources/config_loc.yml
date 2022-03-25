@@ -1,0 +1,290 @@
+serverlobby:
+  name: serverLobby
+  x: 0
+  y: 67
+  z: 0
+  yaw: 0
+  pitch: 0  
+mainlobby:
+  name: mainLobby
+  x: 325
+  y: 72
+  z: 325
+  yaw: -90
+  pitch: 0  
+waitingroom1:
+  name: SINGLE
+  x: 325
+  y: 72
+  z: 325
+  yaw: -90
+  pitch: 0  
+waitingroom2:
+  name: BATTLE
+  x: 325
+  y: 72
+  z: 325
+  yaw: -90
+  pitch: 0  
+map1:
+  type: SINGLENORMAL
+  name: "図書館"
+  icon: BOOKSHELF
+  id: 1
+  game1: SINGLE
+  location1:
+    name: wait
+    x: 324
+    y: 77
+    z: 303
+    yaw: 0
+    pitch: 0
+  location2:
+    name: orestart
+    x: 304
+    y: 77
+    z: 248
+    yaw: 0
+    pitch: 0
+  location3:
+    name: spawn
+    x: 324
+    y: 77
+    z: 291
+    yaw: 180
+    pitch: 0
+map2:
+  type: SINGLENORMAL
+  name: "図書館"
+  icon: BOOKSHELF
+  id: 2
+  game1: SINGLE
+  location1:
+    name: wait
+    x: 406
+    y: 77
+    z: 303
+    yaw: 0
+    pitch: 0
+  location2:
+    name: orestart
+    x: 386
+    y: 77
+    z: 248
+    yaw: 0
+    pitch: 0
+  location3:
+    name: spawn
+    x: 406
+    y: 77
+    z: 291
+    yaw: 180
+    pitch: 0
+map3:
+  type: SINGLENORMAL
+  name: "図書館"
+  icon: BOOKSHELF
+  id: 3
+  game1: SINGLE
+  location1:
+    name: wait
+    x: 258
+    y: 77
+    z: 303
+    yaw: 0
+    pitch: 0
+  location2:
+    name: orestart
+    x: 238
+    y: 77
+    z: 248
+    yaw: 0
+    pitch: 0
+  location3:
+    name: spawn
+    x: 258
+    y: 77
+    z: 291
+    yaw: 180
+    pitch: 0
+map4:
+  type: SINGLENORMAL
+  name: "図書館"
+  icon: BOOKSHELF
+  id: 4
+  game1: SINGLE
+  location1:
+    name: wait
+    x: 191
+    y: 77
+    z: 303
+    yaw: 0
+    pitch: 0
+  location2:
+    name: orestart
+    x: 171
+    y: 77
+    z: 248
+    yaw: 0
+    pitch: 0
+  location3:
+    name: spawn
+    x: 191
+    y: 77
+    z: 291
+    yaw: 180
+    pitch: 0
+
+map5:
+  type: BATTLENORMAL
+  name: "図書館"
+  icon: BOOKSHELF
+  id: 1
+  game1: BATTLE
+  location1:
+    name: wait
+    x: 251
+    y: 77
+    z: 432
+    yaw: 0
+    pitch: 0
+  location2:
+    name: orestart
+    x: 231
+    y: 77
+    z: 377
+    yaw: 0
+    pitch: 0
+  location3:
+    name: spawn1
+    x: 251
+    y: 77
+    z: 420
+    yaw: 180
+    pitch: 0
+  location4:
+    name: spawn2
+    x: 251
+    y: 77
+    z: 374
+    yaw: 0
+    pitch: 0
+  location5:
+    name: spawn3
+    x: 274
+    y: 77
+    z: 397
+    yaw: 90
+    pitch: 0
+  location6:
+    name: spawn4
+    x: 228
+    y: 77
+    z: 397
+    yaw: -90
+    pitch: 0
+  location7:
+    name: spawn5
+    x: 228
+    y: 77
+    z: 420
+    yaw: -135
+    pitch: 0
+  location8:
+    name: spawn6
+    x: 274
+    y: 77
+    z: 420
+    yaw: 135
+    pitch: 0
+  location9:
+    name: spawn7
+    x: 274
+    y: 77
+    z: 374
+    yaw: 45
+    pitch: 0
+  location10:
+    name: spawn8
+    x: 228
+    y: 77
+    z: 374
+    yaw: -45
+    pitch: 0
+map6:
+  type: BATTLENORMAL
+  name: "図書館"
+  icon: BOOKSHELF
+  id: 2
+  game1: BATTLE
+  location1:
+    name: wait
+    x: 324
+    y: 77
+    z: 432
+    yaw: 0
+    pitch: 0
+  location2:
+    name: orestart
+    x: 304
+    y: 77
+    z: 377
+    yaw: 0
+    pitch: 0
+  location3:
+    name: spawn1
+    x: 324
+    y: 77
+    z: 420
+    yaw: 180
+    pitch: 0
+  location4:
+    name: spawn2
+    x: 324
+    y: 77
+    z: 374
+    yaw: 0
+    pitch: 0
+  location5:
+    name: spawn3
+    x: 347
+    y: 77
+    z: 397
+    yaw: 90
+    pitch: 0
+  location6:
+    name: spawn4
+    x: 301
+    y: 77
+    z: 397
+    yaw: -90
+    pitch: 0
+  location7:
+    name: spawn5
+    x: 301
+    y: 77
+    z: 420
+    yaw: -135
+    pitch: 0
+  location8:
+    name: spawn6
+    x: 347
+    y: 77
+    z: 420
+    yaw: 135
+    pitch: 0
+  location9:
+    name: spawn7
+    x: 347
+    y: 77
+    z: 374
+    yaw: 45
+    pitch: 0
+  location10:
+    name: spawn8
+    x: 301
+    y: 77
+    z: 374
+    yaw: -45
+    pitch: 0
+    
